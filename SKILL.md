@@ -372,6 +372,15 @@ Level 3：
 
 ## 10. 文档生成
 
+文档生成必须先确认项目目录策略。
+
+默认目录策略：
+- 根目录只建议放 README.md 和 AGENTS.md。
+- 项目治理文档优先放入 docs/codex/。
+- 已有 README.md / AGENTS.md / CHANGELOG.md 时，不得直接覆盖，必须先读取并合并或写入 docs/codex/。
+- PM Thread 阶段只允许创建项目管理文档区，不得创建源码目录、初始化框架或安装依赖。
+- src/、app/、server/、packages/、database/ 等源码目录必须等技术栈确认并进入执行线程后再创建。
+
 Level 1：
 - README.md
 - AGENTS.md
@@ -379,27 +388,27 @@ Level 1：
 Level 2：
 - README.md
 - AGENTS.md
-- PROJECT_BRIEF.md
-- DESIGN.md
-- TASKS.md
-- CHANGELOG.md
+- docs/codex/PROJECT_BRIEF.md
+- docs/codex/DESIGN.md
+- docs/codex/TASKS.md
+- docs/codex/CHANGELOG.md
 
 Level 3：
 - README.md
 - AGENTS.md
-- PROJECT_BRIEF.md
-- DESIGN.md
-- VISUAL_REFERENCES.md
-- ROADMAP.md
-- TASKS.md
-- CHANGELOG.md
-- DECISIONS.md
-- CODEX_QA.md
-- CONTEXT.md
-- SECURITY.md
-- THREADS.md
-- MERGE_PLAN.md
-- REVIEW_CHECKLIST.md
+- docs/codex/PROJECT_BRIEF.md
+- docs/codex/DESIGN.md
+- docs/codex/VISUAL_REFERENCES.md
+- docs/codex/ROADMAP.md
+- docs/codex/TASKS.md
+- docs/codex/CHANGELOG.md
+- docs/codex/DECISIONS.md
+- docs/codex/CODEX_QA.md
+- docs/codex/CONTEXT.md
+- docs/codex/SECURITY.md
+- docs/codex/THREADS.md
+- docs/codex/MERGE_PLAN.md
+- docs/codex/REVIEW_CHECKLIST.md
 
 不要在用户确认前直接创建全部文件。
 
