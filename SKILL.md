@@ -1,5 +1,5 @@
 ---
-name: 橙影Codex企业级工作流
+name: chengying-codex-enterprise-skill
 description: 面向 Codex 的软件项目启动、PM访谈、视觉确认、开源扫描、项目分级、多线程开发、安全评估、回滚治理、架构可视化与上下文沉淀技能。适用于小程序、网站、App、SaaS、后台系统、企业内部系统、工具软件和长期商业项目的可降级开发流程。
 ---
 
