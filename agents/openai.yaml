@@ -1,0 +1,4 @@
+interface:
+  display_name: "橙影 Codex 企业级工作流"
+  short_description: "一句话启动软件项目，从 PM 访谈到执行交接和长期治理"
+  default_prompt: "Use $chengying-codex-enterprise-skill to run PM discovery, project scoping, handoff packaging, and execution-thread planning before coding."
