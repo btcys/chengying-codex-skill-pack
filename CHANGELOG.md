@@ -15,6 +15,8 @@
 - 架构示例改为通用软件项目结构，移除工具型 Editor / Engine 示例命名。
 - README 改为 GitHub 友好的详细使用说明，并加入 Mermaid 工作流图。
 - 新增项目目录策略：PM Thread 只创建 docs/codex/ 项目管理文档区，源码目录需在技术栈确认并进入执行线程后创建。
+- 扩展 GitHub 首页说明，补充安装、更新、PM Thread、Execution Thread、真实项目目录、多线程治理与调用模板。
+- 新增 `agents/openai.yaml`，把 Skill 内部名称规范化为 slug，并保留中文展示名与默认调用提示。
 
 ### Fixed
 
