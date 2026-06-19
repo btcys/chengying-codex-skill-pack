@@ -8,7 +8,8 @@
 
 ### Changed
 
-- 收紧需求到执行的边界：将“完整需求”改为“可执行完整需求”，明确“稍微完整的需求 / PRD / 目标描述 / 整理 Goal 请求”不等于执行授权；新增 Goal Draft、Goal Prompt、Execution Authorization 三层定义，要求 UI 项目在参考、原型、视觉方向或明确跳过视觉探索前不得进入代码。
+- 将“原型”从 UI 视觉门禁中拆出为项目级产品原型门禁：新软件、产品、网站、App、小程序、SaaS、后台和内部系统默认需要产品原型/交互草图；Lean 可用文本流程或低保真草图，Standard/Enterprise 必须覆盖核心路径、页面/模块结构、关键交互和状态；纯后端、脚本、库、局部 bugfix 等可说明原因后跳过。
+- 收紧需求到执行的边界：将“完整需求”改为“可执行完整需求”，明确“稍微完整的需求 / PRD / 目标描述 / 整理 Goal 请求”不等于执行授权；新增 Goal Draft、Goal Prompt、Execution Authorization 三层定义，要求项目在产品原型、设计依据、视觉方向或明确跳过原因确认前不得进入代码。
 - 新增工程执行四准则：Think Before Coding、Simplicity First、Surgical Changes、Goal-Driven Execution；同步到 `SKILL.md`、`AGENTS.md` 和 `references/execution-contract.md`，要求开发前说明假设/歧义/取舍/成功标准，执行中保持最小实现、手术式修改和目标驱动验证。
 - 将 `SKILL.md` 从“一句话启动开发”的重流程入口调整为“对话式项目想法/已有需求收敛”的轻量路由内核：新增粗略想法、半成型需求、完整材料三类输入分流；统一每轮提问数量、默认 3 个视觉方向、关键边界检查 workflow gates；允许在线程工具不可用时在当前线程显式切换执行阶段，避免 Lean 小任务被 Enterprise 流程拖重。
 - 多线程规则调整为长期线程优先。

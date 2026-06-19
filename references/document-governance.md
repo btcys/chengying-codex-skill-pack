@@ -50,7 +50,7 @@
 - `docs/codex/VALIDATION.md`
 - `docs/codex/TASKS.md`
 
-Lean 可以把 PRD、设计规范、阶段计划和一段式 Goal 指令合并写在 Handoff 中，但必须仍能回答“做什么、不做什么、怎么验收、怎么回滚”。
+Lean 可以把 PRD、产品原型、设计规范、阶段计划和一段式 Goal 指令合并写在 Handoff 中，但必须仍能回答“做什么、不做什么、怎么走、怎么验收、怎么回滚”。
 
 ### Standard
 
@@ -131,8 +131,8 @@ PM 阶段核心文档：
 - `VALIDATION.md`：测试命令、替代验证清单、不能自动验证的部分和阻塞项。
 - `PHASE_ACCEPTANCE.md`：每轮/每阶段计划完成验收，不合格打回执行线程。
 - `HANDOFF.md`：PM Thread 给 Execution / Acceptance / Review / Release 等线程的工作单，必须引用 Work ID、修改边界、参考依据、验收标准和派发条件。
-- `ACCEPTANCE.md`：需求一致性审核，逐条对照 PRD、设计、已确认 Goal 指令、Handoff 和实现结果。
-- `DESIGN.md`：视觉方向、页面结构、交互原则。
+- `ACCEPTANCE.md`：需求一致性审核，逐条对照 PRD、产品原型、设计、已确认 Goal 指令、Handoff 和实现结果。
+- `DESIGN.md`：产品原型、用户路径、页面结构、视觉方向、交互原则。
 - `TECH_SPEC.md`：技术栈、模块边界、数据/API/权限契约、依赖、风险、验证和回滚方案。
 - `VISUAL_REFERENCES.md`：参考产品、截图、风格取舍。
 - `ROADMAP.md`：阶段规划、版本目标。

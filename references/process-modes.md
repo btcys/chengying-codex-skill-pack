@@ -14,9 +14,9 @@ PM Thread 第一轮后必须同时给出：
 
 | 档位 | 适用 | PM 与 PRD | 调研 | 文档 | 验收与审查 |
 | --- | --- | --- | --- | --- | --- |
-| Lean | 小工具、Demo、单页、小改动、内部临时脚本 | 1 到 2 轮 PM；PRD 可写成 Handoff 切片 | 0 到 15 分钟，可跳过 | `README.md`、`AGENTS.md`，必要时写 `HANDOFF.md` / `VALIDATION.md` | 轻量验收表；不强制独立 Code Review / Release |
-| Standard | 正式小程序、网站、App、后台、中小型 SaaS | 完整 PRD、设计规范、技术方案、阶段计划和一段式 Goal 指令 | 20 到 45 分钟轻量竞品/开源扫描 | 核心 `docs/codex/` 文档 | Phase Acceptance 必须有；Code Review 按风险启用 |
-| Enterprise | 长期商业项目、用户数据、权限、上传、计费、发布、多模块、多线程 | 完整 PRD、设计规范、TECH_SPEC/ADR、架构影响面、版本规划 | 1 到 3 小时；必要时独立 Research Thread | 完整 `docs/codex/` 文档体系 | Phase Acceptance、Requirement Compliance、Code Review、Privacy Audit、Release 必须有 |
+| Lean | 小工具、Demo、单页、小改动、内部临时脚本 | 1 到 2 轮 PM；PRD 和产品原型可写成 Handoff 切片 | 0 到 15 分钟，可跳过 | `README.md`、`AGENTS.md`，必要时写 `HANDOFF.md` / `VALIDATION.md` | 轻量验收表；不强制独立 Code Review / Release |
+| Standard | 正式小程序、网站、App、后台、中小型 SaaS | 完整 PRD、产品原型/交互草图、设计规范、技术方案、阶段计划和一段式 Goal 指令 | 20 到 45 分钟轻量竞品/开源扫描 | 核心 `docs/codex/` 文档 | Phase Acceptance 必须有；Code Review 按风险启用 |
+| Enterprise | 长期商业项目、用户数据、权限、上传、计费、发布、多模块、多线程 | 完整 PRD、产品原型、设计规范、TECH_SPEC/ADR、架构影响面、版本规划 | 1 到 3 小时；必要时独立 Research Thread | 完整 `docs/codex/` 文档体系 | Phase Acceptance、Requirement Compliance、Code Review、Privacy Audit、Release 必须有 |
 
 ## 选择规则
 
@@ -48,7 +48,7 @@ PM Thread 第一轮后必须同时给出：
 
 Lean 可以合并阶段，但不能省略判断：
 
-- PRD、设计规范、阶段计划可合并为一个轻量 Handoff。
+- PRD、产品原型、设计规范、阶段计划可合并为一个轻量 Handoff；产品原型可以是文本流程、页面清单或低保真草图。
 - 技术方案可合并到 Handoff；触碰 API、数据、权限、部署或新增依赖时升级到 Standard。
 - 竞品调研可跳过，但要写明原因。
 - Phase Acceptance 可用轻量验收表，不强制新线程。
@@ -56,7 +56,7 @@ Lean 可以合并阶段，但不能省略判断：
 
 Standard 保留完整主线，但允许文档后置生成：
 
-- PM 阶段先形成 PRD、PRODUCT_RESEARCH、DESIGN、TECH_SPEC、PHASE_PLAN、VALIDATION、GOAL、HANDOFF 的等价内容。
+- PM 阶段先形成 PRD、PRODUCT_RESEARCH、产品原型、DESIGN、TECH_SPEC、PHASE_PLAN、VALIDATION、GOAL、HANDOFF 的等价内容。
 - Execution 后再补齐 PHASE_ACCEPTANCE、ACCEPTANCE、CODEX_QA。
 
 Enterprise 不压缩关键门禁：

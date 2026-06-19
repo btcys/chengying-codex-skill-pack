@@ -12,7 +12,7 @@
 
 | 需求项 | 来源 | 实现位置 | 结果 | 备注 |
 | --- | --- | --- | --- | --- |
-|  | PRD / DESIGN / GOAL / HANDOFF |  | passed / missing / drifted / extra |  |
+|  | PRD / PROTOTYPE / DESIGN / GOAL / HANDOFF |  | passed / missing / drifted / extra |  |
 
 ## 范围漂移
 

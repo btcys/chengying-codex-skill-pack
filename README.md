@@ -2,7 +2,7 @@
 
 面向 Codex 的对话式软件项目协作工作流 Skill Pack。
 
-它适合把“开发一个 xxx 程序”的粗略想法、半成型需求，或已有 PRD / 设计稿 / 代码仓库 / 技术方案的可执行完整需求，先通过对话交给 Codex 判断输入成熟度、流程档位和风险，再按需要完成 PM 访谈、PRD 前期竞品/同类产品方向校准、完整 PRD、设计规范、原型草图、技术方案/ADR、架构影响面、阶段开发计划、QA 验证矩阵、开发前 Goal Prompt 和交接包整理；等用户明确确认“按这个 Goal 执行”后，再进入 Execution Thread 或当前线程的执行阶段，做受控自动开发、自动测试、自动修复。
+它适合把“开发一个 xxx 程序”的粗略想法、半成型需求，或已有 PRD / 原型 / 设计稿 / 代码仓库 / 技术方案的可执行完整需求，先通过对话交给 Codex 判断输入成熟度、流程档位和风险，再按需要完成 PM 访谈、PRD 前期竞品/同类产品方向校准、完整 PRD、产品原型/交互草图、设计规范、技术方案/ADR、架构影响面、阶段开发计划、QA 验证矩阵、开发前 Goal Prompt 和交接包整理；等用户明确确认“按这个 Goal 执行”后，再进入 Execution Thread 或当前线程的执行阶段，做受控自动开发、自动测试、自动修复。
 
 核心原则很简单：先像真实软件团队一样把项目想清楚，再让 Codex 写代码。
 
@@ -13,8 +13,9 @@
 - 把 PM Thread 和 Execution Thread 分开，PM 线程不改代码。
 - 先判断 Lean / Standard / Enterprise 流程档位，让小项目快走、正式项目完整走、长期商业项目严格走。
 - 逼问出完整、可实现、可测试、可验收的 PRD。
-- 逼问出完整设计规范；必须询问参考产品、截图、Figma、原型、草图、品牌素材、现有页面或竞品 URL。
-- 没有明确视觉目标时，先确认是否调用 Product Design:get-context -> Product Design:ideate；brief 经用户确认后生成 3 个方向，等用户选择后才能进入 UI 实现。
+- 新软件、产品、网站、App、小程序、SaaS、后台和内部系统默认要有产品原型或交互草图；Lean 可轻量，Standard/Enterprise 必须覆盖核心路径、页面/模块结构、关键交互和状态。
+- 逼问出完整设计规范；必须询问产品原型、参考产品、截图、Figma、草图、品牌素材、现有页面或竞品 URL。
+- 没有明确原型或视觉目标时，先确认是否调用 Product Design:get-context -> Product Design:ideate；brief 经用户确认后生成 3 个方向，等用户选择后才能进入实现。
 - 标准项目在 PRD 冻结前轻量查竞品、同类产品和开源方案；长期商业项目在 PRD 冻结前评估竞品边界和可商用开源二开底座，用来指导 PM 判断和缩短开发周期，但不默认采用。
 - 涉及核心技术选型、API、数据、权限、部署或新增依赖时，先写一页 `TECH_SPEC.md` 或 ADR，避免边做边改架构。
 - 让正式开发前必须明确 Goal Prompt、执行授权、MVP、非目标、阶段计划、验证方案、验收标准、修改范围和禁止修改范围；只发需求、PRD 或让整理 Goal 不等于授权执行。
@@ -29,7 +30,7 @@
 - UI 验收、localhost 页面检查和截图默认使用 Codex 内置浏览器；只有需要 Chrome 登录态、Cookie、插件、已打开页面状态或用户明确要求时，才使用外置 Chrome。
 - 每轮/每阶段完成后进入独立 Phase Acceptance Thread，不合格直接打回执行线程。
 - 审查或验收不通过时生成 Fix Request，Execution Thread 按打回包定向修复并输出 Fix Response，最多自动修复 3 轮。
-- 全部阶段验收通过后，再做需求一致性审核，确认严格符合 PRD、设计规范、Goal、阶段计划和 Handoff。
+- 全部阶段验收通过后，再做需求一致性审核，确认严格符合 PRD、产品原型、设计规范、Goal、阶段计划和 Handoff。
 - 加入隐私审计、打包发布、版本文档、独立代码审查线程和自进化记录。
 - 用户反馈问题时先记录到 `FEEDBACK_LOG.md`；重复、高影响或导致返工的问题升级为检查项、决策或项目硬规则。
 - 适配轻量 Demo、正式产品、长期商业项目三种复杂度。
@@ -55,7 +56,7 @@ flowchart LR
   B --> Mode[项目等级 / 流程档位]
   Mode --> Research[PRD 前期竞品 / 同类产品方向校准]
   Research --> C[完整 PRD]
-  C --> D[设计规范 / 原型草图]
+  C --> D[产品原型 / 设计规范]
   D --> Gate1{门禁通过?}
   Gate1 -- 否 --> B
   Gate1 -- 是 --> E[技术方案 / 架构影响面]
@@ -85,7 +86,7 @@ flowchart LR
 | 档位 | 适用 | 特点 |
 | --- | --- | --- |
 | Lean | 小工具、Demo、单页、小改动 | 1 到 2 轮 PM，轻量 Handoff，竞品调研可跳过，轻量验收 |
-| Standard | 正式小程序、网站、App、后台、中小型 SaaS | 完整 PRD、设计规范、轻量调研、阶段计划、验证方案、一段式 Goal 指令和阶段验收 |
+| Standard | 正式小程序、网站、App、后台、中小型 SaaS | 完整 PRD、产品原型、设计规范、轻量调研、阶段计划、验证方案、一段式 Goal 指令和阶段验收 |
 | Enterprise | 长期商业项目、用户数据、权限、上传、计费、发布、多线程 | 完整文档体系、技术方案/ADR、架构影响面、多线程治理、需求一致性审核、Code Review、隐私审计和发布文档 |
 
 默认映射：Level 1 -> Lean，Level 2 -> Standard，Level 3 -> Enterprise。涉及登录、权限、上传、支付、客户数据、schema/API、发布或商用交付时必须升级流程档位。
@@ -94,13 +95,13 @@ flowchart LR
 
 ```mermaid
 flowchart TB
-  PM[PM Thread<br/>PRD 前期调研 / 完整 PRD / 设计规范 / 技术方案 / 阶段计划 / QA矩阵 / Goal Prompt] --> Work[活跃工作安排<br/>Work ID / 目标线程 / 派发条件 / 打断规则]
+  PM[PM Thread<br/>PRD 前期调研 / 完整 PRD / 产品原型 / 设计规范 / 技术方案 / 阶段计划 / QA矩阵 / Goal Prompt] --> Work[活跃工作安排<br/>Work ID / 目标线程 / 派发条件 / 打断规则]
   Work --> Handoff[PM Handoff 工作单<br/>参考依据 / 修改范围 / 禁止范围 / 验收标准 / 验证方式]
   Handoff --> Arch[架构梳理<br/>模块依赖 / 影响面 / 线程责任矩阵]
   Arch --> Exec[Execution Thread<br/>阶段开发 / 自动测试 / 自动修复]
   Exec --> PhaseAccept[Phase Acceptance Thread<br/>每阶段完成验收 / Fix Request 打回]
   PhaseAccept -. Fix Response 复验 .-> Exec
-  PhaseAccept --> Accept[需求一致性审核<br/>PRD / 设计 / Goal / Handoff 对照]
+  PhaseAccept --> Accept[需求一致性审核<br/>PRD / 原型 / 设计 / Goal / Handoff 对照]
   Accept --> Review[Code Review Thread<br/>正确性 / 安全 / 测试缺口]
   Review --> Release[Release Thread<br/>隐私审计 / 打包发布 / 版本文档]
   Release --> Close[版本关闭<br/>当前版本完成 / 终止 / 后置项记录]
@@ -130,7 +131,7 @@ assets/templates/
 
 安装后重启 Codex，或开启一个新的 Codex 对话，让 Skill 列表重新加载。
 
-`SKILL.md` 是 Codex 触发后的入口规则；`references/` 是按需加载的细则库；`assets/templates/` 存放真实项目可复制的 `docs/codex/` 模板。PM 访谈、完整 PRD、设计规范、架构多线程、文档治理、执行回滚、发布审计分别拆在不同文件里，这样日常调用更轻，遇到长期项目或多线程项目时又能加载完整规则。
+`SKILL.md` 是 Codex 触发后的入口规则；`references/` 是按需加载的细则库；`assets/templates/` 存放真实项目可复制的 `docs/codex/` 模板。PM 访谈、完整 PRD、产品原型、设计规范、架构多线程、文档治理、执行回滚、发布审计分别拆在不同文件里，这样日常调用更轻，遇到长期项目或多线程项目时又能加载完整规则。
 
 如果你已经下载了 zip，也可以把解压后的文件夹放到：
 
@@ -196,6 +197,7 @@ PM Thread 会逐步逼问并确认：
 - PRD 冻结前的竞品、同类产品、开源方案或可商用二开底座调研结论
 - 完整 PRD
 - MVP 必做功能和非目标
+- 产品原型或交互草图；不确定时给方案选择
 - 完整设计规范；不确定时给方案选择
 - 参考产品、截图、Figma、原型、草图、品牌素材、现有页面或竞品 URL
 - Product Design brief、是否生成 3 个视觉方向、用户选定方向或明确跳过原因
@@ -215,7 +217,7 @@ PM Thread 会逐步逼问并确认：
 当需求清楚后，对 Codex 说：
 
 ```text
-请整理 PM Handoff 工作单，包括 Work ID、目标线程、派发条件、完整 PRD、设计规范、原型图/草图结论、一段式 Goal 授权、阶段开发计划、MVP、非目标、技术路线、当前 Task、修改范围、禁止修改范围、架构影响面、风险点、验证方式和验收标准。
+请整理 PM Handoff 工作单，包括 Work ID、目标线程、派发条件、完整 PRD、产品原型/交互草图结论、设计规范、一段式 Goal 授权、阶段开发计划、MVP、非目标、技术路线、当前 Task、修改范围、禁止修改范围、架构影响面、风险点、验证方式和验收标准。
 ```
 
 交接包应至少包含：
@@ -223,8 +225,8 @@ PM Thread 会逐步逼问并确认：
 - 项目一句话说明
 - 当前阶段目标
 - 完整 PRD
+- 产品原型/交互草图结论或无需生成原因
 - 完整设计规范
-- 原型图/交互草图结论或无需生成原因
 - Work ID、目标线程和活跃工作安排状态
 - 一段式 Goal 授权和用户确认结果
 - 阶段开发计划
@@ -402,10 +404,10 @@ PM 启动：
 请先判断项目等级和 Lean / Standard / Enterprise 流程档位。小项目不要默认走企业级流程；涉及登录、权限、上传、支付、客户数据、发布或商用交付时必须升级流程。
 ```
 
-设计规范 / Product Design：
+产品原型 / 设计规范 / Product Design：
 
 ```text
-请在设计规范阶段先问我有没有参考产品、截图、Figma、原型、草图、品牌素材、现有页面或竞品 URL；如果没有明确视觉目标，请确认是否调用 Product Design:get-context 建立 brief，brief 经我确认后再用 Product Design:ideate 给 3 个方向；不要进入 image-to-code，直到我选定视觉目标并确认最终 Goal。
+请在产品原型与设计规范阶段先问我有没有产品原型、流程草图、参考产品、截图、Figma、品牌素材、现有页面或竞品 URL；如果没有明确原型或视觉目标，请确认是否调用 Product Design:get-context 建立 brief，brief 经我确认后再用 Product Design:ideate 给 3 个方向；不要进入 image-to-code，直到我选定产品原型/视觉方向，并明确授权按 Goal Prompt 执行。
 ```
 
 同类产品 / 开源方案：
@@ -417,7 +419,7 @@ PM 启动：
 Goal Prompt 与执行授权：
 
 ```text
-请基于已确认的 PRD、设计规范、技术方案/ADR、架构影响面、阶段开发计划、QA 验证矩阵和自动化模式，写出一段正式开发前 Goal Prompt，方便我确认或复制给 Codex 设置目标。只输出 Goal Prompt 不代表开始执行；必须等我明确说“按这个 Goal 执行 / 开始开发 / 进入 Execution”后，才登记 Work ID、生成 PM Handoff 并进入执行。如果我暂不确认，请继续按阶段开发计划给我缺口、建议和下一步选择。
+请基于已确认的 PRD、产品原型/交互草图、设计规范、技术方案/ADR、架构影响面、阶段开发计划、QA 验证矩阵和自动化模式，写出一段正式开发前 Goal Prompt，方便我确认或复制给 Codex 设置目标。只输出 Goal Prompt 不代表开始执行；必须等我明确说“按这个 Goal 执行 / 开始开发 / 进入 Execution”后，才登记 Work ID、生成 PM Handoff 并进入执行。如果我暂不确认，请继续按阶段开发计划给我缺口、建议和下一步选择。
 ```
 
 全流程对齐：
@@ -477,7 +479,7 @@ Goal Prompt 与执行授权：
 需求一致性审核：
 
 ```text
-请按橙影工作流做需求一致性审核，逐条对照 PRD、设计规范、Goal、阶段计划和 Handoff，检查是否漏做、错做、多做或越界修改。未通过不要进入 Code Review。
+请按橙影工作流做需求一致性审核，逐条对照 PRD、产品原型、设计规范、Goal、阶段计划和 Handoff，检查是否漏做、错做、多做或越界修改。未通过不要进入 Code Review。
 ```
 
 多线程治理：
@@ -506,9 +508,9 @@ Goal Prompt 与执行授权：
 - 每个阶段进入下一阶段前必须检查门禁状态。
 - 先判断 Lean / Standard / Enterprise 流程档位；小项目压缩流程，风险项目升级流程。
 - PM Thread 与 Execution Thread 分离。
-- PM Thread 不写代码，不初始化框架，不创建源码目录；必须产出完整 PRD、设计规范、阶段开发计划、验证方案，并在正式开发前输出 Goal Prompt，等待用户明确执行授权。
-- 设计规范阶段必须判断 Product Design、ui-ux-design-advisor、motion-quality、better-icons、ImageGen、Figma 和审查类 Skill 的调用；实现型 image-to-code、图标同步和动画代码必须等到 Execution Thread。
-- UI 项目没有参考图、截图、Figma、原型或已选视觉方向时，不得进入 UI 实现；必须继续追问、调用 Product Design 生成方向，或明确把 UI 后置。
+- PM Thread 不写代码，不初始化框架，不创建源码目录；必须产出完整 PRD、产品原型/交互草图、设计规范、阶段开发计划、验证方案，并在正式开发前输出 Goal Prompt，等待用户明确执行授权。
+- 产品原型与设计规范阶段必须判断 Product Design、ui-ux-design-advisor、motion-quality、better-icons、ImageGen、Figma 和审查类 Skill 的调用；实现型 image-to-code、图标同步和动画代码必须等到 Execution Thread。
+- 新软件/产品/网站/App/小程序/SaaS/后台没有产品原型、流程草图、参考图、截图、Figma 或已选方向时，不得进入实现；必须继续追问、调用 Product Design 生成方向，或明确把原型/界面实现后置。
 - 涉及核心技术选型、API、数据、权限、部署或新增依赖时，必须先确认技术方案 / ADR。
 - Level 2 标准项目必须在 PRD 冻结前轻量查竞品、同类产品和开源方案；Level 3 长期商业项目必须在 PRD 冻结前评估竞品边界和可商用开源二开底座；任何开源方案都不能默认采用。
 - 多线程前先做架构梳理和影响面分析。
