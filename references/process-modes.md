@@ -49,16 +49,16 @@ PM Thread 第一轮后必须同时给出：
 
 Lean 可以合并阶段，但不能省略判断：
 
-- PRD、产品原型、设计规范、阶段计划可合并为一个轻量 Handoff；产品原型可以是文本流程、页面清单或低保真草图。
+- PRD、产品原型、设计规范、阶段计划、验证方案和执行前线程方案可合并为一个轻量开发前对齐包 / Handoff；产品原型可以是文本流程、页面清单或低保真草图。
 - 技术方案可合并到 Handoff；触碰 API、数据、权限、部署或新增依赖时升级到 Standard。
 - 竞品调研可跳过，但要写明原因。
 - Phase Acceptance 可用轻量验收表，不强制新线程。
-- Goal 仍必须在开发前确认，但它只是用户授权目标；执行线程必须读取 PM Handoff / Work ID 工作单。
+- Goal 仍必须在开发前确认，但它只是用户授权目标；执行线程必须读取开发前对齐包 / PM Handoff / Work ID 工作单。
 - 多线程判断可压缩为一句结论，通常为 single-thread；不得因为想加速而拆线程。
 
 Standard 保留完整主线，但允许文档后置生成：
 
-- PM 阶段先形成 PRD、PRODUCT_RESEARCH、产品原型、DESIGN、TECH_SPEC、PHASE_PLAN、VALIDATION、GOAL、HANDOFF 的等价内容。
+- PM 阶段先形成 PRD、PRODUCT_RESEARCH、产品原型、DESIGN、TECH_SPEC、PHASE_PLAN、VALIDATION、执行前线程方案、开发前对齐包、GOAL、HANDOFF 的等价内容。
 - Execution 后再补齐 PHASE_ACCEPTANCE、ACCEPTANCE、CODEX_QA。
 - 如需多线程，必须先在技术方案/架构影响面阶段完成可拆性分析，再在 Goal Prompt / Execution 前的执行前线程方案中确定线程数量，并写清线程责任、契约、合并顺序和验证矩阵。
 
