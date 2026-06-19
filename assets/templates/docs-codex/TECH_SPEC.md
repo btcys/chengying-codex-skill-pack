@@ -2,10 +2,15 @@
 
 ## 技术方案范围
 
+- 版本：
+- 状态：草案 / 本轮冻结版 / 已废弃
+- 可执行性：不可执行 / 可派发 Execution Thread / 待确认
 - 项目等级：
 - 流程档位：Lean / Standard / Enterprise
 - 适用阶段：
 - 是否需要 ADR：
+
+> `v0.x` 只表示 PM 对齐草案；进入最终 Goal Prompt、登记 Work ID 或派发 Execution Thread 前，必须升级为 `v1.0` 或明确标记为“本轮冻结版”。
 
 ## 技术栈
 

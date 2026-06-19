@@ -57,6 +57,9 @@
 ### 技术方案 / ADR
 
 - 是否需要 TECH_SPEC：
+- TECH_SPEC 版本：
+- TECH_SPEC 状态：草案 / 本轮冻结版 / 已废弃
+- TECH_SPEC 可执行性：不可执行 / 可派发 Execution Thread / 待确认
 - 是否需要 ADR：
 - 技术方案结论：
 - 数据 / API / 权限契约：

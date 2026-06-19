@@ -1,5 +1,11 @@
 # PHASE_PLAN.md
 
+## 文档状态
+
+- 版本：
+- 状态：草案 / 本轮冻结版 / 已废弃
+- 可执行性：不可执行 / 可派发 Execution Thread / 待确认
+
 ## 流程档位
 
 - Lean / Standard / Enterprise：

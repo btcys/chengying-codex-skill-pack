@@ -16,7 +16,7 @@
 - Lean 快速路径的“完整落地”可以是聊天内轻量工作单，不要求完整文档集合；但必须明确目标、非目标、允许修改、禁止修改、验收方式和回滚方式。触碰登录、后台账号、权限、数据、API、API Key、Token、上传、支付、部署、自动化任务、外部抓取、外部数据源、新增依赖或公共架构时，必须退出 Lean 快速路径。
 - `TECH_SPEC` / `PHASE_PLAN` / `VALIDATION` / Handoff 或 Lean 等价工作单未形成前，禁止输出完整 Goal Prompt；只能输出“当前还不能生成最终 Goal”的阶段状态、缺口和下一步。
 - 用户需求涉及 UI、后台、登录、API Key、Token、部署、自动化、外部抓取或外部数据源时，必须先输出全流程状态表和开发前对齐包，再允许生成最终 Goal Prompt。
-- PM 对齐超过两轮，或用户质疑“还缺什么 / 为什么还不能开始 / 现在到哪一步”，必须输出最小全流程状态表。Standard/Enterprise 对齐达到三轮后，必须输出可复制的 `PRD v0.x`、`TECH_SPEC v0.x`、`PHASE_PLAN v0.x`、`VALIDATION v0.x` 和 Handoff 草案，未知项标为待确认。
+- PM 对齐超过两轮，或用户质疑“还缺什么 / 为什么还不能开始 / 现在到哪一步”，必须输出最小全流程状态表。Standard/Enterprise 对齐达到三轮后，必须输出可复制的 `PRD v0.x`、`TECH_SPEC v0.x`、`PHASE_PLAN v0.x`、`VALIDATION v0.x` 和 Handoff 草案，未知项标为待确认。`v0.x` 是未冻结草案，必须标注不可执行缺口；最终 Goal Prompt / Work ID / Execution 派发前必须使用 `v1.0`、本轮冻结版或 Lean 等价冻结工作单。
 - PM 输出 PRD 或范围变更时，必须分为“已确认 / 我的建议 / 待确认”；没有被用户确认的推断不得写成事实。
 - Level 2/3 项目没有 PRD 前期竞品/同类产品/开源方案方向校准，不冻结 PRD。
 - 新软件、产品、网站、App、小程序、SaaS、后台或内部系统没有产品原型/交互草图，也没有明确跳过原因和替代依据时，不进入实现。
