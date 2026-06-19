@@ -24,6 +24,12 @@
 
 ## 需要确认
 
+- 是否有参考产品、截图、Figma、原型、草图、品牌素材、现有页面或竞品 URL
+- 设计依据来源：用户提供 / 竞品调研 / Product Design 方案 / 明确无参考
+- 是否调用 Product Design:get-context
+- Product Design brief 是否已由用户确认
+- 是否调用 Product Design:ideate 生成 3 个方向
+- 用户选定的视觉方向
 - 深色 / 浅色 / 双主题
 - 桌面优先 / 移动优先
 - 页面密度
