@@ -18,7 +18,7 @@ PM Thread 第一轮后必须同时给出：
 | Standard | 正式小程序、网站、App、后台、中小型 SaaS | 完整 PRD、产品原型/交互草图、设计规范、技术方案、阶段计划和一段式 Goal 指令 | 20 到 45 分钟轻量竞品/开源扫描 | 核心 `docs/codex/` 文档 | Phase Acceptance 必须有；Code Review 按风险启用 |
 | Enterprise | 长期商业项目、用户数据、权限、上传、计费、发布、多模块、多线程 | 完整 PRD、产品原型、设计规范、TECH_SPEC/ADR、架构影响面、版本规划 | 1 到 3 小时；必要时独立 Research Thread | 完整 `docs/codex/` 文档体系 | Phase Acceptance、Requirement Compliance、Code Review、Privacy Audit、Release 必须有 |
 
-默认当前对话是 PM Thread。Lean 快速路径可在授权后由当前线程显式切换执行；Standard 和 Enterprise 必须由 PM Thread 派发给独立 Execution Thread 或已有执行线程修改代码。
+默认当前对话是 PM Thread。Lean 快速路径可在授权后由当前线程显式切换执行；Standard 和 Enterprise 必须由 PM Thread 派发给独立 Execution Thread 或已有执行线程修改代码，不允许把当前 PM Thread 降级为执行线程。线程工具不可用时，Standard/Enterprise 只能输出 Execution Thread 任务包并停止等待。
 
 ## 选择规则
 
@@ -33,8 +33,9 @@ PM Thread 第一轮后必须同时给出：
 
 遇到以下任一情况，不得使用 Lean：
 
-- 登录、权限、团队协作、支付、上传、AI Key、客户数据、个人信息。
-- 数据库 schema、API 契约、权限模型、构建配置或部署发布变更。
+- 登录、后台账号、权限、团队协作、支付、上传、AI Key、API Key、Token、客户数据、个人信息。
+- 外部数据源、外部抓取、自动化任务、定时任务、队列或长时间后台运行。
+- 数据库 schema、API 契约、权限模型、构建配置、服务器配置或部署发布变更。
 - 长期维护、商用交付、多人协作、多线程开发。
 - 用户明确要求高可靠、可发布、可审计或可回滚。
 - 失败会影响生产、客户数据、品牌或收入。
@@ -63,7 +64,7 @@ Lean 可以合并阶段，但不能省略判断：
 适用：
 
 - 低风险 bugfix、文案、静态内容、视觉微调、一次性脚本、单页 Demo。
-- 不触碰登录、权限、客户数据、上传、支付、AI Key、数据库 schema、API 契约、部署发布、新增依赖或公共架构。
+- 不触碰登录、后台账号、权限、客户数据、上传、支付、AI Key、API Key、Token、数据库 schema、API 契约、外部数据源、外部抓取、自动化任务、部署发布、新增依赖或公共架构。
 - 验收方式清楚，失败代价低，可用一次任务完成和回滚。
 
 Lean 快速路径只需要 6 个最小字段：

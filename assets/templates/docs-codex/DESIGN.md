@@ -10,6 +10,16 @@
 - 端与适配：
 - 跳过原型原因（如适用）：
 
+## DESIGN_DECISION
+
+- 选中方案：
+- 采用点：
+- 不采用点：
+- 待改点：
+- 是否冻结：是 / 否
+- 冻结范围：页面 / 组件 / 风格 / 交互 / 不冻结
+- 对 PHASE_PLAN / VALIDATION / Handoff 的影响：
+
 ## UI/UX 总原则
 
 - 优先清晰、可用、稳定。
@@ -41,6 +51,7 @@
 - Product Design brief 是否已由用户确认
 - 是否调用 Product Design:ideate 生成 3 个方向
 - 用户选定的视觉方向
+- DESIGN_DECISION 是否已冻结
 - 深色 / 浅色 / 双主题
 - 桌面优先 / 移动优先
 - 页面密度

@@ -24,4 +24,4 @@
 - Process mode: Lean / Standard / Enterprise
 - Project docs: `docs/codex/`
 - Current handoff:
-
+- Execution dispatch: Level 2 / Level 3 require Execution Thread or existing execution thread; no PM Thread coding.

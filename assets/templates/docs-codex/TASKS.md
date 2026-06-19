@@ -4,9 +4,9 @@
 
 PM Thread 派发任何执行、验收、审查或发布任务前，必须先登记到这里。已通过验收的工作必须从本区移除，并在下方完成记录或 `CODEX_QA.md` / `PHASE_ACCEPTANCE.md` 中归档摘要。
 
-| Work ID | 阶段 | 目标线程 | 工作内容 | 状态 | 派发时间 | 是否已产生代码修改 | 是否允许打断 | 下一步 |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| W-001 |  | Execution |  | planned / dispatched / in_progress / ready_for_acceptance / accepted / blocked / cancelled |  | yes/no | yes/no |  |
+| Work ID | 阶段 | 目标线程 | 执行线程 ID / 链接 | 派发方式 | 工作内容 | 状态 | 派发时间 | 是否已产生代码修改 | 是否允许打断 | 下一步 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| W-001 |  | Execution |  | created_thread / handoff_thread / send_message_to_thread / existing_thread / task_package_only |  | planned / dispatched / in_progress / ready_for_acceptance / accepted / blocked / blocked_waiting_for_execution_thread / cancelled |  | yes/no | yes/no |  |
 
 ## 当前任务池
 

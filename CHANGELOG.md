@@ -8,17 +8,19 @@
 
 ### Changed
 
-- 明确默认当前对话就是 PM Thread：PM 线程只做需求、范围、计划、风险、验收和派发；Level 2 / Standard 与 Level 3 / Enterprise 项目必须安排独立 Execution Thread 或已有执行线程修改代码，不能由 PM 自己改。无线程工具时必须显式声明环境降级并切换执行阶段；README 总览图和 `THREADS.md` 模板同步区分 Lean 当前线程执行与 Level 2/3 Execution Thread。
+- 收紧 Level 2/3 执行派发门禁：Standard/Enterprise 不允许把当前 PM Thread 降级为执行线程；线程工具可用时必须实际创建/派发 Execution Thread 或指向已有执行线程，线程工具不可用时只能输出可复制 Execution Thread 任务包并停在 `blocked_waiting_for_execution_thread`。
+- 收紧测试暴露的 PM 漏洞：最终 Goal Prompt 必须等 `TECH_SPEC` / `PHASE_PLAN` / `VALIDATION` / Handoff 或等价工作单形成后才能输出；对齐超过两轮必须给全流程状态表，Standard/Enterprise 三轮后必须输出 PRD / TECH_SPEC / PHASE_PLAN / VALIDATION / Handoff v0.x；Product Design 出图后必须生成 `DESIGN_DECISION`；登录、API Key、Token、部署、自动化、外部抓取和外部数据源必须立即升级 Standard；PRD 变更必须分“已确认 / 我的建议 / 待确认”；参考资料必须登记用途。
+- 明确默认当前对话就是 PM Thread：PM 线程只做需求、范围、计划、风险、验收和派发；Level 2 / Standard 与 Level 3 / Enterprise 项目必须安排独立 Execution Thread 或已有执行线程修改代码，不能由 PM 自己改。README 总览图和 `THREADS.md` 模板同步区分 Lean 当前线程执行与 Level 2/3 Execution Thread。
 - 增加 Lean 快速路径瘦身规则：低风险 bugfix、文案、静态内容、视觉微调、一次性脚本和单页 Demo 只需目标、非目标、允许修改、禁止修改、验收方式、回滚方式 6 个字段；允许聊天内轻量 Work ID / 等价工作单 / 替代验证清单 / 截图观察证据，避免把完整 PRD、DESIGN、TECH_SPEC、HANDOFF、PHASE_PLAN、VALIDATION、截图目录或独立验收线程强加给小任务。
 - 修正截图与视觉证据存档边界：用户/外部提供的参考图、修改图、目标效果图和验收目标图归档到 `docs/codex/assets/visual-references/` 或记录来源；Codex 执行、浏览器检查和验收产生的 before/after、smoke、回归或修复复验截图必须可追溯，Lean 可在对话或轻量验收表中记录，Standard/Enterprise 归档到 `docs/codex/assets/qa/<Work ID>/`，并在 `VISUAL_REFERENCES.md`、Handoff、Validation、QA 和 Phase Acceptance 中引用。
 - 重新审视上下文后统一 Goal / Handoff / 执行线程关系：开发前先形成对齐包和 Handoff 草案，再输出一段式 Goal；Goal 只承载授权目标，不替代执行上下文；复制给其他 Codex 时必须同时提供对齐包或 Handoff。
-- 放松 `AGENTS.md` 中过硬的执行规则：Execution Thread 优先新开但允许无线程工具时在当前线程显式切换；Lean 小任务可压缩任务前后输出；主分支限制改为受保护/生产/发布分支需确认。
+- 修正 `AGENTS.md` 中的线程派发边界：Lean 小任务可压缩任务前后输出；Standard/Enterprise 必须派发 Execution Thread，不能用无线程工具作为当前 PM Thread 开发的理由；主分支限制改为受保护/生产/发布分支需确认。
 - 明确多线程判断时机：PM 第一轮只做预判；技术方案/架构影响面阶段只做可拆性分析；阶段计划与验证方案完成后，在 Goal Prompt / Execution 前输出执行前线程方案并确定 single-thread / N threads / defer，缺线程责任、数据/API 契约、验证矩阵、合并顺序或回滚策略时不得并行开发。
 - 明确 `可执行完整需求` 判定标准：必须满足当前流程档位和本轮目标下进入开发前的全部必需前提，能支撑 Handoff、阶段计划、Goal Prompt、验证和回滚；资料完整仍不等于执行授权。
 - 将“原型”从 UI 视觉门禁中拆出为项目级产品原型门禁：新软件、产品、网站、App、小程序、SaaS、后台和内部系统默认需要产品原型/交互草图；Lean 可用文本流程或低保真草图，Standard/Enterprise 必须覆盖核心路径、页面/模块结构、关键交互和状态；纯后端、脚本、库、局部 bugfix 等可说明原因后跳过。
 - 收紧需求到执行的边界：将“完整需求”改为“可执行完整需求”，明确“稍微完整的需求 / PRD / 目标描述 / 整理 Goal 请求”不等于执行授权；新增 Goal Draft、Goal Prompt、Execution Authorization 三层定义，要求项目在产品原型、设计依据、视觉方向或明确跳过原因确认前不得进入代码。
 - 新增工程执行四准则：Think Before Coding、Simplicity First、Surgical Changes、Goal-Driven Execution；同步到 `SKILL.md`、`AGENTS.md` 和 `references/execution-contract.md`，要求开发前说明假设/歧义/取舍/成功标准，执行中保持最小实现、手术式修改和目标驱动验证。
-- 将 `SKILL.md` 从“一句话启动开发”的重流程入口调整为“对话式项目想法/已有需求收敛”的轻量路由内核：新增粗略想法、半成型需求、完整材料三类输入分流；统一每轮提问数量、默认 3 个视觉方向、关键边界检查 workflow gates；允许在线程工具不可用时在当前线程显式切换执行阶段，避免 Lean 小任务被 Enterprise 流程拖重。
+- 将 `SKILL.md` 从“一句话启动开发”的重流程入口调整为“对话式项目想法/已有需求收敛”的轻量路由内核：新增粗略想法、半成型需求、完整材料三类输入分流；统一每轮提问数量、默认 3 个视觉方向、关键边界检查 workflow gates；只允许 Lean 小任务在授权后当前线程显式切换执行，避免低风险小任务被 Enterprise 流程拖重。
 - 多线程规则调整为长期线程优先。
 - 临时线程必须在任务完成后合并、放弃或归档，并更新 THREADS.md / MERGE_PLAN.md。
 - 技能定位从偏特定工具类场景扩展为适用于小程序、网站、App、SaaS、后台系统、企业系统与通用工具软件。
@@ -32,7 +34,7 @@
 - 将 `SKILL.md` 瘦身为核心入口规则，并把 PM 访谈、架构多线程、文档治理、执行回滚细则拆入 `references/`，降低触发 Skill 时的上下文负担。
 - 强化 PM Thread：必须逼问出完整、可实现、可测试、可验收的 PRD，设计规范不完整时继续追问或给方案选择。
 - 新增原型图/交互草图规则：需要视觉确认时调用可用生图或设计工具生成草图，并等待用户确认。
-- 调整 Goal Prompt 门槛：Goal Draft 可在 PM 后段形成，但最终 Goal Prompt 必须在阶段计划、验证方案和自动化模式明确后输出，并等待用户明确执行授权。
+- 调整 Goal Prompt 门槛：Goal Draft 只可作为内部收敛草案；最终 Goal Prompt 必须在 `TECH_SPEC`、阶段计划、验证方案、Handoff 和自动化模式明确后输出，并等待用户明确执行授权。
 - 新增阶段开发计划规则：每阶段必须可实现、可测试、可验收、可回滚。
 - 新增自动开发、自动测试、自动修复闭环，以及失败阻塞输出规则。
 - 新增隐私审计、打包发布、版本文档、独立 Code Review Thread 和自进化记录规则。

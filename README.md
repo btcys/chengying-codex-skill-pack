@@ -14,16 +14,20 @@
 - 默认当前对话就是 PM Thread；Level 2 / Standard 和 Level 3 / Enterprise 必须由 PM 安排独立 Execution Thread 或已有执行线程修改代码，不能由 PM 自己改。
 - 先判断 Lean / Standard / Enterprise 流程档位，让小项目快走、正式项目完整走、长期商业项目严格走。
 - Lean 快速路径只保留目标、非目标、允许修改、禁止修改、验收方式和回滚方式，避免小修、文案、视觉微调、一次性脚本被完整 PRD / TECH_SPEC / Handoff 拖重。
+- Goal Prompt 只能作为最后的执行授权；`TECH_SPEC` / `PHASE_PLAN` / `VALIDATION` / Handoff 或等价工作单未形成前，只能输出“当前还不能生成最终 Goal”的阶段状态、缺口和下一步。
+- PM 对齐超过两轮或用户问“还缺什么”时，必须输出全流程状态表；Standard/Enterprise 对齐达到三轮后，必须输出可复制的 PRD / TECH_SPEC / PHASE_PLAN / VALIDATION / Handoff v0.x。
 - 逼问出完整、可实现、可测试、可验收的 PRD。
 - 新软件、产品、网站、App、小程序、SaaS、后台和内部系统默认要有产品原型或交互草图；Lean 可轻量，Standard/Enterprise 必须覆盖核心路径、页面/模块结构、关键交互和状态。
 - 逼问出完整设计规范；必须询问产品原型、参考产品、截图、Figma、草图、品牌素材、现有页面或竞品 URL。
 - 用户/外部提供参考截图、修改截图、旧系统截图、设计稿截图、目标效果图或验收目标图时，必须归档到 `docs/codex/assets/visual-references/` 或登记来源；Lean 可在等价工作单中记录来源和对照点。Codex 执行和验收产生的截图必须可追溯，Lean 可在对话或轻量验收表中记录，Standard/Enterprise 归档到 `docs/codex/assets/qa/<Work ID>/`，并在 Handoff / Validation / QA / Phase Acceptance 中引用。
 - 没有明确原型或视觉目标时，先确认是否调用 Product Design:get-context -> Product Design:ideate；brief 经用户确认后生成 3 个方向，等用户选择后才能进入实现。
+- Product Design 出图后必须形成 `DESIGN_DECISION`，写清选中方案、采用点、不采用点、待改点和是否冻结；未冻结前不得把图片当作实现约束。
 - 明确 `可执行完整需求` 的判断标准：必须满足当前档位和本轮目标的全部开发前提，能完整支撑开发前对齐包、Handoff、阶段计划、Goal Prompt、验证和回滚；资料完整仍不等于执行授权。
 - 标准项目在 PRD 冻结前轻量查竞品、同类产品和开源方案；长期商业项目在 PRD 冻结前评估竞品边界和可商用开源二开底座，用来指导 PM 判断和缩短开发周期，但不默认采用。
-- 涉及核心技术选型、API、数据、权限、部署或新增依赖时，先写一页 `TECH_SPEC.md` 或 ADR，避免边做边改架构。
+- 涉及核心技术选型、登录、后台账号、API、API Key、Token、外部数据源、外部抓取、自动化、数据、权限、部署或新增依赖时，先升级 Standard 并写一页 `TECH_SPEC.md` 或 ADR，避免边做边改架构。
 - 让正式开发前必须先形成开发前对齐包 / Handoff 草案，明确 MVP、非目标、阶段计划、验证方案、执行前线程方案、验收标准、修改范围和禁止修改范围；Goal Prompt 只是一段授权目标，不替代 Handoff。
 - PM 派发给任何线程前必须先登记活跃工作安排，生成 Work ID；Execution / Acceptance / Review / Release 线程都以 Work ID + Handoff 工作单为依据。
+- 每次输出 PRD 或范围变更必须区分“已确认 / 我的建议 / 待确认”；每个参考资料必须登记用途：可借鉴 / 不照搬 / 不采用 / 待验证。
 - 用户暂不确认或不选择使用 Goal 时，不进入 Execution Thread，但 PM Thread 继续按阶段开发计划沟通缺口、风险、建议和下一步选择。
 - 已派发工作在执行线程未产生代码修改前可以调整；进入执行后，除阻塞、范围冲突、安全风险或用户强制变更外，不得随意打断。
 - Phase Acceptance 通过后，必须从活跃工作安排中移除该 Work ID，并把摘要归档到 QA/验收/完成记录，避免活跃上下文堆积。
@@ -115,7 +119,9 @@ flowchart TB
   Close -. 新需求 / 变更 / 下一版本 .-> PM
 ```
 
-PM Thread 只负责梳理、判断、确认、登记和交接，不负责代码修改。真正开始开发前，应先整理开发前对齐包 / Handoff 草案 / Lean 等价工作单；用户确认后再登记 Work ID。Level 2/3 默认必须新开 Execution Thread 或派发已有执行线程；如果环境没有线程工具，必须显式声明“线程工具不可用，当前线程从 PM 降级切换到执行阶段”，并把 PM Handoff 工作单作为执行输入；Lean 则可使用等价工作单。
+PM Thread 只负责梳理、判断、确认、登记和交接，不负责代码修改。真正开始开发前，应先整理开发前对齐包 / Handoff 草案 / Lean 等价工作单；用户确认后再登记 Work ID。Level 2/3 必须新开 Execution Thread 或派发已有执行线程；如果环境没有线程工具，PM Thread 只能输出可复制的 Execution Thread 任务包并停止在 `blocked_waiting_for_execution_thread`，等待用户新开或指定执行线程。
+
+Lean 可使用等价工作单，并可在明确授权后当前线程显式切换执行。
 
 ## 安装
 

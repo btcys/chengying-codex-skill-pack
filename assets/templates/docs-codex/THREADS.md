@@ -11,6 +11,7 @@
 状态：默认启用  
 职责：需求梳理、范围确认、项目分级、任务拆解、风险说明、验收标准、交接  
 规则：不允许改代码；Level 2 / Level 3 必须在用户确认进入开发后安排 Execution Thread 或已有执行线程
+无线程工具时：输出 Execution Thread 任务包并停止，状态为 `blocked_waiting_for_execution_thread`；不得把当前 PM Thread 降级为执行线程
 
 ### 交接包
 
