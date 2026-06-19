@@ -6,7 +6,8 @@
 
 - 阶段：
 - PHASE_PLAN 版本：
-- 阶段 ID / 顺序：
+- 阶段版本：
+- 阶段 ID / 执行顺序：
 - Work ID：
 - 流程档位：Lean / Standard / Enterprise
 - 状态：blocked / blocked_validation_missing / needs-fix / passed
@@ -20,9 +21,9 @@
 
 ## 计划对照
 
-| 阶段 ID | 计划版本 | 计划项 | 实现结果 | 审计点 | 测试/证据 | 结论 | 备注 |
-| --- | --- | --- | --- | --- | --- | --- | --- |
-|  |  |  |  |  |  | passed / missing / failed / drifted |  |
+| 阶段版本 | 阶段 ID | 计划版本 | 计划项 | 实现结果 | 审计点 | 测试/证据 | 结论 | 备注 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+|  |  |  |  |  |  |  | passed / missing / failed / drifted |  |
 
 ## 阻塞验证缺口
 

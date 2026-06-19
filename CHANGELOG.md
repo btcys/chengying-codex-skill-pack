@@ -8,7 +8,7 @@
 
 ### Changed
 
-- 强化 `PHASE_PLAN` 治理：阶段开发计划必须有计划版本号、阶段顺序、前后依赖、允许/禁止范围、独立审计点、独立验收标准、阻塞验证项、回滚方式和进入下一阶段条件；没有可独立审计和验收的阶段计划不得进入最终 Goal、Work ID 登记或 Execution Thread 派发。
+- 强化 `PHASE_PLAN` 治理：阶段开发计划必须有计划版本号、执行顺序和每阶段三段式阶段版本号（如 `0.0.1`、`0.1.0`、`0.4.5`），不得只用 `P0/P1/P2` 这类优先级标签替代；每阶段必须有前后依赖、允许/禁止范围、独立审计点、独立验收标准、阻塞验证项、回滚方式和进入下一阶段条件；没有可独立审计和验收的阶段计划不得进入最终 Goal、Work ID 登记或 Execution Thread 派发。
 - 明确 PRD / TECH_SPEC / PHASE_PLAN / VALIDATION / Handoff 的文档版本语义：`v0.x` 只表示 PM 对齐草案，必须标注未冻结和不可执行缺口；最终 Goal Prompt、Work ID 登记或 Execution Thread 派发前必须升级为 `v1.0`、本轮冻结版或 Lean 等价冻结工作单；`v1.1+` 仅用于兼容修订，重大范围/架构/API/数据/部署变化进入 `v2.0` 重新对齐。
 - 明确 PM 台账语义：PM 台账即 `TASKS.md` 的活跃工作安排登记，只用于当前未完成任务的临时调度，不是历史归档。Phase Acceptance 验收通过后必须从 PM 台账活跃区删除对应 Work ID 条目，避免活跃上下文堆积；完成摘要、验收结论和证据路径归档到 `TASKS.md` 完成记录、`CODEX_QA.md` 或 `PHASE_ACCEPTANCE.md`，不得删除历史证据。
 - 强制 UI/视觉截图验收恢复路径：涉及 UI、前端、可视化、图片/海报/日报卡、管理后台或用户可见页面时，截图为 `blocking` 验收项；不得因 `file://` / `data:` 被策略拦截、缺 Chromium、Chrome 权限不足、Browser 未 attach、页面未启动或缺 Docker 就直接跳过。Execution / Acceptance 必须先尝试 Codex Browser Plugin、项目 dev server / preview、`localhost` / `127.0.0.1` 静态服务、项目 e2e 截图命令或必要外置 Chrome；需要启动服务、安装浏览器、运行 Docker 或更高权限时，先请求一次明确且窄范围审批。只有审批被拒或全部路径失败后，才允许 `blocked_validation_missing`，且不得验收通过。
