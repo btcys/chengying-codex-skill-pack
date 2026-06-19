@@ -46,8 +46,10 @@
 - 开发计划必须按阶段拆分，每阶段可实现、可测试、可验收、可回滚。
 - 自动开发必须受控执行；确认 Goal、Handoff 和自动化模式后，才允许在阶段内连续开发、测试、修复。
 - 自动开发前必须有测试命令、`VALIDATION.md` 替代验证方案，或 Lean 轻量替代验证清单，并包含 QA 验证矩阵或轻量验收方式。
+- Handoff、VALIDATION、阶段计划或 Goal 中列为阻塞/必需的验证项，未运行、无证据、失败或因缺工具/环境无法执行时，阶段状态只能是 `blocked` / `blocked_validation_missing` / `needs-fix`，不得标记 `passed` / `verified`；只有验收前明确为非阻塞、写明风险/owner/后续验证方式并经用户或 PM 确认，才允许后置。
 - UI 验收、localhost 页面检查、截图、视觉 smoke 默认使用 Codex 内置浏览器；只有需要用户 Chrome 登录态、Cookie、插件、已打开页面状态或用户明确要求时，才使用外置 Chrome。
 - Codex 执行和验收产生的 before/after、浏览器 smoke、视觉回归或修复复验截图必须可追溯；Lean 可在对话或轻量验收表中记录截图/观察证据，Standard/Enterprise 归档到 `docs/codex/assets/qa/<Work ID>/`，并记录到 `CODEX_QA.md`、`VALIDATION.md` 或 `PHASE_ACCEPTANCE.md`。
+- UI/视觉/浏览器路径、Docker/部署、外部服务、权限或安全验证属于本轮交付范围时，缺浏览器截图、smoke、Docker/部署启动或安全验证证据不得通过验收；缺 Playwright/Chromium/Chrome 权限/Docker 命令只能说明阻塞原因，不能替代通过证据。
 - 进入任何下一阶段前必须对照全流程门禁；门禁不通过不得继续推进。
 - Execution Thread 不得自我验收；Standard / Enterprise 每轮或每阶段完成后必须进入独立 Phase Acceptance Thread，Lean 可用轻量验收表。
 - Phase Acceptance Thread 未通过，必须打回 Execution Thread 或回 PM Thread 重新确认，不能继续下一阶段。

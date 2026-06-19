@@ -121,6 +121,8 @@ description: 对话式软件项目协作工作流。用于把“开发一个 xxx
 - 用户提供或外部生成的参考截图、修改截图、设计稿截图、目标效果图或验收目标图是实现依据，必须存入 `docs/codex/assets/visual-references/` 或登记来源，并在 `VISUAL_REFERENCES.md`、Handoff 或 Lean 等价工作单中引用；Codex 执行、浏览器检查和验收产生的 before/after、smoke、回归截图是执行证据，Lean 可在对话或轻量验收表中记录截图/观察证据，Standard/Enterprise 存入 `docs/codex/assets/qa/<Work ID>/` 并写入 Validation/QA/验收记录。
 - PM 派发执行前必须登记 Work ID 或等价工作单；Lean 可使用聊天内轻量 Work ID + 6 字段工作单，Standard/Enterprise 使用 `TASKS.md` / Handoff。执行依据是 Work ID、Handoff 或等价工作单、阶段计划或轻量任务单、验证矩阵或替代验证清单和验收标准。
 - 自动开发只能在已确认 Goal、范围、阶段计划、验证方式和自动化模式内进行；遇到越界、失败、风险或产品判断必须停止。
+- Handoff / `VALIDATION` / 阶段计划 / Goal 中列为阻塞或必需的验证项，未运行、无证据、失败、因缺工具无法执行，或只写“未完成原因”时，阶段状态只能是 `blocked_validation_missing` / `blocked` / `needs-fix`，不得标记 `passed` / `verified`。只有用户或 PM 在验收前明确把该项降为非阻塞、写明风险和后续 owner，才允许后置。
+- UI、浏览器路径、视觉、截图对照、部署、Docker、外部服务或发布相关任务，如果对应验证属于本轮交付范围，缺浏览器截图 / smoke / Docker 或部署实测证据时不得通过验收；缺 Playwright、Chromium、Chrome 权限或 Docker 命令都属于验证阻塞，不是通过后的普通备注。
 - Execution 不得自我验收。Lean 可用轻量验收表；Standard/Enterprise 应使用独立 Phase Acceptance。
 - 涉及公共组件、数据模型、API、权限、上传、支付、部署或新增依赖时，必须先完成技术方案评审。
 - 不得修改无关模块、破坏已有数据、API 契约或用户数据。

@@ -4,7 +4,7 @@
 
 | Work ID | 阶段 | 执行线程结果 | 测试结果 | 验收状态 | 修复轮次 | 活跃登记处理 | 备注 |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-|  |  | ready_for_acceptance / blocked |  | passed / needs-fix / blocked | 0 | remove-from-active / keep-blocked |  |
+|  |  | ready_for_acceptance / blocked / blocked_validation_missing |  | passed / needs-fix / blocked / blocked_validation_missing | 0 | remove-from-active / keep-blocked |  |
 
 ## Fix Request / Fix Response
 
@@ -14,13 +14,19 @@
 
 ## QA 验证矩阵结果
 
-| 类型 | 覆盖范围 | 方法 | 是否阻塞 | 结果 | 证据 |
+| 类型 | 覆盖范围 | 方法 | 阻塞级别 | 结果 | 证据 |
 | --- | --- | --- | --- | --- | --- |
-| 自动测试 |  |  | yes/no | pending |  |
-| 人工主链路 |  |  | yes/no | pending |  |
-| 回归检查 |  |  | yes/no | pending |  |
-| 发布后 smoke |  |  | yes/no | pending |  |
-| 不可自动验证项 |  |  | yes/no | pending |  |
+| 自动测试 |  |  | blocking / non-blocking | pending / passed / failed / skipped |  |
+| 人工主链路 |  |  | blocking / non-blocking | pending / passed / failed / skipped |  |
+| 回归检查 |  |  | blocking / non-blocking | pending / passed / failed / skipped |  |
+| 发布后 smoke |  |  | blocking / non-blocking | pending / passed / failed / skipped |  |
+| 不可自动验证项 |  |  | blocking / non-blocking | pending / passed / failed / skipped |  |
+
+## 阻塞验证缺口
+
+| Work ID | 验证项 | 未完成原因 | 缺少工具/环境 | 必须补的证据 | 状态 |
+| --- | --- | --- | --- | --- | --- |
+|  |  |  |  |  | open / fixed / accepted-deferred |
 
 ## 浏览器验收记录
 

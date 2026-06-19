@@ -32,6 +32,23 @@
 - API：健康检查、核心接口请求、错误码、权限、schema 兼容。
 - 数据库：迁移 dry-run、回滚计划、数据兼容检查。
 - AI 功能：输入输出样例、失败兜底、敏感数据检查、费用/速率限制。
+- Docker / 部署：`docker compose config`、镜像构建、容器启动、健康检查、关键接口/页面 smoke、日志无启动错误；无法本地跑时使用 CI、远端环境或用户本机验证回执替代，不能仅凭 Docker 文件存在判定通过。
+
+## 阻塞验证与后置验证
+
+每个验证项必须在开发前或提交验收前分级：
+
+- `blocking`：本轮验收必须完成。未运行、失败、无证据、缺工具或缺环境时，阶段状态只能是 `blocked_validation_missing` / `blocked` / `needs-fix`。
+- `non-blocking`：可后置。必须在验收前写明原因、风险、owner、后续验证方式和用户/PM 确认。
+
+不得在验收阶段临时把失败或未运行的 `blocking` 验证项改写成“允许后置”。缺 Playwright、Chromium、Chrome 权限、Docker 命令、账号、外部服务或部署环境，只能说明阻塞原因，不能替代通过证据。
+
+典型阻塞验证项：
+
+- UI、视觉或浏览器路径在本轮范围内：必须有内置浏览器 / Playwright / 外置 Chrome 的 smoke、截图或可追溯观察证据。
+- 生成图片、日报卡、海报或可视资产在本轮范围内：必须有尺寸、格式、关键视觉结果或截图证据。
+- Docker、部署、服务器、CI 或发布在本轮范围内：必须有本地、CI、远端或用户本机的启动/健康检查证据。
+- 登录、权限、Token、API Key、隐私、安全在本轮范围内：必须有对应负向/正向验证或扫描结果。
 
 ## 浏览器验收策略
 
@@ -58,6 +75,7 @@ UI 验收、截图和本地页面检查不要默认使用外置 Chrome。
 - 用户/外部提供的参考截图、修改截图、目标效果图、验收目标图，引用 `VISUAL_REFERENCES.md` 中的 ID 或存档路径。
 - Codex 执行/验收产生的 before/after、smoke、回归或修复复验截图必须可追溯；Lean 可在对话或轻量验收表中记录截图/观察证据，Standard/Enterprise 存入 `docs/codex/assets/qa/<Work ID>/`，并在 `VALIDATION.md`、`CODEX_QA.md` 或 `PHASE_ACCEPTANCE.md` 中记录。
 - UI 修改类任务至少保留可对照的 before/after、参考/实现截图或轻量观察证据；无法截图时必须写明原因和替代观察证据。
+- 如果截图、浏览器 smoke 或视觉对照在 Handoff / `VALIDATION.md` / 阶段计划中是 `blocking`，无法截图或缺浏览器工具时不得验收通过；必须补充可执行替代路径，或标记 `blocked_validation_missing`。
 - 验收或修复期间用户新增的截图先登记为新的 `VISUAL_REFERENCES.md` 依据，再进入 Fix Request 或 Handoff 更新。
 - 截图含敏感信息时先脱敏；不能脱敏时记录不可入库原因，不提交原图。
 
@@ -94,15 +112,15 @@ Lean 可以只保留自动测试和人工主链路；Standard 必须包含回归
 
 ## 自动命令
 
-| 命令 | 用途 | 是否阻塞 |
-| --- | --- | --- |
-|  |  | yes/no |
+| 命令 | 用途 | 阻塞级别 | 结果 | 证据 |
+| --- | --- | --- | --- | --- |
+|  |  | blocking / non-blocking | pending / passed / failed / skipped |  |
 
 ## 替代验证清单
 
-| 路径/功能 | 操作 | 预期结果 | 结果 |
-| --- | --- | --- | --- |
-|  |  |  | pending |
+| 路径/功能 | 操作 | 预期结果 | 阻塞级别 | 结果 | 证据 |
+| --- | --- | --- | --- | --- | --- |
+|  |  |  | blocking / non-blocking | pending / passed / failed / skipped |  |
 
 ## QA 验证矩阵
 
@@ -127,11 +145,15 @@ Lean 可以只保留自动测试和人工主链路；Standard 必须包含回归
 
 ## 不能自动验证的部分
 
--
+| 项目 | 原因 | 阻塞级别 | 替代验证 / 后续 owner | 是否允许后置 |
+| --- | --- | --- | --- | --- |
+|  |  | blocking / non-blocking |  | yes/no |
 
 ## 阻塞项
 
--
+| 项目 | 原因 | 需要的工具/环境 | 下一步 |
+| --- | --- | --- | --- |
+|  |  |  |  |
 ```
 
 ## 阻塞规则
@@ -140,4 +162,6 @@ Lean 可以只保留自动测试和人工主链路；Standard 必须包含回归
 - 自动命令失败且无法解释：不得进入 Phase Acceptance Thread。
 - 替代验证清单没有覆盖当前阶段核心路径：不得标记阶段通过。
 - QA 验证矩阵没有覆盖当前流程档位要求：不得进入阶段验收。
+- 任一 `blocking` 验证项未运行、失败、无证据或因缺工具无法执行：不得标记阶段通过。
+- 浏览器截图、UI smoke、Docker/部署启动验证属于本轮范围且为 `blocking` 时，缺浏览器或缺 Docker 只能标记为 `blocked_validation_missing`，不得用“已说明原因”替代通过。
 - 涉及安全、权限、支付、上传、隐私时，必须有专门验证项。

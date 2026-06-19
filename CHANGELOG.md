@@ -8,6 +8,7 @@
 
 ### Changed
 
+- 收紧阶段验收口径：新增阻塞验证缺口规则，Handoff / VALIDATION / 阶段计划 / Goal 中列为阻塞或必需的验证项未运行、失败、无证据或缺工具/环境时，不得标记 `passed` / `verified`；浏览器截图、UI smoke、Docker/部署启动、安全/权限验证属于本轮范围时必须有证据，否则状态为 `blocked_validation_missing` / `needs-fix`。
 - 收紧 Level 2/3 执行派发门禁：Standard/Enterprise 不允许把当前 PM Thread 降级为执行线程；线程工具可用时必须实际创建/派发 Execution Thread 或指向已有执行线程，线程工具不可用时只能输出可复制 Execution Thread 任务包并停在 `blocked_waiting_for_execution_thread`。
 - 收紧测试暴露的 PM 漏洞：最终 Goal Prompt 必须等 `TECH_SPEC` / `PHASE_PLAN` / `VALIDATION` / Handoff 或等价工作单形成后才能输出；对齐超过两轮必须给全流程状态表，Standard/Enterprise 三轮后必须输出 PRD / TECH_SPEC / PHASE_PLAN / VALIDATION / Handoff v0.x；Product Design 出图后必须生成 `DESIGN_DECISION`；登录、API Key、Token、部署、自动化、外部抓取和外部数据源必须立即升级 Standard；PRD 变更必须分“已确认 / 我的建议 / 待确认”；参考资料必须登记用途。
 - 明确默认当前对话就是 PM Thread：PM 线程只做需求、范围、计划、风险、验收和派发；Level 2 / Standard 与 Level 3 / Enterprise 项目必须安排独立 Execution Thread 或已有执行线程修改代码，不能由 PM 自己改。README 总览图和 `THREADS.md` 模板同步区分 Lean 当前线程执行与 Level 2/3 Execution Thread。

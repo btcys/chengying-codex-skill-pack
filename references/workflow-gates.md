@@ -25,6 +25,9 @@
 - 没有验收标准，不进入开发。
 - 没有测试命令或替代验证方案，不进入自动开发。
 - 没有测试结果，不进入阶段验收。
+- Handoff / `VALIDATION.md` / 阶段计划 / Goal 中列为阻塞或必需的验证项，未运行、无证据、失败或因缺工具无法执行时，不得标记 `passed` / `verified`；只能标记 `needs-fix` / `blocked`，并生成阻塞验证缺口或 Fix Request。
+- 说明“浏览器截图没完成 / Docker 没有跑 / Playwright 缺浏览器 / Chrome 被系统权限杀掉 / 本地没有 docker 命令”等原因，只能解释阻塞来源，不能替代验收通过证据。
+- 允许后置项必须在验收前明确为非阻塞，写明风险、owner、后续验证方式和用户/PM 确认；阻塞验证项不得被放入“允许后置项”绕过验收。
 - 阶段验收未通过，不进入下一阶段。
 - 审查或验收打回时，必须生成 Fix Request；Execution Thread 只能按 Fix Request 定向修复后重新提交验收。
 - 执行、验收或打回期间用户补充修改截图、标注截图或目标效果图时，先归档/登记为新的实现依据；若改变范围、交互、视觉目标或验收标准，回到 PM Thread 更新 Handoff / Fix Request，不得直接扩大执行范围。
@@ -53,7 +56,7 @@
 | 5. 阶段计划与验证方案 | PRD、产品原型、设计、调研结论、技术方案、架构影响面 | `PHASE_PLAN.md` / `VALIDATION.md` / 执行前线程方案 / 开发前对齐包 / Handoff 草案 / Goal 就绪判断 | 每阶段可实现、可测试、可验收、可回滚；QA 验证矩阵可执行；已确定 single-thread / N threads / defer；如需多线程，线程责任矩阵、数据/API 契约、合并顺序、回滚策略和跨模块验证矩阵明确；Handoff 草案可支持执行；若前置产物缺失，只能输出 Goal 未就绪说明 | 重拆计划、补验证方案，或回架构阶段重做可拆性分析 |
 | 6. Goal Prompt / 执行授权 | Goal 就绪判断、开发前对齐包、Handoff 草案、执行前线程方案、技术方案/ADR、阶段计划、当前 Task、自动化模式、QA 验证矩阵 | 一段式 Goal Prompt、用户明确执行授权记录、执行线程安排、派发证据 | `TECH_SPEC` / `PHASE_PLAN` / `VALIDATION` / Handoff 或 Lean 等价工作单已形成；Goal Prompt 只承载授权目标，不替代 Handoff；用户明确同意按最终 Goal Prompt 正式进入开发，自动化模式明确，QA 验证矩阵可执行；Level 2/3 已实际创建/派发独立 Execution Thread 或已明确已有执行线程 ID/链接；多线程时每个线程的 Goal 字段写入 Handoff，而不是把 Goal Prompt 写成长文档 | 不进入 Execution；如线程工具不可用，输出 Execution Thread 任务包并标记 `blocked_waiting_for_execution_thread`；否则继续按阶段计划沟通缺口、建议和下一步选择 |
 | 7. Execution Thread | Work ID、PM Handoff、当前 Task、或 Fix Request | 代码修改、测试结果、自动修复记录、Fix Response | 当前阶段测试通过或阻塞原因明确；被打回时已逐条回应 Fix Request | 自动修复，最多 3 轮；仍失败则停止 |
-| 8. Phase Acceptance Thread | Work ID、阶段计划、Handoff、执行结果、测试结果 | `PHASE_ACCEPTANCE.md` 或等价验收表；不通过时输出 Fix Request；通过时移除活跃工作安排并归档摘要 | 当前阶段计划项全部通过，允许进入下一阶段；Lean 可用轻量验收表 | 生成 Fix Request 打回 Execution Thread，或回 PM Thread 重新确认 |
+| 8. Phase Acceptance Thread | Work ID、阶段计划、Handoff、执行结果、测试结果、验证证据 | `PHASE_ACCEPTANCE.md` 或等价验收表；不通过时输出 Fix Request；通过时移除活跃工作安排并归档摘要 | 当前阶段计划项全部完成；全部阻塞验证项已运行且有可追溯证据；未运行、失败、缺工具或无证据的验证项均已判定为非阻塞并有确认记录；Lean 可用轻量验收表 | 生成 Fix Request 打回 Execution Thread；缺验证工具或环境时标记 `blocked` 并给出补验证路径；验收标准问题回 PM Thread 重新确认 |
 | 9. 需求一致性审核 | PRD、产品原型、设计规范、Goal、阶段计划、Handoff、全部阶段验收结果 | `ACCEPTANCE.md` 或等价审核表；不通过时输出 Fix Request | 无漏做、错做、多做、越界修改；偏差已确认 | 生成 Fix Request 回 Execution Thread，或回 PM Thread 重新确认 |
 | 10. Code Review Thread | 已完成代码、测试结果、影响面、需求一致性审核 | 审查发现清单；P0/P1 输出 Fix Request | 无 P0；P1 有处理计划 | 生成 Fix Request 回 Execution Thread 修复 |
 | 11. Release Thread | 审查结果、构建结果 | 隐私审计、版本文档、回滚方案 | 隐私、构建、发布后主链路验证通过 | 阻塞发布 |
@@ -86,6 +89,7 @@
 
 - `blocked`：缺关键输入或存在 P0 风险。
 - `blocked_waiting_for_execution_thread`：Level 2/3 已有执行授权和任务包，但没有可用线程工具或尚未完成执行线程派发；PM Thread 必须停止，不得改代码。
+- `blocked_validation_missing`：阻塞验证项未运行、无证据、失败或缺工具无法执行；不得进入下一阶段、需求一致性审核、Code Review 或 Release。
 - `ready`：输入完整，等待用户确认。
 - `in_progress`：正在执行。
 - `verified`：产物和验收通过。
@@ -126,7 +130,7 @@
 - 产品原型或设计规范变更：回到产品原型/设计阶段，并重新检查前端任务、交互路径和验收。
 - 数据模型/API/权限变更：回到架构阶段，并重新检查多线程边界。
 - 测试失败：留在 Execution Thread，自动修复，不能进入阶段验收。
-- 阶段验收失败：打回 Execution Thread；如果是计划或验收标准问题，回 PM Thread。
+- 阶段验收失败或阻塞验证缺失：打回 Execution Thread；缺工具或环境时补齐验证路径，无法补齐则状态为 `blocked_validation_missing`；如果是计划或验收标准问题，回 PM Thread。
 - 需求一致性审核失败：回 Execution Thread 修复；如果是需求矛盾，回 PM Thread。
 - 审查 P0：回 Execution Thread 修复。
 - 隐私或发布 P0：阻塞发布。

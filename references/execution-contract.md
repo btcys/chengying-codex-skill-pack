@@ -127,7 +127,9 @@ Execution Thread 默认执行闭环：
 
 测试未通过时，当前阶段状态只能是 `blocked` 或 `in_progress`，不得标记为 `verified`。
 
-Execution Thread 完成后只能标记为 `ready_for_acceptance`，不得自我标记为 `verified`。只有 Phase Acceptance Thread 通过后，当前阶段才能标记为 `verified`。
+阻塞验证项未运行、失败、无证据或因缺工具/环境无法执行时，Execution Thread 不得标记为 `ready_for_acceptance`。必须标记为 `blocked`，列出阻塞验证缺口、缺少的工具/环境、已尝试路径和建议补验证方式。
+
+Execution Thread 完成实现且全部阻塞验证项已有证据后，只能标记为 `ready_for_acceptance`，不得自我标记为 `verified`。只有 Phase Acceptance Thread 通过后，当前阶段才能标记为 `verified`。
 
 ## 打回修复输入
 
@@ -191,9 +193,10 @@ Lean 快速路径可以只保留一个 Task，不要求拆 Epic / Feature / Subt
 - 完成内容
 - 测试结果
 - 浏览器验收工具和截图/证据；若使用外置 Chrome，说明原因
+- 阻塞验证缺口：未运行 / 失败 / 无证据 / 缺工具 / 缺环境
 - 自动修复轮次
-- 阶段状态：`ready_for_acceptance` / `blocked` / `deferred`
-- Work ID 状态建议：`ready_for_acceptance` / `blocked`
+- 阶段状态：`ready_for_acceptance` / `blocked` / `blocked_validation_missing` / `deferred`
+- Work ID 状态建议：`ready_for_acceptance` / `blocked` / `blocked_validation_missing`
 - 风险点
 - 未完成事项
 - 下一步建议
