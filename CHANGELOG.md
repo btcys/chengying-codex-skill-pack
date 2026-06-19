@@ -8,6 +8,7 @@
 
 ### Changed
 
+- 明确 `可执行完整需求` 判定标准：必须满足当前流程档位和本轮目标下进入开发前的全部必需前提，能支撑 Handoff、阶段计划、Goal Prompt、验证和回滚；资料完整仍不等于执行授权。
 - 将“原型”从 UI 视觉门禁中拆出为项目级产品原型门禁：新软件、产品、网站、App、小程序、SaaS、后台和内部系统默认需要产品原型/交互草图；Lean 可用文本流程或低保真草图，Standard/Enterprise 必须覆盖核心路径、页面/模块结构、关键交互和状态；纯后端、脚本、库、局部 bugfix 等可说明原因后跳过。
 - 收紧需求到执行的边界：将“完整需求”改为“可执行完整需求”，明确“稍微完整的需求 / PRD / 目标描述 / 整理 Goal 请求”不等于执行授权；新增 Goal Draft、Goal Prompt、Execution Authorization 三层定义，要求项目在产品原型、设计依据、视觉方向或明确跳过原因确认前不得进入代码。
 - 新增工程执行四准则：Think Before Coding、Simplicity First、Surgical Changes、Goal-Driven Execution；同步到 `SKILL.md`、`AGENTS.md` 和 `references/execution-contract.md`，要求开发前说明假设/歧义/取舍/成功标准，执行中保持最小实现、手术式修改和目标驱动验证。

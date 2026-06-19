@@ -123,7 +123,7 @@ PRD 至少包含：
 边界：
 
 - PM Thread 可以调用设计类 Skill 来补齐 brief、方案、原型图和设计规范，但不得写代码。
-- `Product Design:image-to-code` 只能在用户选定视觉目标、Goal Prompt 获得执行授权、并进入 Execution Thread 后使用。
+- `Product Design:image-to-code` 只能在用户选定产品原型/视觉目标、Goal Prompt 获得执行授权、并进入 Execution Thread 后使用。
 - 如果 Product Design 插件不可用，PM Thread 必须说明不可用原因，并改为让用户补充参考图/截图/Figma/原型，或用文本方案选择作为降级方案。
 - `motion-quality` 在 PM 阶段只产出动效原则和验收项；具体实现和浏览器验证必须在 Execution Thread。
 - `better-icons` 在 PM 阶段只确定图标风格和候选库；具体下载、同步或代码接入必须在 Execution Thread。
