@@ -16,6 +16,7 @@
 - Lean 快速路径只保留目标、非目标、允许修改、禁止修改、验收方式和回滚方式，避免小修、文案、视觉微调、一次性脚本被完整 PRD / TECH_SPEC / Handoff 拖重。
 - Goal Prompt 只能作为最后的执行授权；`TECH_SPEC` / `PHASE_PLAN` / `VALIDATION` / Handoff 或等价工作单未形成前，只能输出“当前还不能生成最终 Goal”的阶段状态、缺口和下一步。
 - PM 对齐超过两轮或用户问“还缺什么”时，必须输出全流程状态表；Standard/Enterprise 对齐达到三轮后，必须输出可复制的 PRD / TECH_SPEC / PHASE_PLAN / VALIDATION / Handoff v0.x。v0.x 只表示草案，进入最终 Goal / Work ID / Execution 前必须升级为 v1.0、本轮冻结版或 Lean 等价冻结工作单。
+- PHASE_PLAN 必须有计划版本号、阶段顺序和前后依赖；每个阶段都要明确做什么、先做什么后做什么、允许/禁止范围、独立审计点、验收标准、阻塞验证和回滚方式。
 - 逼问出完整、可实现、可测试、可验收的 PRD。
 - 新软件、产品、网站、App、小程序、SaaS、后台和内部系统默认要有产品原型或交互草图；Lean 可轻量，Standard/Enterprise 必须覆盖核心路径、页面/模块结构、关键交互和状态。
 - 逼问出完整设计规范；必须询问产品原型、参考产品、截图、Figma、草图、品牌素材、现有页面或竞品 URL。

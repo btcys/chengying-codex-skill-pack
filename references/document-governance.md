@@ -148,7 +148,7 @@ PM 阶段核心文档：
 - `PRD.md`：完整产品需求、角色、功能清单、流程、数据权限、验收标准。
 - Goal 指令：正式开发前发给用户确认的一段话；可记录在 `HANDOFF.md` 或 `CODEX_QA.md`，不作为必备独立文档。
 - `PRODUCT_RESEARCH.md`：PRD 冻结前的竞品/同类产品方向校准、交互参考、开源候选、License、二开成本、采用结论和对 PRD 的影响。
-- `PHASE_PLAN.md`：阶段计划、输入依赖、验收、测试、回滚和状态。
+- `PHASE_PLAN.md`：版本化阶段计划、阶段顺序、输入依赖、允许/禁止范围、独立审计点、独立验收标准、阻塞验证、回滚和状态。
 - `VALIDATION.md`：测试命令、替代验证清单、不能自动验证的部分和阻塞项。
 - `PHASE_ACCEPTANCE.md`：每轮/每阶段计划完成验收，不合格打回执行线程。
 - `HANDOFF.md`：PM Thread 给 Execution / Acceptance / Review / Release 等线程的工作单，必须引用 Work ID、修改边界、参考依据、验收标准和派发条件。
