@@ -8,6 +8,7 @@
 
 ### Changed
 
+- 强制 UI/视觉截图验收恢复路径：涉及 UI、前端、可视化、图片/海报/日报卡、管理后台或用户可见页面时，截图为 `blocking` 验收项；不得因 `file://` / `data:` 被策略拦截、缺 Chromium、Chrome 权限不足、Browser 未 attach、页面未启动或缺 Docker 就直接跳过。Execution / Acceptance 必须先尝试 Codex Browser Plugin、项目 dev server / preview、`localhost` / `127.0.0.1` 静态服务、项目 e2e 截图命令或必要外置 Chrome；需要启动服务、安装浏览器、运行 Docker 或更高权限时，先请求一次明确且窄范围审批。只有审批被拒或全部路径失败后，才允许 `blocked_validation_missing`，且不得验收通过。
 - 收紧阶段验收口径：新增阻塞验证缺口规则，Handoff / VALIDATION / 阶段计划 / Goal 中列为阻塞或必需的验证项未运行、失败、无证据或缺工具/环境时，不得标记 `passed` / `verified`；浏览器截图、UI smoke、Docker/部署启动、安全/权限验证属于本轮范围时必须有证据，否则状态为 `blocked_validation_missing` / `needs-fix`。
 - 收紧 Level 2/3 执行派发门禁：Standard/Enterprise 不允许把当前 PM Thread 降级为执行线程；线程工具可用时必须实际创建/派发 Execution Thread 或指向已有执行线程，线程工具不可用时只能输出可复制 Execution Thread 任务包并停在 `blocked_waiting_for_execution_thread`。
 - 收紧测试暴露的 PM 漏洞：最终 Goal Prompt 必须等 `TECH_SPEC` / `PHASE_PLAN` / `VALIDATION` / Handoff 或等价工作单形成后才能输出；对齐超过两轮必须给全流程状态表，Standard/Enterprise 三轮后必须输出 PRD / TECH_SPEC / PHASE_PLAN / VALIDATION / Handoff v0.x；Product Design 出图后必须生成 `DESIGN_DECISION`；登录、API Key、Token、部署、自动化、外部抓取和外部数据源必须立即升级 Standard；PRD 变更必须分“已确认 / 我的建议 / 待确认”；参考资料必须登记用途。

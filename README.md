@@ -36,7 +36,7 @@
 - 在多线程分工前先做架构梳理和影响面分析，避免一个线程改完牵连其他模块。
 - 支持受控自动开发：确认 Goal、Handoff 和自动化模式后，按阶段自动开发、自动测试、自动修复，失败时停止并说明阻塞。
 - 项目没有测试脚本时，先生成 `VALIDATION.md` 和 QA 验证矩阵；没有验证方式不得自动开发。
-- UI 验收、localhost 页面检查和截图默认使用 Codex 内置浏览器；只有需要 Chrome 登录态、Cookie、插件、已打开页面状态或用户明确要求时，才使用外置 Chrome。
+- UI 验收、localhost 页面检查和截图默认使用 Codex Browser Plugin 内置浏览器；涉及 UI、前端、可视化、图片/海报/日报卡、管理后台或用户可见页面时，截图是强制验收项。`file://` / `data:` 被拦截、缺 Chromium、Chrome 权限不足或页面未启动时，不得直接跳过；必须先尝试项目 dev server / preview、`localhost` / `127.0.0.1` 静态服务、项目 e2e 截图命令或必要外置 Chrome。需要启动服务、安装浏览器、运行 Docker、访问外置 Chrome 或更高权限时，先请求一次明确且窄范围审批。
 - 每轮/每阶段完成后进入独立 Phase Acceptance Thread，不合格直接打回执行线程。
 - 审查或验收不通过时生成 Fix Request，Execution Thread 按打回包定向修复并输出 Fix Response，最多自动修复 3 轮。
 - 全部阶段验收通过后，再做需求一致性审核，确认严格符合 PRD、产品原型、设计规范、Goal、阶段计划和 Handoff。
@@ -482,7 +482,7 @@ Goal Prompt 与执行授权：
 验证方案：
 
 ```text
-请为当前阶段生成验证方案：先列出可运行的测试命令；如果没有测试脚本，Lean 快速路径可在轻量工作单中写替代验证清单，Standard/Enterprise 生成 VALIDATION.md、QA 验证矩阵和阻塞项。UI 验收和截图默认使用内置浏览器，只有需要 Chrome 登录态、Cookie、插件或我明确要求时才使用外置 Chrome。
+请为当前阶段生成验证方案：先列出可运行的测试命令；如果没有测试脚本，Lean 快速路径可在轻量工作单中写替代验证清单，Standard/Enterprise 生成 VALIDATION.md、QA 验证矩阵和阻塞项。UI 验收和截图默认使用 Codex Browser Plugin 内置浏览器；如果本地文件或静态页面不能直接打开，先启动项目 dev server / preview 或临时 localhost 静态服务再截图。需要安装浏览器、启动 Docker、访问外置 Chrome 或更高权限时，先请求一次明确审批；只有需要 Chrome 登录态、Cookie、插件或我明确要求时才使用外置 Chrome。
 ```
 
 技术方案 / ADR：

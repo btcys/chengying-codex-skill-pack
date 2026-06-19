@@ -45,7 +45,7 @@ Phase Acceptance 不能把“执行线程如实说明了缺口”当作验收通
 - QA 验证矩阵是否覆盖当前流程档位、主链路、回归路径和人工检查项。
 - UI 验收如需浏览器，是否默认使用内置浏览器完成截图和 smoke；若使用外置 Chrome，是否说明登录态、Cookie、插件或用户指定等必要原因。
 - UI 修改或视觉修复是否提供 `VISUAL_REFERENCES.md` 中的参考截图 ID 或 Lean 等价视觉依据；Execution 产生的 before/after、smoke、回归或修复复验截图是否已按档位记录，Lean 可在对话/轻量验收表中记录，Standard/Enterprise 归档到 `docs/codex/assets/qa/<Work ID>/`。
-- 浏览器截图、UI smoke、视觉对照、Docker/部署启动、外部服务、权限或安全扫描如果是本轮 `blocking` 验证项，是否已经实际运行并有证据；缺 Playwright/Chromium、Chrome 权限、Docker 命令、账号或环境时是否标记为阻塞验证缺口。
+- 浏览器截图、UI smoke、视觉对照、Docker/部署启动、外部服务、权限或安全扫描如果是本轮 `blocking` 验证项，是否已经实际运行并有证据；缺 Playwright/Chromium、Chrome 权限、Docker 命令、账号或环境时，是否先尝试内置浏览器、localhost / preview、临时静态服务、项目 e2e 截图命令、外置 Chrome 或必要审批后仍失败。没有补验证尝试和审批记录时，不能直接判为阻塞结论，必须打回 Execution Thread 补齐。
 - 如果用户在验收期间补充新的修改截图、标注截图或目标效果图，是否已作为新的实现依据归档/登记，并生成 Fix Request 或回 PM Thread 更新范围与验收标准。
 - 人工验收点是否有结论。
 - 如果本轮来自打回修复，Fix Response 是否逐条回应 Fix Request。
@@ -87,6 +87,7 @@ Phase Acceptance 不能把“执行线程如实说明了缺口”当作验收通
 - before 截图：
 - after 截图：
 - 截图/证据：
+- 截图恢复路径与审批记录：
 
 ### 打回项
 | ID | 严重级别 | 问题 | 证据 | 期望结果 | 打回对象 |
@@ -120,7 +121,7 @@ Phase Acceptance 不能把“执行线程如实说明了缺口”当作验收通
 - 有计划项未完成：打回 Execution Thread。
 - 有测试失败且未解释清楚：打回 Execution Thread。
 - 有 `blocking` 验证项未运行、失败、无证据或因缺工具/环境无法执行：状态为 `needs-fix` 或 `blocked_validation_missing`，不得通过。
-- 浏览器截图、UI smoke、Docker/部署启动验证属于本轮范围且缺证据：不得通过；能由执行线程补齐时打回 Execution Thread，缺环境或工具时标记 `blocked_validation_missing` 并给出补验证路径。
+- 浏览器截图、UI smoke、Docker/部署启动验证属于本轮范围且缺证据：不得通过；先检查 Execution 是否已经尝试强制恢复路径并请求必要审批。能由执行线程补齐时打回 Execution Thread；缺环境、工具或权限但尚未请求审批时，也打回要求补审批和补验证；用户拒绝审批或全部路径失败后，才标记 `blocked_validation_missing` 并给出下一步补验证路径。
 - 允许后置项没有风险、owner、后续验证方式和用户/PM 确认：不得作为后置，按阻塞验证缺口处理。
 - 有越界修改：打回 Execution Thread，并更新影响面。
 - 有需求矛盾或验收标准不清：回 PM Thread。

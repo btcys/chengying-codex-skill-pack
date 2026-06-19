@@ -26,7 +26,8 @@
 - 没有测试命令或替代验证方案，不进入自动开发。
 - 没有测试结果，不进入阶段验收。
 - Handoff / `VALIDATION.md` / 阶段计划 / Goal 中列为阻塞或必需的验证项，未运行、无证据、失败或因缺工具无法执行时，不得标记 `passed` / `verified`；只能标记 `needs-fix` / `blocked`，并生成阻塞验证缺口或 Fix Request。
-- 说明“浏览器截图没完成 / Docker 没有跑 / Playwright 缺浏览器 / Chrome 被系统权限杀掉 / 本地没有 docker 命令”等原因，只能解释阻塞来源，不能替代验收通过证据。
+- 说明“浏览器截图没完成 / Docker 没有跑 / Playwright 缺浏览器 / Chrome 被系统权限杀掉 / 本地没有 docker 命令”等原因，只能解释阻塞来源，不能替代验收通过证据；在形成最终阻塞结论前，必须先尝试内置浏览器、localhost / preview、临时静态服务、项目 e2e 截图命令、必要外置 Chrome 或 Docker/浏览器安装等恢复路径，并在需要时向用户请求一次明确且窄范围审批。
+- UI、前端、可视化、图片/海报/日报卡、管理后台或用户可见页面的交付，截图是强制验收门禁。缺截图时优先生成 Fix Request 或补验证任务；只有用户拒绝审批、账号/外部服务不可获得、工具无法 attach、全部允许路径失败或敏感信息无法脱敏时，才允许 `blocked_validation_missing`，并必须列出已尝试路径、审批记录、失败点和下一步。
 - 允许后置项必须在验收前明确为非阻塞，写明风险、owner、后续验证方式和用户/PM 确认；阻塞验证项不得被放入“允许后置项”绕过验收。
 - 阶段验收未通过，不进入下一阶段。
 - 审查或验收打回时，必须生成 Fix Request；Execution Thread 只能按 Fix Request 定向修复后重新提交验收。
@@ -89,7 +90,7 @@
 
 - `blocked`：缺关键输入或存在 P0 风险。
 - `blocked_waiting_for_execution_thread`：Level 2/3 已有执行授权和任务包，但没有可用线程工具或尚未完成执行线程派发；PM Thread 必须停止，不得改代码。
-- `blocked_validation_missing`：阻塞验证项未运行、无证据、失败或缺工具无法执行；不得进入下一阶段、需求一致性审核、Code Review 或 Release。
+- `blocked_validation_missing`：阻塞验证项未运行、无证据、失败或缺工具无法执行；对截图、浏览器 smoke、Docker/部署启动等强制验证项，必须先尝试可执行恢复路径并请求必要审批后仍失败，才允许使用本状态。不得进入下一阶段、需求一致性审核、Code Review 或 Release。
 - `ready`：输入完整，等待用户确认。
 - `in_progress`：正在执行。
 - `verified`：产物和验收通过。
