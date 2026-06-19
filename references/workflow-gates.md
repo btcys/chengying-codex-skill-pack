@@ -27,7 +27,7 @@
 - 有 P0 / 阻塞风险，不进入发布。
 - 用户未确认 Goal，不进入 Execution Thread；但 PM Thread 必须继续按阶段开发计划沟通缺口、风险、建议和下一步选择。
 - Goal Draft / Goal Prompt 不是执行授权。只有用户明确说“按这个 Goal 执行 / 开始开发 / 进入 Execution”等，才进入执行授权。
-- 多线程判断不能拖到 Goal 执行时临时决定。PM 早期只能预判；PRD、产品原型、技术方案和架构影响面明确后做正式决策；Handoff 前必须校验线程责任、数据/API 契约、验证矩阵、合并顺序和回滚方式，缺任一项不得并行开发。
+- 多线程不能拖到 Goal 执行时临时决定。PM 早期只能预判；技术方案/架构影响面阶段只做可拆性分析；阶段计划与验证方案完成后、Goal Prompt / Execution 前，必须输出执行前线程方案并确定 single-thread / N threads / defer，缺线程责任、数据/API 契约、验证矩阵、合并顺序或回滚方式时不得并行开发。
 - PM 未登记活跃工作安排、未生成 Work ID 或 Handoff 未引用 Work ID，不进入 Execution Thread。
 - 未明确自动化模式时，不进入 Execution Thread；如用户未指定，PM Thread 可在 Goal 中建议 Assisted Autopilot，并取得用户确认。高风险任务必须使用 Manual。
 - 发现风险、矛盾或不可实现点时，必须直接指出，不得迎合式推进。
@@ -41,9 +41,9 @@
 | 1. PRD 前期竞品/同类产品方向校准 | 项目定位、MVP 初稿、现有基础、项目等级 | `PRODUCT_RESEARCH.md` 或 PM Handoff 调研结论 | Level 1 已明确跳过或轻量参考；Level 2 已轻量联网扫描；Level 3 已做竞品边界和可商用二开评估；无法联网时假设已标明 | 补调研，或明确跳过/从零实现原因 |
 | 2. PRD | 项目定位、MVP、现有基础、调研结论 | `PRD.md` 或 PM Handoff 中的完整 PRD | 功能、角色、流程、数据、权限、验收可实现；已写明调研对需求/MVP/非目标的影响 | 继续追问或给方案选择 |
 | 3. 产品原型与设计规范 | PRD、调研结论、参考产品、用户偏好、用户提供的截图/Figma/原型/品牌素材或明确跳过原因 | `DESIGN.md` / `VISUAL_REFERENCES.md` / Product Design brief / 产品原型或交互草图结论 | 新软件/产品/网站/App/小程序/SaaS/后台/内部系统已有产品原型或交互草图；已询问参考产品、截图、Figma、原型、草图、品牌素材或竞品 URL；design brief 已确认；页面、组件、状态、响应式、可访问性、动效原则、图标风格明确；必要的 Product Design / ui-ux-design-advisor / motion-quality / better-icons / 生图 / Figma 调用已完成或明确跳过原因；需要视觉目标时用户已选定方向 | 继续追问参考材料，调用 Product Design:get-context -> ideate，给 2 到 3 个方案或生成草图再确认 |
-| 4. 技术方案与架构 | PRD、产品原型、设计规范、调研结论、现有代码、流程档位 | `TECH_SPEC.md` 或 Handoff 技术方案、模块清单、依赖关系、影响面表、多线程正式判断 | Lean 已在 Handoff 写明技术边界和单线程/不拆原因；Standard/Enterprise 涉及 API/数据/权限/部署/依赖时已有技术方案；修改范围、禁止范围、共享资源和风险模块明确；如需多线程，线程责任矩阵、数据/API 契约、合并顺序、回滚策略和跨模块验证矩阵明确 | 回到技术方案或架构梳理 |
-| 5. 阶段计划与验证方案 | PRD、产品原型、设计、调研结论、技术方案、架构影响面 | `PHASE_PLAN.md` / `VALIDATION.md` / Goal Draft | 每阶段可实现、可测试、可验收、可回滚；QA 验证矩阵可执行 | 重拆计划或补验证方案 |
-| 6. Goal Prompt / 执行授权 | Goal Draft / Goal Prompt、技术方案/ADR、阶段计划、当前 Task、自动化模式、QA 验证矩阵 | 一段 Goal Prompt 和用户明确执行授权记录 | 用户明确同意按最终 Goal Prompt 正式进入开发，自动化模式明确，QA 验证矩阵可执行 | 不进入 Execution；继续按阶段计划沟通缺口、建议和下一步选择 |
+| 4. 技术方案与架构 | PRD、产品原型、设计规范、调研结论、现有代码、流程档位 | `TECH_SPEC.md` 或 Handoff 技术方案、模块清单、依赖关系、影响面表、多线程可拆性分析 | Lean 已在 Handoff 写明技术边界；Standard/Enterprise 涉及 API/数据/权限/部署/依赖时已有技术方案；修改范围、禁止范围、共享资源、风险模块和候选拆分点明确 | 回到技术方案或架构梳理 |
+| 5. 阶段计划与验证方案 | PRD、产品原型、设计、调研结论、技术方案、架构影响面 | `PHASE_PLAN.md` / `VALIDATION.md` / 执行前线程方案 / Goal Draft | 每阶段可实现、可测试、可验收、可回滚；QA 验证矩阵可执行；已确定 single-thread / N threads / defer；如需多线程，线程责任矩阵、数据/API 契约、合并顺序、回滚策略和跨模块验证矩阵明确 | 重拆计划、补验证方案，或回架构阶段重做可拆性分析 |
+| 6. Goal Prompt / 执行授权 | Goal Draft / Goal Prompt、执行前线程方案、技术方案/ADR、阶段计划、当前 Task、自动化模式、QA 验证矩阵 | 一段或多段 Goal Prompt 和用户明确执行授权记录 | 用户明确同意按最终 Goal Prompt 正式进入开发，自动化模式明确，QA 验证矩阵可执行；多线程时每个线程都有对应 Work ID / Goal / Handoff | 不进入 Execution；继续按阶段计划沟通缺口、建议和下一步选择 |
 | 7. Execution Thread | Work ID、PM Handoff、当前 Task、或 Fix Request | 代码修改、测试结果、自动修复记录、Fix Response | 当前阶段测试通过或阻塞原因明确；被打回时已逐条回应 Fix Request | 自动修复，最多 3 轮；仍失败则停止 |
 | 8. Phase Acceptance Thread | Work ID、阶段计划、Handoff、执行结果、测试结果 | `PHASE_ACCEPTANCE.md` 或等价验收表；不通过时输出 Fix Request；通过时移除活跃工作安排并归档摘要 | 当前阶段计划项全部通过，允许进入下一阶段；Lean 可用轻量验收表 | 生成 Fix Request 打回 Execution Thread，或回 PM Thread 重新确认 |
 | 9. 需求一致性审核 | PRD、产品原型、设计规范、Goal、阶段计划、Handoff、全部阶段验收结果 | `ACCEPTANCE.md` 或等价审核表；不通过时输出 Fix Request | 无漏做、错做、多做、越界修改；偏差已确认 | 生成 Fix Request 回 Execution Thread，或回 PM Thread 重新确认 |

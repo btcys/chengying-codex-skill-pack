@@ -25,7 +25,7 @@ PM Thread 第一轮后必须同时给出：
 - Level 2 默认 Standard。
 - Level 3 默认 Enterprise，但如果只是低风险局部维护，可降为 Standard。
 - 用户要求快速验证时，优先 Lean；但不能绕过安全、隐私、数据和发布风险。
-- 多线程按档位升降级：Lean 默认单线程并写明不拆原因；Standard 只有在技术方案和架构影响面明确后才可拆独立模块；Enterprise 必须做多线程正式判断，但不代表默认并行开发。
+- 多线程按档位升降级：Lean 默认单线程并写明不拆原因；Standard 在技术方案和架构影响面明确后只做候选拆分；Enterprise 必须在 Goal Prompt / Execution 前输出执行前线程方案，但不代表默认并行开发。
 
 ## 必须升级的情况
 
@@ -60,7 +60,7 @@ Standard 保留完整主线，但允许文档后置生成：
 
 - PM 阶段先形成 PRD、PRODUCT_RESEARCH、产品原型、DESIGN、TECH_SPEC、PHASE_PLAN、VALIDATION、GOAL、HANDOFF 的等价内容。
 - Execution 后再补齐 PHASE_ACCEPTANCE、ACCEPTANCE、CODEX_QA。
-- 如需多线程，必须在技术方案/架构影响面阶段完成正式判断，并在 Handoff 中写清线程责任、契约、合并顺序和验证矩阵。
+- 如需多线程，必须先在技术方案/架构影响面阶段完成可拆性分析，再在 Goal Prompt / Execution 前的执行前线程方案中确定线程数量，并写清线程责任、契约、合并顺序和验证矩阵。
 
 Enterprise 不压缩关键门禁：
 
