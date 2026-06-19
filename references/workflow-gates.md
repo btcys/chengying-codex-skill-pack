@@ -12,7 +12,9 @@
 - 没有明确产物，不进入下一阶段。
 - 未判断项目等级和 Lean / Standard / Enterprise 流程档位，不进入 PRD。
 - 流程可以按档位压缩，但门禁判断不能消失；压缩时必须说明等价产物在哪里。
+- “需求稍微完整”“用户发了 PRD”“用户让整理 Goal”都不等于可执行完整需求；缺设计依据、验收标准、验证方式、技术上下文或风险约束时，仍停留在 PM 对齐。
 - Level 2/3 项目没有 PRD 前期竞品/同类产品/开源方案方向校准，不冻结 PRD。
+- 涉及 UI 时，没有参考产品、截图、Figma、原型、草图、品牌素材、现有页面、竞品 URL、已选视觉方向，或用户明确确认跳过视觉探索，不进入 UI 实现。
 - 没有验收标准，不进入开发。
 - 没有测试命令或替代验证方案，不进入自动开发。
 - 没有测试结果，不进入阶段验收。
@@ -23,6 +25,7 @@
 - 需求一致性审核未通过，不进入代码审查。
 - 有 P0 / 阻塞风险，不进入发布。
 - 用户未确认 Goal，不进入 Execution Thread；但 PM Thread 必须继续按阶段开发计划沟通缺口、风险、建议和下一步选择。
+- Goal Draft / Goal Prompt 不是执行授权。只有用户明确说“按这个 Goal 执行 / 开始开发 / 进入 Execution”等，才进入执行授权。
 - PM 未登记活跃工作安排、未生成 Work ID 或 Handoff 未引用 Work ID，不进入 Execution Thread。
 - 未明确自动化模式时，不进入 Execution Thread；如用户未指定，PM Thread 可在 Goal 中建议 Assisted Autopilot，并取得用户确认。高风险任务必须使用 Manual。
 - 发现风险、矛盾或不可实现点时，必须直接指出，不得迎合式推进。
@@ -32,13 +35,13 @@
 
 | 阶段 | 输入 | 必须产出 | 通过条件 | 不通过时 |
 | --- | --- | --- | --- | --- |
-| 0. 启动 | 粗略想法、半成型需求或完整需求材料 | 输入成熟度判断、必要 PM 问题、项目等级、流程档位 | 已识别项目类型、复杂度、流程重量、现有材料和升级风险；已有材料不重复逼问 | 继续 PM 追问、整理材料或要求用户补充关键输入 |
+| 0. 启动 | 粗略想法、半成型需求或可执行完整需求材料 | 输入成熟度判断、必要 PM 问题、项目等级、流程档位 | 已识别项目类型、复杂度、流程重量、现有材料和升级风险；已有材料不重复逼问 | 继续 PM 追问、整理材料或要求用户补充关键输入 |
 | 1. PRD 前期竞品/同类产品方向校准 | 项目定位、MVP 初稿、现有基础、项目等级 | `PRODUCT_RESEARCH.md` 或 PM Handoff 调研结论 | Level 1 已明确跳过或轻量参考；Level 2 已轻量联网扫描；Level 3 已做竞品边界和可商用二开评估；无法联网时假设已标明 | 补调研，或明确跳过/从零实现原因 |
 | 2. PRD | 项目定位、MVP、现有基础、调研结论 | `PRD.md` 或 PM Handoff 中的完整 PRD | 功能、角色、流程、数据、权限、验收可实现；已写明调研对需求/MVP/非目标的影响 | 继续追问或给方案选择 |
 | 3. 设计规范 | PRD、调研结论、参考产品、用户偏好、用户提供的截图/Figma/原型/品牌素材或明确无参考 | `DESIGN.md` / `VISUAL_REFERENCES.md` / Product Design brief / 原型草图结论 | 已询问参考产品、截图、Figma、原型、草图、品牌素材或竞品 URL；design brief 已确认；页面、组件、状态、响应式、可访问性、动效原则、图标风格明确；必要的 Product Design / ui-ux-design-advisor / motion-quality / better-icons / 生图 / Figma 调用已完成或明确跳过原因；需要视觉目标时用户已选定方向 | 继续追问参考材料，调用 Product Design:get-context -> ideate，给 2 到 3 个方案或生成草图再确认 |
 | 4. 技术方案与架构 | PRD、设计规范、调研结论、现有代码、流程档位 | `TECH_SPEC.md` 或 Handoff 技术方案、模块清单、依赖关系、影响面表 | Lean 已在 Handoff 写明技术边界；Standard/Enterprise 涉及 API/数据/权限/部署/依赖时已有技术方案；修改范围、禁止范围、共享资源和风险模块明确 | 回到技术方案或架构梳理 |
-| 5. 阶段计划与验证方案 | PRD、设计、调研结论、技术方案、架构影响面 | `PHASE_PLAN.md` / `VALIDATION.md` / Goal 草案 | 每阶段可实现、可测试、可验收、可回滚；QA 验证矩阵可执行 | 重拆计划或补验证方案 |
-| 6. Goal 正式确认 | Goal 草案、技术方案/ADR、阶段计划、当前 Task、自动化模式、QA 验证矩阵 | 一段 Goal 授权指令和用户确认记录 | 用户明确同意按最终 Goal 正式进入开发，自动化模式明确，QA 验证矩阵可执行 | 不进入 Execution；继续按阶段计划沟通缺口、建议和下一步选择 |
+| 5. 阶段计划与验证方案 | PRD、设计、调研结论、技术方案、架构影响面 | `PHASE_PLAN.md` / `VALIDATION.md` / Goal Draft | 每阶段可实现、可测试、可验收、可回滚；QA 验证矩阵可执行 | 重拆计划或补验证方案 |
+| 6. Goal Prompt / 执行授权 | Goal Draft / Goal Prompt、技术方案/ADR、阶段计划、当前 Task、自动化模式、QA 验证矩阵 | 一段 Goal Prompt 和用户明确执行授权记录 | 用户明确同意按最终 Goal 正式进入开发，自动化模式明确，QA 验证矩阵可执行 | 不进入 Execution；继续按阶段计划沟通缺口、建议和下一步选择 |
 | 7. Execution Thread | Work ID、PM Handoff、当前 Task、或 Fix Request | 代码修改、测试结果、自动修复记录、Fix Response | 当前阶段测试通过或阻塞原因明确；被打回时已逐条回应 Fix Request | 自动修复，最多 3 轮；仍失败则停止 |
 | 8. Phase Acceptance Thread | Work ID、阶段计划、Handoff、执行结果、测试结果 | `PHASE_ACCEPTANCE.md` 或等价验收表；不通过时输出 Fix Request；通过时移除活跃工作安排并归档摘要 | 当前阶段计划项全部通过，允许进入下一阶段；Lean 可用轻量验收表 | 生成 Fix Request 打回 Execution Thread，或回 PM Thread 重新确认 |
 | 9. 需求一致性审核 | PRD、设计规范、Goal、阶段计划、Handoff、全部阶段验收结果 | `ACCEPTANCE.md` 或等价审核表；不通过时输出 Fix Request | 无漏做、错做、多做、越界修改；偏差已确认 | 生成 Fix Request 回 Execution Thread，或回 PM Thread 重新确认 |
@@ -75,7 +78,7 @@
 | 设计规范 |  |  |  |  |
 | 技术方案 / 架构影响面 |  |  |  |  |
 | 阶段计划 / 验证方案 |  |  |  |  |
-| Goal 正式确认 |  |  |  |  |
+| Goal Prompt / 执行授权 |  |  |  |  |
 | Execution |  |  |  |  |
 | 阶段验收 |  |  |  |  |
 | 需求一致性审核 |  |  |  |  |

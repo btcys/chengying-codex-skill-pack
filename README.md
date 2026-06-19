@@ -2,7 +2,7 @@
 
 面向 Codex 的对话式软件项目协作工作流 Skill Pack。
 
-它适合把“开发一个 xxx 程序”的粗略想法、半成型需求，或已有 PRD / 设计稿 / 代码仓库 / 技术方案的完整需求，先通过对话交给 Codex 判断输入成熟度、流程档位和风险，再按需要完成 PM 访谈、PRD 前期竞品/同类产品方向校准、完整 PRD、设计规范、原型草图、技术方案/ADR、架构影响面、阶段开发计划、QA 验证矩阵、开发前 Goal 正式确认和交接包整理；等用户确认后，再进入 Execution Thread 或当前线程的执行阶段，做受控自动开发、自动测试、自动修复。
+它适合把“开发一个 xxx 程序”的粗略想法、半成型需求，或已有 PRD / 设计稿 / 代码仓库 / 技术方案的可执行完整需求，先通过对话交给 Codex 判断输入成熟度、流程档位和风险，再按需要完成 PM 访谈、PRD 前期竞品/同类产品方向校准、完整 PRD、设计规范、原型草图、技术方案/ADR、架构影响面、阶段开发计划、QA 验证矩阵、开发前 Goal Prompt 和交接包整理；等用户明确确认“按这个 Goal 执行”后，再进入 Execution Thread 或当前线程的执行阶段，做受控自动开发、自动测试、自动修复。
 
 核心原则很简单：先像真实软件团队一样把项目想清楚，再让 Codex 写代码。
 
@@ -17,7 +17,7 @@
 - 没有明确视觉目标时，先确认是否调用 Product Design:get-context -> Product Design:ideate；brief 经用户确认后生成 3 个方向，等用户选择后才能进入 UI 实现。
 - 标准项目在 PRD 冻结前轻量查竞品、同类产品和开源方案；长期商业项目在 PRD 冻结前评估竞品边界和可商用开源二开底座，用来指导 PM 判断和缩短开发周期，但不默认采用。
 - 涉及核心技术选型、API、数据、权限、部署或新增依赖时，先写一页 `TECH_SPEC.md` 或 ADR，避免边做边改架构。
-- 让正式开发前必须明确一段式 Goal 授权、MVP、非目标、阶段计划、验证方案、验收标准、修改范围和禁止修改范围。
+- 让正式开发前必须明确 Goal Prompt、执行授权、MVP、非目标、阶段计划、验证方案、验收标准、修改范围和禁止修改范围；只发需求、PRD 或让整理 Goal 不等于授权执行。
 - PM 派发给任何线程前必须先登记活跃工作安排，生成 Work ID；Execution / Acceptance / Review / Release 线程都以 Work ID + Handoff 工作单为依据。
 - 用户暂不确认或不选择使用 Goal 时，不进入 Execution Thread，但 PM Thread 继续按阶段开发计划沟通缺口、风险、建议和下一步选择。
 - 已派发工作在执行线程未产生代码修改前可以调整；进入执行后，除阻塞、范围冲突、安全风险或用户强制变更外，不得随意打断。
@@ -60,8 +60,8 @@ flowchart LR
   Gate1 -- 否 --> B
   Gate1 -- 是 --> E[技术方案 / 架构影响面]
   E --> F[阶段计划 / QA 验证矩阵]
-  F --> G[Goal 正式确认]
-  G --> W[登记 Work ID / PM Handoff 工作单]
+  F --> G[Goal Prompt / 等待执行授权]
+  G --> W[明确确认后登记 Work ID / PM Handoff 工作单]
   W --> Gate2{门禁通过?}
   Gate2 -- 否 --> B
   Gate2 -- 是 --> I[Execution Thread / 当前线程执行阶段]
@@ -94,7 +94,7 @@ flowchart LR
 
 ```mermaid
 flowchart TB
-  PM[PM Thread<br/>PRD 前期调研 / 完整 PRD / 设计规范 / 技术方案 / 阶段计划 / QA矩阵 / Goal 正式确认] --> Work[活跃工作安排<br/>Work ID / 目标线程 / 派发条件 / 打断规则]
+  PM[PM Thread<br/>PRD 前期调研 / 完整 PRD / 设计规范 / 技术方案 / 阶段计划 / QA矩阵 / Goal Prompt] --> Work[活跃工作安排<br/>Work ID / 目标线程 / 派发条件 / 打断规则]
   Work --> Handoff[PM Handoff 工作单<br/>参考依据 / 修改范围 / 禁止范围 / 验收标准 / 验证方式]
   Handoff --> Arch[架构梳理<br/>模块依赖 / 影响面 / 线程责任矩阵]
   Arch --> Exec[Execution Thread<br/>阶段开发 / 自动测试 / 自动修复]
@@ -414,10 +414,10 @@ PM 启动：
 请在 PRD 冻结前按项目等级做竞品、同类产品与开源方案调研：Level 2 轻量查 2 到 3 个同类产品和 1 到 3 个开源/模板/组件候选；Level 3 评估竞品功能边界和可商用开源二开底座，输出 License、维护状态、二开成本、架构绑定风险、adopt/reference/avoid 结论，以及对 PRD、MVP、非目标、设计规范和技术路线的影响。
 ```
 
-Goal 正式确认：
+Goal Prompt 与执行授权：
 
 ```text
-请基于已确认的 PRD、设计规范、技术方案/ADR、架构影响面、阶段开发计划、QA 验证矩阵和自动化模式，写出一段正式开发前 Goal 授权，并问我是否按这个 Goal 正式进入开发。如果我暂不确认或不选择使用这个 Goal，请不要进入 Execution Thread，继续按阶段开发计划给我缺口、建议和下一步选择。
+请基于已确认的 PRD、设计规范、技术方案/ADR、架构影响面、阶段开发计划、QA 验证矩阵和自动化模式，写出一段正式开发前 Goal Prompt，方便我确认或复制给 Codex 设置目标。只输出 Goal Prompt 不代表开始执行；必须等我明确说“按这个 Goal 执行 / 开始开发 / 进入 Execution”后，才登记 Work ID、生成 PM Handoff 并进入执行。如果我暂不确认，请继续按阶段开发计划给我缺口、建议和下一步选择。
 ```
 
 全流程对齐：
@@ -506,7 +506,7 @@ Goal 正式确认：
 - 每个阶段进入下一阶段前必须检查门禁状态。
 - 先判断 Lean / Standard / Enterprise 流程档位；小项目压缩流程，风险项目升级流程。
 - PM Thread 与 Execution Thread 分离。
-- PM Thread 不写代码，不初始化框架，不创建源码目录；必须产出完整 PRD、设计规范、阶段开发计划、验证方案，并在正式开发前完成 Goal 确认。
+- PM Thread 不写代码，不初始化框架，不创建源码目录；必须产出完整 PRD、设计规范、阶段开发计划、验证方案，并在正式开发前输出 Goal Prompt，等待用户明确执行授权。
 - 设计规范阶段必须判断 Product Design、ui-ux-design-advisor、motion-quality、better-icons、ImageGen、Figma 和审查类 Skill 的调用；实现型 image-to-code、图标同步和动画代码必须等到 Execution Thread。
 - UI 项目没有参考图、截图、Figma、原型或已选视觉方向时，不得进入 UI 实现；必须继续追问、调用 Product Design 生成方向，或明确把 UI 后置。
 - 涉及核心技术选型、API、数据、权限、部署或新增依赖时，必须先确认技术方案 / ADR。
@@ -521,7 +521,7 @@ Goal 正式确认：
 - 正式版本必须做隐私审计、打包发布检查和版本文档。
 - 用户反馈问题必须先记录；重复、高影响或导致返工的问题必须升级到相关文档或检查项。
 - 当前版本关闭后不自动回 PM，只有新需求、变更、返工或下一版本才回 PM。
-- 用户不确认 Goal 时不进入执行线程，但 PM Thread 应继续分阶段沟通和给建议，不能把流程卡死。
+- 用户不确认 Goal 或只是要求整理 Goal 时不进入执行线程；PM Thread 应继续分阶段沟通和给建议，不能把流程卡死。
 - 用户确认前不选技术栈、不引入依赖、不做大重构。
 - 每个开发任务必须可验收、可回滚、可沉淀。
 - 不覆盖用户已有文件。
