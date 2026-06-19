@@ -53,7 +53,7 @@ Phase Acceptance 不能把“执行线程如实说明了缺口”当作验收通
 - 禁止修改范围是否未被触碰。
 - 是否新增未经确认的功能、依赖、接口或数据字段。
 - 是否更新对应文档：Lean 可在对话中归档摘要；Standard/Enterprise 更新 `TASKS.md`、`CODEX_QA.md`、`PHASE_PLAN.md`、必要时更新 `DECISIONS.md`。
-- 验收通过时，是否已要求从活跃工作安排中移除该 Work ID，并归档摘要；Lean 可在对话中标记完成，Standard/Enterprise 更新 `TASKS.md`。
+- 验收通过时，是否已要求从 PM 台账 / 活跃工作安排中删除该 Work ID 条目，并归档摘要；Lean 可在对话中标记完成，Standard/Enterprise 更新 `TASKS.md`。
 - 是否存在阻塞风险、未关闭缺陷或跨模块影响。
 
 ## 输出格式
@@ -113,7 +113,7 @@ Phase Acceptance 不能把“执行线程如实说明了缺口”当作验收通
 - 回 Execution Thread 修复：
 - 进入下一阶段：
 - 回 PM Thread 重新确认：
-- 活跃工作安排处理：remove-from-active / keep-blocked / update-and-redispatch
+- PM 台账处理：delete-active-entry / keep-blocked / update-and-redispatch
 ```
 
 ## 打回规则
@@ -131,4 +131,4 @@ Phase Acceptance 不能把“执行线程如实说明了缺口”当作验收通
 - 同一阶段最多自动修复并重新验收 3 轮；仍未通过时状态为 `blocked`，回 PM Thread 重新确认计划、范围或验收标准。
 - 每次重新提交验收必须带上修复轮次、修复项对照、测试结果和仍未解决的问题。
 
-只有 Phase Acceptance Thread 输出 `passed`，当前阶段才可标记为 `verified`。通过后必须把对应 Work ID 从活跃工作安排中移除，并在验收/QA/完成记录中留下摘要，避免活跃上下文堆积。
+只有 Phase Acceptance Thread 输出 `passed`，当前阶段才可标记为 `verified`。通过后必须把对应 Work ID 从 PM 台账 / 活跃工作安排中删除，并在验收/QA/完成记录中留下摘要，避免活跃上下文堆积。

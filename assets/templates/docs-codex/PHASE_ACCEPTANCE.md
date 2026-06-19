@@ -14,7 +14,7 @@
 - Lean 是否使用轻量验收：
 - 是否生成 Fix Request：
 - 验收轮次：
-- 活跃工作安排处理：remove-from-active / keep-blocked / update-and-redispatch
+- PM 台账处理：delete-active-entry / keep-blocked / update-and-redispatch
 
 ## 计划对照
 
@@ -66,4 +66,4 @@
 - 回 Execution Thread 修复：
 - 进入下一阶段：
 - 回 PM Thread 重新确认：
-- 活跃工作安排处理：remove-from-active / keep-blocked / update-and-redispatch
+- PM 台账处理：delete-active-entry / keep-blocked / update-and-redispatch

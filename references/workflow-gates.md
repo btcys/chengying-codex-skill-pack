@@ -40,7 +40,7 @@
 - Goal Draft / Goal Prompt 不是执行授权。只有用户明确说“按这个 Goal 执行 / 开始开发 / 进入 Execution”等，才进入执行授权。
 - 默认当前对话是 PM Thread。Level 2 / Standard 和 Level 3 / Enterprise 在执行授权后，也不得由 PM Thread 自行改代码，且不得把当前 PM Thread 降级为执行线程；必须实际派发到 Execution Thread 或明确指向已有执行线程。线程工具不可用时，PM Thread 只能输出可复制的 Execution Thread 任务包并停止，状态记为 `blocked_waiting_for_execution_thread`。
 - 多线程不能拖到 Goal 执行时临时决定。PM 早期只能预判；技术方案/架构影响面阶段只做可拆性分析；阶段计划与验证方案完成后、Goal Prompt / Execution 前，必须输出执行前线程方案并确定 single-thread / N threads / defer，缺线程责任、数据/API 契约、验证矩阵、合并顺序或回滚方式时不得并行开发。
-- PM 未登记活跃工作安排、未生成 Work ID 或 Handoff 未引用 Work ID，不进入 Execution Thread。Lean 快速路径可使用聊天内轻量 Work ID 和 6 字段工作单作为等价登记；Standard/Enterprise 必须写入 `TASKS.md` 或等价项目文档。
+- PM 未登记 PM 台账 / 活跃工作安排、未生成 Work ID 或 Handoff 未引用 Work ID，不进入 Execution Thread。Lean 快速路径可使用聊天内轻量 Work ID 和 6 字段工作单作为等价登记；Standard/Enterprise 必须写入 `TASKS.md` 或等价项目文档。PM 台账只保留未完成活跃任务；Phase Acceptance 通过后必须从活跃区删除该 Work ID 条目并归档摘要。
 - 未明确自动化模式时，不进入 Execution Thread；如用户未指定，PM Thread 可在 Goal 中建议 Assisted Autopilot，并取得用户确认。高风险任务必须使用 Manual。
 - 发现风险、矛盾或不可实现点时，必须直接指出，不得迎合式推进。
 - 用户反馈流程或执行问题时，不等版本结束，必须先记录到 `FEEDBACK_LOG.md`；重复、高影响或导致返工的问题必须升级到相关文档或检查清单。
@@ -57,7 +57,7 @@
 | 5. 阶段计划与验证方案 | PRD、产品原型、设计、调研结论、技术方案、架构影响面 | `PHASE_PLAN.md` / `VALIDATION.md` / 执行前线程方案 / 开发前对齐包 / Handoff 草案 / Goal 就绪判断 | 每阶段可实现、可测试、可验收、可回滚；QA 验证矩阵可执行；已确定 single-thread / N threads / defer；如需多线程，线程责任矩阵、数据/API 契约、合并顺序、回滚策略和跨模块验证矩阵明确；Handoff 草案可支持执行；若前置产物缺失，只能输出 Goal 未就绪说明 | 重拆计划、补验证方案，或回架构阶段重做可拆性分析 |
 | 6. Goal Prompt / 执行授权 | Goal 就绪判断、开发前对齐包、Handoff 草案、执行前线程方案、技术方案/ADR、阶段计划、当前 Task、自动化模式、QA 验证矩阵 | 一段式 Goal Prompt、用户明确执行授权记录、执行线程安排、派发证据 | `TECH_SPEC` / `PHASE_PLAN` / `VALIDATION` / Handoff 或 Lean 等价工作单已形成；Goal Prompt 只承载授权目标，不替代 Handoff；用户明确同意按最终 Goal Prompt 正式进入开发，自动化模式明确，QA 验证矩阵可执行；Level 2/3 已实际创建/派发独立 Execution Thread 或已明确已有执行线程 ID/链接；多线程时每个线程的 Goal 字段写入 Handoff，而不是把 Goal Prompt 写成长文档 | 不进入 Execution；如线程工具不可用，输出 Execution Thread 任务包并标记 `blocked_waiting_for_execution_thread`；否则继续按阶段计划沟通缺口、建议和下一步选择 |
 | 7. Execution Thread | Work ID、PM Handoff、当前 Task、或 Fix Request | 代码修改、测试结果、自动修复记录、Fix Response | 当前阶段测试通过或阻塞原因明确；被打回时已逐条回应 Fix Request | 自动修复，最多 3 轮；仍失败则停止 |
-| 8. Phase Acceptance Thread | Work ID、阶段计划、Handoff、执行结果、测试结果、验证证据 | `PHASE_ACCEPTANCE.md` 或等价验收表；不通过时输出 Fix Request；通过时移除活跃工作安排并归档摘要 | 当前阶段计划项全部完成；全部阻塞验证项已运行且有可追溯证据；未运行、失败、缺工具或无证据的验证项均已判定为非阻塞并有确认记录；Lean 可用轻量验收表 | 生成 Fix Request 打回 Execution Thread；缺验证工具或环境时标记 `blocked` 并给出补验证路径；验收标准问题回 PM Thread 重新确认 |
+| 8. Phase Acceptance Thread | Work ID、阶段计划、Handoff、执行结果、测试结果、验证证据 | `PHASE_ACCEPTANCE.md` 或等价验收表；不通过时输出 Fix Request；通过时从 PM 台账活跃区删除该 Work ID 条目并归档摘要 | 当前阶段计划项全部完成；全部阻塞验证项已运行且有可追溯证据；未运行、失败、缺工具或无证据的验证项均已判定为非阻塞并有确认记录；Lean 可用轻量验收表 | 生成 Fix Request 打回 Execution Thread；缺验证工具或环境时标记 `blocked` 并给出补验证路径；验收标准问题回 PM Thread 重新确认 |
 | 9. 需求一致性审核 | PRD、产品原型、设计规范、Goal、阶段计划、Handoff、全部阶段验收结果 | `ACCEPTANCE.md` 或等价审核表；不通过时输出 Fix Request | 无漏做、错做、多做、越界修改；偏差已确认 | 生成 Fix Request 回 Execution Thread，或回 PM Thread 重新确认 |
 | 10. Code Review Thread | 已完成代码、测试结果、影响面、需求一致性审核 | 审查发现清单；P0/P1 输出 Fix Request | 无 P0；P1 有处理计划 | 生成 Fix Request 回 Execution Thread 修复 |
 | 11. Release Thread | 审查结果、构建结果 | 隐私审计、版本文档、回滚方案 | 隐私、构建、发布后主链路验证通过 | 阻塞发布 |

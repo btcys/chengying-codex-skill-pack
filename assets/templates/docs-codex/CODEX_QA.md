@@ -2,9 +2,9 @@
 
 ## 执行与验收记录
 
-| Work ID | 阶段 | 执行线程结果 | 测试结果 | 验收状态 | 修复轮次 | 活跃登记处理 | 备注 |
+| Work ID | 阶段 | 执行线程结果 | 测试结果 | 验收状态 | 修复轮次 | PM 台账处理 | 备注 |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-|  |  | ready_for_acceptance / blocked / blocked_validation_missing |  | passed / needs-fix / blocked / blocked_validation_missing | 0 | remove-from-active / keep-blocked |  |
+|  |  | ready_for_acceptance / blocked / blocked_validation_missing |  | passed / needs-fix / blocked / blocked_validation_missing | 0 | delete-active-entry / keep-blocked |  |
 
 ## Fix Request / Fix Response
 

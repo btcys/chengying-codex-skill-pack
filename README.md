@@ -26,11 +26,11 @@
 - 标准项目在 PRD 冻结前轻量查竞品、同类产品和开源方案；长期商业项目在 PRD 冻结前评估竞品边界和可商用开源二开底座，用来指导 PM 判断和缩短开发周期，但不默认采用。
 - 涉及核心技术选型、登录、后台账号、API、API Key、Token、外部数据源、外部抓取、自动化、数据、权限、部署或新增依赖时，先升级 Standard 并写一页 `TECH_SPEC.md` 或 ADR，避免边做边改架构。
 - 让正式开发前必须先形成开发前对齐包 / Handoff 草案，明确 MVP、非目标、阶段计划、验证方案、执行前线程方案、验收标准、修改范围和禁止修改范围；Goal Prompt 只是一段授权目标，不替代 Handoff。
-- PM 派发给任何线程前必须先登记活跃工作安排，生成 Work ID；Execution / Acceptance / Review / Release 线程都以 Work ID + Handoff 工作单为依据。
+- PM 派发给任何线程前必须先登记 PM 台账 / 活跃工作安排，生成 Work ID；Execution / Acceptance / Review / Release 线程都以 Work ID + Handoff 工作单为依据。PM 台账只用于当前活跃任务的临时调度，不是历史归档。
 - 每次输出 PRD 或范围变更必须区分“已确认 / 我的建议 / 待确认”；每个参考资料必须登记用途：可借鉴 / 不照搬 / 不采用 / 待验证。
 - 用户暂不确认或不选择使用 Goal 时，不进入 Execution Thread，但 PM Thread 继续按阶段开发计划沟通缺口、风险、建议和下一步选择。
 - 已派发工作在执行线程未产生代码修改前可以调整；进入执行后，除阻塞、范围冲突、安全风险或用户强制变更外，不得随意打断。
-- Phase Acceptance 通过后，必须从活跃工作安排中移除该 Work ID，并把摘要归档到 QA/验收/完成记录，避免活跃上下文堆积。
+- Phase Acceptance 通过后，必须从 PM 台账活跃区删除该 Work ID 条目，并把摘要、验收结论和证据路径归档到 QA/验收/完成记录，避免活跃上下文堆积。
 - 明确多线程判断时机：PM 第一轮只做预判；技术方案/架构影响面阶段只做可拆性分析；阶段计划与验证方案完成后，在 Goal Prompt / Execution 前确定 single-thread / N threads / defer。
 - 用全流程门禁表检查每个阶段能否进入下一阶段，避免流程“看起来走了、实际没闭环”。
 - 在多线程分工前先做架构梳理和影响面分析，避免一个线程改完牵连其他模块。
@@ -106,7 +106,7 @@ flowchart LR
 
 ```mermaid
 flowchart TB
-  PM[PM Thread<br/>PRD 前期调研 / 完整 PRD / 产品原型 / 设计规范 / 技术方案 / 阶段计划 / QA矩阵 / 对齐包 / Goal Prompt] --> Work[活跃工作安排<br/>Work ID / 目标线程 / 派发条件 / 打断规则]
+  PM[PM Thread<br/>PRD 前期调研 / 完整 PRD / 产品原型 / 设计规范 / 技术方案 / 阶段计划 / QA矩阵 / 对齐包 / Goal Prompt] --> Work[PM 台账 / 活跃工作安排<br/>Work ID / 目标线程 / 派发条件 / 打断规则]
   Work --> Handoff[PM Handoff 工作单<br/>参考依据 / 修改范围 / 禁止范围 / 验收标准 / 验证方式]
   Handoff --> Arch[架构梳理<br/>模块依赖 / 影响面 / 线程责任矩阵]
   Arch --> Exec[Execution Thread<br/>阶段开发 / 自动测试 / 自动修复]
@@ -223,7 +223,7 @@ PM Thread 会逐步逼问并确认：
 - 技术方案 / ADR 结论
 - QA 验证矩阵
 - 开发前对齐包 / Handoff 草案、一段式 Goal 授权和阶段开发计划
-- 活跃工作安排、Work ID、目标线程和派发条件
+- PM 台账 / 活跃工作安排、Work ID、目标线程和派发条件
 
 ### 2. 让 PM Thread 输出交接包
 
@@ -240,7 +240,7 @@ PM Thread 会逐步逼问并确认：
 - 完整 PRD
 - 产品原型/交互草图结论或无需生成原因
 - 完整设计规范
-- Work ID、目标线程和活跃工作安排状态
+- Work ID、目标线程和 PM 台账状态
 - 一段式 Goal 授权和用户确认结果；如果只是复制 Goal 给另一个 Codex，还要附开发前对齐包 / Handoff 草案
 - 阶段开发计划
 - MVP 范围
@@ -464,7 +464,7 @@ Goal Prompt 与执行授权：
 准备开发：
 
 ```text
-用户已确认按 Goal 执行。请先登记活跃工作安排并生成 Work ID，然后基于已确认的开发前对齐包 / PM Handoff 工作单 / Lean 等价工作单，帮我生成一个适合新 Execution Thread 使用的任务说明。
+用户已确认按 Goal 执行。请先登记 PM 台账 / 活跃工作安排并生成 Work ID，然后基于已确认的开发前对齐包 / PM Handoff 工作单 / Lean 等价工作单，帮我生成一个适合新 Execution Thread 使用的任务说明。PM 台账只保留当前活跃任务；验收通过后要从活跃区删除该 Work ID 条目并归档摘要。
 ```
 
 执行线程：
@@ -494,7 +494,7 @@ Goal Prompt 与执行授权：
 阶段验收线程：
 
 ```text
-当前是 Phase Acceptance Thread。请只验收当前 Work ID 是否严格完成 PHASE_PLAN 或 Lean 轻量任务单里的计划项，对照 Handoff / Lean 等价工作单、测试结果和修改文件；不合格生成 Fix Request 打回 Execution Thread，不要替它修代码；通过后要求从活跃工作安排移除并归档摘要。
+当前是 Phase Acceptance Thread。请只验收当前 Work ID 是否严格完成 PHASE_PLAN 或 Lean 轻量任务单里的计划项，对照 Handoff / Lean 等价工作单、测试结果和修改文件；不合格生成 Fix Request 打回 Execution Thread，不要替它修代码；通过后要求从 PM 台账活跃区删除该 Work ID 条目，并归档摘要、验收结论和证据路径。
 ```
 
 打回修复：
