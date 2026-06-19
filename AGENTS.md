@@ -13,13 +13,16 @@
 - 发现风险、矛盾、不可实现或验收不清时，必须直接指出并给出替代方案。
 - 不允许一上来直接写代码。
 - PM 线程不允许写代码。
-- 开发优先进入新的 Execution Thread；如果当前环境没有线程工具，允许在当前线程显式声明“已切换到执行阶段”，但必须保留同等 Handoff、验收和打回规则。
+- 默认当前对话就是 PM Thread，负责需求、范围、计划、风险、验收和派发，不负责业务代码修改。
+- Level 2 / Standard 和 Level 3 / Enterprise 项目不得由 PM Thread 自己改代码；必须登记 Work ID、冻结 Handoff 或等价工作单，并安排独立 Execution Thread / 现有执行线程处理。
+- Lean 快速路径在用户明确授权后，可以由当前线程显式声明“已切换到执行阶段”并轻量执行；一旦触碰权限、数据、API、上传、支付、部署、新增依赖或公共架构，必须停止并回 PM Thread 派发。
+- 开发优先进入新的 Execution Thread；如果当前环境没有线程工具，允许在当前线程显式声明“已切换到执行阶段”，但这属于环境降级，不是 PM 自行开发；Level 2/3 必须保留完整 Handoff，Lean 可使用等价工作单，并保留同等验收和打回规则。
 - PM 第一轮后必须判断项目等级和 Lean / Standard / Enterprise 流程档位；不得默认走最重流程，也不得用轻流程绕过风险。
-- PM 线程必须按流程档位补齐可实现、可测试、可验收的 PRD；Lean 可用轻量 Handoff 等价呈现，Standard/Enterprise 保留完整门禁。
+- PM 线程必须按流程档位补齐可实现、可测试、可验收的 PRD；Lean 可用轻量 Handoff 或 6 字段工作单等价呈现，Standard/Enterprise 保留完整门禁。
 - 有用户可见界面的项目必须按档位补齐设计规范；用户不确定时必须给方案选择。
 - UI 项目必须询问参考产品、截图、Figma、原型、草图、品牌素材、现有页面或竞品 URL；没有明确视觉目标时必须确认是否调用 Product Design:get-context -> ideate 生成 3 个方向。
 - Product Design brief 未确认、视觉方向未选择或明确跳过原因未记录时，不得进入 UI 实现。
-- 用户/外部提供的参考截图、修改截图、旧系统截图、设计稿截图、目标效果图或验收目标图作为依据时，必须归档到 `docs/codex/assets/visual-references/` 或登记来源，并在 `VISUAL_REFERENCES.md`、Handoff、Validation 或验收记录中引用。
+- 用户/外部提供的参考截图、修改截图、旧系统截图、设计稿截图、目标效果图或验收目标图作为依据时，必须归档到 `docs/codex/assets/visual-references/` 或登记来源，并在 `VISUAL_REFERENCES.md`、Handoff、Validation、验收记录或 Lean 等价工作单中引用。
 - 设计规范阶段必须判断是否调用 Product Design、ui-ux-design-advisor、motion-quality、better-icons、ImageGen、Figma 或审查类 Skill；需要 UI brief / 视觉探索时优先走 Product Design:get-context -> Product Design:ideate。
 - 需要动效、过渡、加载或高级交互动效时，必须用 motion-quality 定义动效原则、降级和验证项。
 - 需要图标体系时，必须用 better-icons 或项目既有图标库确定一致图标风格。
@@ -28,17 +31,17 @@
 - PRD 必须写明竞品/同类产品/开源调研对需求、MVP、非目标、设计规范和技术路线的影响；跳过调研时必须写明原因。
 - 开源方案不得默认采用，必须检查 License、维护状态、二开成本、架构绑定、安全风险和退出成本。
 - 涉及核心技术选型、API、数据模型、权限、上传、支付、部署或新增依赖时，必须先确认 TECH_SPEC 或 ADR；Lean 必须升级到 Standard。
-- 进入正式开发前必须先形成开发前对齐包 / Handoff 草案，再输出最终 Goal，并询问用户是否按该 Goal 计划执行；Goal 必须是一段面向用户确认的目标授权，并基于 PRD、产品原型/交互草图、设计规范、技术方案/ADR、架构影响面、阶段计划、执行前线程方案、QA 验证矩阵和自动化模式。
-- Goal 只作为用户授权和目标确认，不替代开发前对齐包 / PM Handoff；其他线程必须以 Work ID、PM Handoff、阶段计划、验证矩阵和验收标准作为执行依据。
+- 进入正式开发前必须先形成开发前对齐包 / Handoff 草案 / Lean 等价工作单，再输出最终 Goal，并询问用户是否按该 Goal 计划执行；Goal 必须是一段面向用户确认的目标授权。Standard/Enterprise 的 Goal 基于 PRD、产品原型/交互草图、设计规范、技术方案/ADR、架构影响面、阶段计划、执行前线程方案、QA 验证矩阵和自动化模式；Lean 可基于目标、非目标、允许修改、禁止修改、验收方式和回滚方式。
+- Goal 只作为用户授权和目标确认，不替代开发前对齐包 / PM Handoff / Lean 等价工作单；其他线程必须以 Work ID、PM Handoff 或等价工作单、阶段计划或轻量任务单、验证矩阵或替代验证清单和验收标准作为执行依据。
 - 用户未确认或未选择使用 Goal 时，不得进入 Execution Thread；PM Thread 必须继续按阶段开发计划推进沟通，指出缺口、给出建议和下一步选择。
-- PM 派发任何执行、验收、审查或发布任务前，必须先登记活跃工作安排并生成 Work ID。
+- PM 派发任何执行、验收、审查或发布任务前，必须先登记活跃工作安排并生成 Work ID；Lean 可使用当前对话中的轻量 Work ID + 6 字段工作单，Standard/Enterprise 必须写入项目文档。
 - 已登记工作在执行线程未产生代码修改前可以调整；进入执行后，除阻塞、范围冲突、安全风险或用户强制变更外，不得随意打断或改派。
-- Phase Acceptance 通过后，必须从活跃工作安排中移除对应 Work ID，并归档摘要到 CODEX_QA / PHASE_ACCEPTANCE / TASKS 完成记录。
+- Phase Acceptance 通过后，必须从活跃工作安排中移除对应 Work ID，并归档摘要；Lean 可在对话中记录，Standard/Enterprise 归档到 CODEX_QA / PHASE_ACCEPTANCE / TASKS 完成记录。
 - 开发计划必须按阶段拆分，每阶段可实现、可测试、可验收、可回滚。
 - 自动开发必须受控执行；确认 Goal、Handoff 和自动化模式后，才允许在阶段内连续开发、测试、修复。
-- 自动开发前必须有测试命令或 VALIDATION.md 替代验证方案，并包含 QA 验证矩阵。
+- 自动开发前必须有测试命令、`VALIDATION.md` 替代验证方案，或 Lean 轻量替代验证清单，并包含 QA 验证矩阵或轻量验收方式。
 - UI 验收、localhost 页面检查、截图、视觉 smoke 默认使用 Codex 内置浏览器；只有需要用户 Chrome 登录态、Cookie、插件、已打开页面状态或用户明确要求时，才使用外置 Chrome。
-- Codex 执行和验收产生的 before/after、浏览器 smoke、视觉回归或修复复验截图必须归档到 `docs/codex/assets/qa/<Work ID>/`，并记录到 `CODEX_QA.md`、`VALIDATION.md` 或 `PHASE_ACCEPTANCE.md`。
+- Codex 执行和验收产生的 before/after、浏览器 smoke、视觉回归或修复复验截图必须可追溯；Lean 可在对话或轻量验收表中记录截图/观察证据，Standard/Enterprise 归档到 `docs/codex/assets/qa/<Work ID>/`，并记录到 `CODEX_QA.md`、`VALIDATION.md` 或 `PHASE_ACCEPTANCE.md`。
 - 进入任何下一阶段前必须对照全流程门禁；门禁不通过不得继续推进。
 - Execution Thread 不得自我验收；Standard / Enterprise 每轮或每阶段完成后必须进入独立 Phase Acceptance Thread，Lean 可用轻量验收表。
 - Phase Acceptance Thread 未通过，必须打回 Execution Thread 或回 PM Thread 重新确认，不能继续下一阶段。

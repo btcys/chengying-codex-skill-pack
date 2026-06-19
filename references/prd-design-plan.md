@@ -14,7 +14,7 @@
 
 ## PRD 完整性门槛
 
-PM Thread 必须逼问出完整、可实现、可验收的 PRD。不能只有一句需求摘要。
+Standard / Enterprise 的 PM Thread 必须逼问出完整、可实现、可验收的 PRD。不能只有一句需求摘要。Lean 快速路径可使用 6 字段轻量工作单替代 PRD 文档。
 
 Level 2/3 项目在 PRD 冻结前必须先完成竞品、同类产品和开源方案方向校准；PRD 必须吸收调研结论，或明确写明跳过原因和风险。
 
@@ -49,6 +49,8 @@ PRD 至少包含：
 ## 产品原型完整性门槛
 
 新软件、产品、网站、App、小程序、SaaS、后台、企业内部系统或工具软件，默认必须在正式开发前形成产品原型或交互草图。原型不是只为“UI 好看”，而是提前确认用户怎么完成任务、页面/模块怎么组织、关键状态怎么流转，避免代码阶段才发现产品路径不成立。
+
+Lean UI Fix 例外：如果本轮只是已有页面的低风险视觉微调、文案修正、样式 bugfix 或按明确截图修复，可以用现有页面/截图/文字验收目标替代完整产品原型，但必须写清视觉依据、必须对照点、禁止偏离点、验收方式和回滚方式。
 
 产品原型至少回答：
 
@@ -117,7 +119,7 @@ PRD 至少包含：
 - 每张图必须在 `VISUAL_REFERENCES.md` 写清：ID、存档路径或来源、页面/模块、对照点、禁止点、确认状态。
 - Handoff 中必须引用相关截图 ID 或路径，Execution Thread 才能按图对照实现。
 
-执行或验收阶段产生的 before/after、浏览器 smoke、视觉回归或修复复验截图，归档到 `docs/codex/assets/qa/<Work ID>/`，并在 `VALIDATION.md`、`PHASE_ACCEPTANCE.md` 或 `CODEX_QA.md` 中记录路径。
+执行或验收阶段产生的 before/after、浏览器 smoke、视觉回归或修复复验截图，Lean 可在对话或轻量验收表中记录截图/观察证据；Standard/Enterprise 归档到 `docs/codex/assets/qa/<Work ID>/`，并在 `VALIDATION.md`、`PHASE_ACCEPTANCE.md` 或 `CODEX_QA.md` 中记录路径。
 
 如果用户在 Execution、Phase Acceptance 或打回修复期间补充新的修改截图、标注截图或目标效果图，先视为新的实现依据或验收依据：必须补登记到 `VISUAL_REFERENCES.md`，更新 Handoff 或 Fix Request；如果它改变范围、交互路径、视觉目标或验收标准，回 PM Thread 重新确认，不得让 Execution Thread 直接凭聊天图片扩大修改范围。
 

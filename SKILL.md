@@ -11,6 +11,8 @@ description: 对话式软件项目协作工作流。用于把“开发一个 xxx
 
 它不是“用户一句话说完就开始开发”。用户可以只给一句想法，也可以提供完整 PRD、截图、Figma、代码仓库或技术方案。Codex 的职责是先判断信息成熟度和风险，再决定追问、整理、补齐、校验或输出开发前 Goal Prompt 等待确认。
 
+默认当前对话就是 PM Thread。除非用户已经明确确认最终 Goal 并要求进入 Execution，否则本线程只做 PM 对齐、计划、交接和派发，不改业务代码。
+
 成功标准：
 
 - 把模糊想法变成可实现、可测试、可验收的共识。
@@ -90,6 +92,7 @@ description: 对话式软件项目协作工作流。用于把“开发一个 xxx
 
 - 低风险局部维护、一次性原型、非商用 Demo、已有完整 PRD/设计/技术方案且验收清楚。
 - 压缩时必须说明原因，并保留“做什么、不做什么、怎么验收、怎么回滚”。
+- Lean 快速路径只要求保留 6 个最小字段：目标、非目标、允许修改、禁止修改、验收方式、回滚方式；不得把完整 PRD、独立设计规范、TECH_SPEC、完整 Handoff 或独立验收线程强加给低风险小任务。
 
 ## 3. 硬规则
 
@@ -97,14 +100,16 @@ description: 对话式软件项目协作工作流。用于把“开发一个 xxx
 - 禁止一上来写代码、初始化框架、安装依赖或默认技术栈。
 - 禁止默认走最重流程；必须按信息成熟度、风险和流程档位升降级。
 - PM 阶段只负责需求、范围、风险、方案、验收和交接，不直接改业务代码。
+- 默认对话身份是 PM Thread；Level 2 / Standard 和 Level 3 / Enterprise 项目不得由 PM Thread 自己改代码，必须登记 Work ID、冻结 Handoff 或等价工作单，并安排独立 Execution Thread / 现有执行线程处理。
+- 只有 Level 1 / Lean 快速路径在用户明确授权后，才允许当前线程显式声明“已切换到执行阶段”并轻量执行；若执行中触碰升级风险，立即停止并回 PM Thread 派发。
 - 用户方案有风险、矛盾或不可实现时，必须说明依据、影响和替代路线。
 - PRD/任务范围、产品原型、设计依据、验收标准和验证方式不清时，不得进入正式开发。
 - 开发前必须输出一段面向用户确认或复制给 Codex 设置目标的 Goal Prompt；Goal 只用于授权目标，不替代 PM Handoff。用户要把 Goal 交给另一个 Codex 执行时，应同时提供或引用开发前对齐包 / Handoff 草案。
 - 用户发送需求、补充 PRD、描述“目标是……”或要求“整理一个 Goal”不等于确认执行；只有用户明确说“按这个 Goal 执行 / 开始开发 / 进入 Execution”等，才算开发授权。
 - 新软件、产品、网站、App、小程序、SaaS、后台或内部系统默认需要产品原型或交互草图；未确认用户流程、页面/模块结构、关键交互和状态，不得进入实现。纯后端/API、CLI、脚本、库、局部 bugfix 或低风险小改可以明确说明原因后跳过原型。
 - 涉及视觉界面时，未确认参考产品、截图、Figma、原型、草图、品牌素材、现有页面、竞品 URL、Product Design 方向，或未明确跳过视觉确认，不得进入 UI 实现。
-- 用户提供或外部生成的参考截图、修改截图、设计稿截图、目标效果图或验收目标图是实现依据，必须存入 `docs/codex/assets/visual-references/` 或登记来源，并在 `VISUAL_REFERENCES.md` 与 Handoff 中引用；Codex 执行、浏览器检查和验收产生的 before/after、smoke、回归截图是执行证据，存入 `docs/codex/assets/qa/<Work ID>/` 并写入 Validation/QA/验收记录。
-- PM 派发执行前必须登记 Work ID 或等价工作单；执行依据是 Work ID、Handoff、阶段计划、验证矩阵和验收标准。
+- 用户提供或外部生成的参考截图、修改截图、设计稿截图、目标效果图或验收目标图是实现依据，必须存入 `docs/codex/assets/visual-references/` 或登记来源，并在 `VISUAL_REFERENCES.md`、Handoff 或 Lean 等价工作单中引用；Codex 执行、浏览器检查和验收产生的 before/after、smoke、回归截图是执行证据，Lean 可在对话或轻量验收表中记录截图/观察证据，Standard/Enterprise 存入 `docs/codex/assets/qa/<Work ID>/` 并写入 Validation/QA/验收记录。
+- PM 派发执行前必须登记 Work ID 或等价工作单；Lean 可使用聊天内轻量 Work ID + 6 字段工作单，Standard/Enterprise 使用 `TASKS.md` / Handoff。执行依据是 Work ID、Handoff 或等价工作单、阶段计划或轻量任务单、验证矩阵或替代验证清单和验收标准。
 - 自动开发只能在已确认 Goal、范围、阶段计划、验证方式和自动化模式内进行；遇到越界、失败、风险或产品判断必须停止。
 - Execution 不得自我验收。Lean 可用轻量验收表；Standard/Enterprise 应使用独立 Phase Acceptance。
 - 涉及公共组件、数据模型、API、权限、上传、支付、部署或新增依赖时，必须先完成技术方案评审。
@@ -121,6 +126,8 @@ description: 对话式软件项目协作工作流。用于把“开发一个 xxx
 
 按需进入，不要求所有项目完整跑完所有步骤。
 
+Lean 快速路径适用于低风险 bugfix、文案、静态页面、视觉微调、一次性脚本或单页 Demo。满足“不碰权限/数据/API/上传/支付/部署/新增依赖/公共架构”的前提下，可把 PRD、产品原型、设计规范、阶段计划、验证方案、Handoff 和执行前线程方案合并为一个轻量工作单，并在用户确认 Goal 后直接进入受控执行。
+
 1. 启动判断：识别输入成熟度、项目类型、用户目标、现有材料和风险。
 2. PM 收敛：补齐 MVP、非目标、用户场景、优先级、验收标准和约束。
 3. 调研校准：Level 2/3 在 PRD 冻结前做时间盒调研；已有充分材料时可只做校验。
@@ -132,7 +139,7 @@ description: 对话式软件项目协作工作流。用于把“开发一个 xxx
 9. 开发前对齐包：整理 Handoff 草案、阶段计划、验证方案、执行前线程方案、修改范围、禁止范围、风险和回滚；它承载上下文，Goal 只承载授权目标。
 10. Goal Prompt 草案：基于开发前对齐包输出一段给用户确认或复制给 Codex 设置目标的授权话术；不得把草案当作执行开始。
 11. 正式授权与 Handoff：用户明确确认按 Goal 执行后，登记 Work ID，冻结或补齐 Handoff，再进入执行。
-12. 受控执行：优先进入 Execution Thread；如果新线程不可用，在当前线程显式声明“已切换到执行阶段”，并严格按 Handoff 执行。
+12. 受控执行：Level 2/3 必须安排独立 Execution Thread 或已有执行线程处理；如果当前环境没有线程工具，必须在当前线程显式声明“已从 PM 切换到执行阶段”，并保留同等 Handoff、验收和打回规则。Lean 快速路径可在授权后当前线程显式切换执行。
 13. 阶段验收：按档位使用轻量验收表或独立 Phase Acceptance；不通过时输出 Fix Request。
 14. 收尾闭环：按风险做需求一致性审核、Code Review、隐私审计、发布文档和反馈进化。
 
@@ -174,7 +181,7 @@ description: 对话式软件项目协作工作流。用于把“开发一个 xxx
 ## 8. 工具与线程策略
 
 - 不默认多线程。多线程按三段处理：PM 第一轮只输出预判；技术方案/架构影响面阶段只做可拆性分析和候选拆分；阶段计划与验证方案完成后，在 Goal Prompt / Execution 前输出执行前线程方案并确定开几个线程。只有模块边界、数据/API 契约、线程责任、验证矩阵、合并顺序和回滚方式清楚时才拆线程。
-- 新开 Execution / Acceptance / Review Thread 是推荐方式；如果当前环境没有线程工具，允许在当前线程显式切换阶段，但必须保留同等 Handoff、验收和打回规则。
+- 新开 Execution / Acceptance / Review Thread 是 Standard/Enterprise 的默认方式；如果当前环境没有线程工具，允许在当前线程显式切换阶段，但必须先说明这是环境降级，不是 PM Thread 自行开发，并保留同等 Handoff、验收和打回规则。
 - UI 验收、localhost 检查、截图和视觉 smoke 默认使用 Codex 内置浏览器；只有需要用户 Chrome 登录态、Cookie、插件、已打开页面状态或用户明确要求时，才使用外置 Chrome，并说明原因。
 - Product Design、Figma、ImageGen、ui-ux-design-advisor、motion-quality、better-icons 等设计类能力只在对应阶段按需调用；实现型 image-to-code 必须等用户选定产品原型/视觉目标，且 Goal Prompt 获得执行授权后再用。
 

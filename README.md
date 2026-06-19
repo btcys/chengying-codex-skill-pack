@@ -2,7 +2,7 @@
 
 面向 Codex 的对话式软件项目协作工作流 Skill Pack。
 
-它适合把“开发一个 xxx 程序”的粗略想法、半成型需求，或已有 PRD / 原型 / 设计稿 / 代码仓库 / 技术方案的可执行完整需求，先通过对话交给 Codex 判断输入成熟度、流程档位和风险，再按需要完成 PM 访谈、PRD 前期竞品/同类产品方向校准、完整 PRD、产品原型/交互草图、设计规范、技术方案/ADR、架构影响面、阶段开发计划、QA 验证矩阵、执行前线程方案、开发前对齐包 / Handoff 草案和一段式 Goal Prompt；等用户明确确认“按这个 Goal 执行”后，再进入 Execution Thread 或当前线程的执行阶段，做受控自动开发、自动测试、自动修复。
+它适合把“开发一个 xxx 程序”的粗略想法、半成型需求，或已有 PRD / 原型 / 设计稿 / 代码仓库 / 技术方案的可执行完整需求，先通过对话交给 Codex 判断输入成熟度、流程档位和风险，再按需要完成 PM 访谈、PRD 前期竞品/同类产品方向校准、完整 PRD、产品原型/交互草图、设计规范、技术方案/ADR、架构影响面、阶段开发计划、QA 验证矩阵、执行前线程方案、开发前对齐包 / Handoff 草案和一段式 Goal Prompt；等用户明确确认“按这个 Goal 执行”后，Lean 可在当前线程显式切换执行，Level 2 / Level 3 则由 PM 派发到 Execution Thread 或已有执行线程，做受控自动开发、自动测试、自动修复。
 
 核心原则很简单：先像真实软件团队一样把项目想清楚，再让 Codex 写代码。
 
@@ -11,11 +11,13 @@
 - 避免 Codex 一上来就建项目、写代码、选技术栈。
 - 避免 Codex 阿谀奉承或迎合式确认；有风险、矛盾或不可实现点时必须直接指出。
 - 把 PM Thread 和 Execution Thread 分开，PM 线程不改代码。
+- 默认当前对话就是 PM Thread；Level 2 / Standard 和 Level 3 / Enterprise 必须由 PM 安排独立 Execution Thread 或已有执行线程修改代码，不能由 PM 自己改。
 - 先判断 Lean / Standard / Enterprise 流程档位，让小项目快走、正式项目完整走、长期商业项目严格走。
+- Lean 快速路径只保留目标、非目标、允许修改、禁止修改、验收方式和回滚方式，避免小修、文案、视觉微调、一次性脚本被完整 PRD / TECH_SPEC / Handoff 拖重。
 - 逼问出完整、可实现、可测试、可验收的 PRD。
 - 新软件、产品、网站、App、小程序、SaaS、后台和内部系统默认要有产品原型或交互草图；Lean 可轻量，Standard/Enterprise 必须覆盖核心路径、页面/模块结构、关键交互和状态。
 - 逼问出完整设计规范；必须询问产品原型、参考产品、截图、Figma、草图、品牌素材、现有页面或竞品 URL。
-- 用户/外部提供参考截图、修改截图、旧系统截图、设计稿截图、目标效果图或验收目标图时，必须归档到 `docs/codex/assets/visual-references/` 或登记来源；Codex 执行和验收产生的截图归档到 `docs/codex/assets/qa/<Work ID>/`，并在 Handoff / Validation / QA / Phase Acceptance 中引用。
+- 用户/外部提供参考截图、修改截图、旧系统截图、设计稿截图、目标效果图或验收目标图时，必须归档到 `docs/codex/assets/visual-references/` 或登记来源；Lean 可在等价工作单中记录来源和对照点。Codex 执行和验收产生的截图必须可追溯，Lean 可在对话或轻量验收表中记录，Standard/Enterprise 归档到 `docs/codex/assets/qa/<Work ID>/`，并在 Handoff / Validation / QA / Phase Acceptance 中引用。
 - 没有明确原型或视觉目标时，先确认是否调用 Product Design:get-context -> Product Design:ideate；brief 经用户确认后生成 3 个方向，等用户选择后才能进入实现。
 - 明确 `可执行完整需求` 的判断标准：必须满足当前档位和本轮目标的全部开发前提，能完整支撑开发前对齐包、Handoff、阶段计划、Goal Prompt、验证和回滚；资料完整仍不等于执行授权。
 - 标准项目在 PRD 冻结前轻量查竞品、同类产品和开源方案；长期商业项目在 PRD 冻结前评估竞品边界和可商用开源二开底座，用来指导 PM 判断和缩短开发周期，但不默认采用。
@@ -70,7 +72,7 @@ flowchart LR
   G --> W[明确确认后登记 Work ID / PM Handoff 工作单]
   W --> Gate2{门禁通过?}
   Gate2 -- 否 --> B
-  Gate2 -- 是 --> I[Execution Thread / 当前线程执行阶段]
+  Gate2 -- 是 --> I[Lean 当前线程执行 / Level 2-3 Execution Thread]
   I --> J[自动开发 / 自动测试 / 自动修复]
   J --> L[Phase Acceptance Thread]
   L -- needs-fix / Fix Request --> I
@@ -90,7 +92,7 @@ flowchart LR
 
 | 档位 | 适用 | 特点 |
 | --- | --- | --- |
-| Lean | 小工具、Demo、单页、小改动 | 1 到 2 轮 PM，轻量 Handoff，竞品调研可跳过，轻量验收 |
+| Lean | 小工具、Demo、单页、小改动 | 1 到 2 轮 PM；低风险快速路径只需 6 字段工作单，竞品调研可跳过，轻量验收 |
 | Standard | 正式小程序、网站、App、后台、中小型 SaaS | 完整 PRD、产品原型、设计规范、轻量调研、阶段计划、验证方案、一段式 Goal 指令和阶段验收 |
 | Enterprise | 长期商业项目、用户数据、权限、上传、计费、发布、多线程 | 完整文档体系、技术方案/ADR、架构影响面、多线程治理、需求一致性审核、Code Review、隐私审计和发布文档 |
 
@@ -113,7 +115,7 @@ flowchart TB
   Close -. 新需求 / 变更 / 下一版本 .-> PM
 ```
 
-PM Thread 只负责梳理、判断、确认、登记和交接，不负责代码修改。真正开始开发前，应先整理开发前对齐包 / Handoff 草案；用户确认后再登记 Work ID，并优先新开 Execution Thread。如果环境没有线程工具，可在当前线程显式切换到执行阶段，并把 PM Handoff 工作单、架构影响面和线程责任矩阵作为执行输入。
+PM Thread 只负责梳理、判断、确认、登记和交接，不负责代码修改。真正开始开发前，应先整理开发前对齐包 / Handoff 草案 / Lean 等价工作单；用户确认后再登记 Work ID。Level 2/3 默认必须新开 Execution Thread 或派发已有执行线程；如果环境没有线程工具，必须显式声明“线程工具不可用，当前线程从 PM 降级切换到执行阶段”，并把 PM Handoff 工作单作为执行输入；Lean 则可使用等价工作单。
 
 ## 安装
 
@@ -222,7 +224,7 @@ PM Thread 会逐步逼问并确认：
 当需求清楚后，对 Codex 说：
 
 ```text
-请整理开发前对齐包 / PM Handoff 草案，包括 Work ID 字段、目标线程、派发条件、完整 PRD、产品原型/交互草图结论、设计规范、一段式 Goal 授权、阶段开发计划、执行前线程方案、MVP、非目标、技术路线、当前 Task、修改范围、禁止修改范围、架构影响面、风险点、验证方式和验收标准。
+请整理开发前对齐包 / PM Handoff 草案。Lean 快速路径只需 Work ID、目标、非目标、允许修改、禁止修改、验收方式和回滚方式；Standard/Enterprise 需要 Work ID 字段、目标线程、派发条件、完整 PRD、产品原型/交互草图结论、设计规范、一段式 Goal 授权、阶段开发计划、执行前线程方案、MVP、非目标、技术路线、当前 Task、修改范围、禁止修改范围、架构影响面、风险点、验证方式和验收标准。
 ```
 
 交接包应至少包含：
@@ -253,9 +255,9 @@ PM Thread 会逐步逼问并确认：
 
 ```text
 当前已切换到 Execution Thread。
-请严格基于下面 Work ID 和 PM Handoff 工作单执行，只做当前 Task，不做无关优化。
+请严格基于下面 Work ID 和 PM Handoff 工作单或 Lean 等价工作单执行，只做当前 Task，不做无关优化。
 
-[粘贴 PM Handoff 工作单]
+[粘贴 PM Handoff 工作单或 Lean 等价工作单]
 ```
 
 Execution Thread 的职责是实现一个明确任务，并在结束时输出：
@@ -293,7 +295,7 @@ Execution Thread 的职责是实现一个明确任务，并在结束时输出：
 如果项目没有测试脚本，先建立替代验证方案：
 
 ```text
-请先识别当前项目可用测试命令；如果没有测试脚本，生成 VALIDATION.md，列出当前阶段可执行的替代验证清单。没有验证方式不要进入自动开发。
+请先识别当前项目可用测试命令；如果没有测试脚本，Lean 快速路径可在轻量工作单中列出替代验证清单，Standard/Enterprise 生成 VALIDATION.md。没有验证方式不要进入自动开发。
 ```
 
 ### 5. 长期项目持续沉淀
@@ -426,7 +428,7 @@ PM 启动：
 截图存档：
 
 ```text
-如果我提供了参考截图、修改截图、旧系统截图、目标效果图或验收目标图，请先把可访问图片归档到 docs/codex/assets/visual-references/，在 VISUAL_REFERENCES.md 记录 ID、路径、页面/模块、对照点和禁止点；执行和验收时把 Codex 产生的 before/after、smoke、回归或修复复验截图归档到 docs/codex/assets/qa/<Work ID>/，并在 Handoff、VALIDATION、CODEX_QA 或 PHASE_ACCEPTANCE 中引用。
+如果我提供了参考截图、修改截图、旧系统截图、目标效果图或验收目标图，请先把可访问图片归档到 docs/codex/assets/visual-references/，或登记来源；在 VISUAL_REFERENCES.md 或 Lean 等价工作单中记录 ID/来源、页面/模块、对照点和禁止点。执行和验收时，Codex 产生的 before/after、smoke、回归或修复复验截图必须可追溯：Lean 可在对话或轻量验收表中记录，Standard/Enterprise 归档到 docs/codex/assets/qa/<Work ID>/，并在 Handoff、VALIDATION、CODEX_QA 或 PHASE_ACCEPTANCE 中引用。
 ```
 
 同类产品 / 开源方案：
@@ -456,13 +458,13 @@ Goal Prompt 与执行授权：
 准备开发：
 
 ```text
-用户已确认按 Goal 执行。请先登记活跃工作安排并生成 Work ID，然后基于已确认的开发前对齐包 / PM Handoff 工作单，帮我生成一个适合新 Execution Thread 使用的任务说明。
+用户已确认按 Goal 执行。请先登记活跃工作安排并生成 Work ID，然后基于已确认的开发前对齐包 / PM Handoff 工作单 / Lean 等价工作单，帮我生成一个适合新 Execution Thread 使用的任务说明。
 ```
 
 执行线程：
 
 ```text
-当前是 Execution Thread。请基于 Work ID 和 PM Handoff 工作单执行当前阶段，自动开发、自动测试、自动修复；修改范围外的文件不要碰，完成后给出测试结果、自动修复轮次、风险、回滚方式和 Work ID 状态建议。
+当前是 Execution Thread。请基于 Work ID 和 PM Handoff 工作单或 Lean 等价工作单执行当前阶段，自动开发、自动测试、自动修复；修改范围外的文件不要碰，完成后给出测试结果、自动修复轮次、风险、回滚方式和 Work ID 状态建议。
 ```
 
 受控自动开发：
@@ -474,7 +476,7 @@ Goal Prompt 与执行授权：
 验证方案：
 
 ```text
-请为当前阶段生成 VALIDATION.md：先列出可运行的测试命令；如果没有测试脚本，就给出可执行的替代验证清单、QA 验证矩阵和阻塞项。UI 验收和截图默认使用内置浏览器，只有需要 Chrome 登录态、Cookie、插件或我明确要求时才使用外置 Chrome。
+请为当前阶段生成验证方案：先列出可运行的测试命令；如果没有测试脚本，Lean 快速路径可在轻量工作单中写替代验证清单，Standard/Enterprise 生成 VALIDATION.md、QA 验证矩阵和阻塞项。UI 验收和截图默认使用内置浏览器，只有需要 Chrome 登录态、Cookie、插件或我明确要求时才使用外置 Chrome。
 ```
 
 技术方案 / ADR：
@@ -486,7 +488,7 @@ Goal Prompt 与执行授权：
 阶段验收线程：
 
 ```text
-当前是 Phase Acceptance Thread。请只验收当前 Work ID 是否严格完成 PHASE_PLAN 里的计划项，对照 Handoff、测试结果和修改文件；不合格生成 Fix Request 打回 Execution Thread，不要替它修代码；通过后要求从活跃工作安排移除并归档摘要。
+当前是 Phase Acceptance Thread。请只验收当前 Work ID 是否严格完成 PHASE_PLAN 或 Lean 轻量任务单里的计划项，对照 Handoff / Lean 等价工作单、测试结果和修改文件；不合格生成 Fix Request 打回 Execution Thread，不要替它修代码；通过后要求从活跃工作安排移除并归档摘要。
 ```
 
 打回修复：

@@ -11,21 +11,21 @@
 
 ## 输入
 
-进入本审核前必须已有：
+进入本审核前必须按当前流程档位已有。Lean 小任务通常不强制进入需求一致性审核；如果因风险或用户要求启用，可使用 Lean 等价工作单和轻量验收结果作为输入。
 
-- `PRD.md` 或 PM Handoff 中的完整 PRD。
+- `PRD.md`、PM Handoff 中的完整 PRD，或 Lean 等价工作单。
 - 产品原型 / 交互草图结论，或明确的无需原型说明。
 - `DESIGN.md` / `VISUAL_REFERENCES.md` 或明确的无用户可见界面说明。
-- 涉及截图对照时，用户/外部参考截图、修改截图、目标效果图或验收目标图的 `VISUAL_REFERENCES.md` ID、存档路径或不可入库原因，以及 Codex 执行/验收截图的 `docs/codex/assets/qa/<Work ID>/` 路径。
+- 涉及截图对照时，用户/外部参考截图、修改截图、目标效果图或验收目标图的 `VISUAL_REFERENCES.md` ID、存档路径、来源或不可入库原因，以及 Codex 执行/验收截图的可追溯证据；Lean 可引用对话/轻量验收表，Standard/Enterprise 引用 `docs/codex/assets/qa/<Work ID>/` 路径。
 - 已确认的一段式 Goal 指令和用户确认记录。
 - Work ID、活跃工作安排归档或阶段验收记录。
-- `PHASE_PLAN.md`。
+- `PHASE_PLAN.md` 或 Lean 轻量任务单。
 - 全部阶段的 `PHASE_ACCEPTANCE.md` 或等价验收结论。
-- `HANDOFF.md`。
-- `VALIDATION.md` / QA 验证矩阵结果。
+- `HANDOFF.md` 或 Lean 等价工作单。
+- `VALIDATION.md` / QA 验证矩阵结果 / Lean 替代验证结果。
 - Execution Thread 的修改文件列表、测试结果、自动修复记录。
 
-缺任一关键输入，不得进入需求一致性审核或 Code Review。
+缺少当前档位的关键输入，不得进入需求一致性审核或 Code Review。
 
 任一阶段验收未通过，不得进入需求一致性审核。
 
@@ -37,7 +37,7 @@
 - 非目标是否没有被偷做。
 - 设计规范是否被遵守。
 - 用户/外部参考截图、修改截图、设计稿截图、目标效果图是否已按 `VISUAL_REFERENCES.md` 和 Handoff 对照实现。
-- Codex 产生的 before/after、smoke、回归或修复复验截图是否已归档到 `docs/codex/assets/qa/<Work ID>/`，并在 QA/验收记录中引用。
+- Codex 产生的 before/after、smoke、回归或修复复验截图是否已按档位记录；Lean 可引用对话/轻量验收表，Standard/Enterprise 归档到 `docs/codex/assets/qa/<Work ID>/` 并在 QA/验收记录中引用。
 - 产品原型/交互草图已确认的结构、路径和状态是否被实现。
 - Goal 成功标准是否满足。
 - Work ID 对应工作单是否完成，且没有把其他工作混进来。

@@ -8,7 +8,7 @@
 
 - 有测试脚本：使用现有测试脚本。
 - 没有测试脚本但可补轻量测试：先补最小测试或检查命令。
-- 暂时不能补测试：生成 `VALIDATION.md` 替代验证方案。
+- 暂时不能补测试：生成 `VALIDATION.md` 替代验证方案；Lean 快速路径可在轻量工作单中写替代验证清单。
 - 连替代验证都无法定义：不得进入自动开发。
 
 ## 测试识别顺序
@@ -56,14 +56,14 @@ UI 验收、截图和本地页面检查不要默认使用外置 Chrome。
 截图证据必须可追溯：
 
 - 用户/外部提供的参考截图、修改截图、目标效果图、验收目标图，引用 `VISUAL_REFERENCES.md` 中的 ID 或存档路径。
-- Codex 执行/验收产生的 before/after、smoke、回归或修复复验截图存入 `docs/codex/assets/qa/<Work ID>/`，并在 `VALIDATION.md`、`CODEX_QA.md` 或 `PHASE_ACCEPTANCE.md` 中记录。
-- UI 修改类任务至少保留可对照的 before/after 或参考/实现截图；无法截图时必须写明原因和替代观察证据。
+- Codex 执行/验收产生的 before/after、smoke、回归或修复复验截图必须可追溯；Lean 可在对话或轻量验收表中记录截图/观察证据，Standard/Enterprise 存入 `docs/codex/assets/qa/<Work ID>/`，并在 `VALIDATION.md`、`CODEX_QA.md` 或 `PHASE_ACCEPTANCE.md` 中记录。
+- UI 修改类任务至少保留可对照的 before/after、参考/实现截图或轻量观察证据；无法截图时必须写明原因和替代观察证据。
 - 验收或修复期间用户新增的截图先登记为新的 `VISUAL_REFERENCES.md` 依据，再进入 Fix Request 或 Handoff 更新。
 - 截图含敏感信息时先脱敏；不能脱敏时记录不可入库原因，不提交原图。
 
 ## QA 验证矩阵
 
-`VALIDATION.md` 必须区分验证类型，不要只写一个笼统测试命令。
+创建 `VALIDATION.md` 时必须区分验证类型，不要只写一个笼统测试命令。Lean 快速路径可以不建独立文件，但轻量工作单里的验收方式也必须可执行。
 
 最小矩阵：
 

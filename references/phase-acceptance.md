@@ -12,17 +12,17 @@ Lean 流程可以使用轻量验收表，不强制新开独立线程；Standard 
 
 ## 进入条件
 
-必须已有：
+必须按当前流程档位已有。Lean 可使用轻量验收表，不要求完整文档集合；Standard/Enterprise 使用完整输入。
 
 - Work ID 和活跃工作安排登记。
-- `PHASE_PLAN.md` 当前阶段。
-- `HANDOFF.md` 当前任务边界。
+- `PHASE_PLAN.md` 当前阶段，或 Lean 轻量任务单。
+- `HANDOFF.md` 当前任务边界，或 Lean 等价工作单。
 - Execution Thread 输出的修改文件列表、测试结果、自动修复记录。
 - `VALIDATION.md` 或等价验证方案。
 - QA 验证矩阵及当前阶段验证结果。
-- 当前阶段涉及的 PRD / DESIGN / TECH_SPEC 或 ADR / 架构影响面。
+- 当前阶段涉及的 PRD / DESIGN / TECH_SPEC 或 ADR / 架构影响面；Lean 可使用轻量任务单中的风险判断和修改范围。
 
-缺少任一关键输入，不得验收通过。
+缺少当前档位的关键输入，不得验收通过。
 
 ## 验收内容
 
@@ -34,15 +34,15 @@ Lean 流程可以使用轻量验收表，不强制新开独立线程；Standard 
 - 替代验证清单是否覆盖当前阶段核心路径。
 - QA 验证矩阵是否覆盖当前流程档位、主链路、回归路径和人工检查项。
 - UI 验收如需浏览器，是否默认使用内置浏览器完成截图和 smoke；若使用外置 Chrome，是否说明登录态、Cookie、插件或用户指定等必要原因。
-- UI 修改或视觉修复是否提供 `VISUAL_REFERENCES.md` 中的参考截图 ID；Execution 产生的 before/after、smoke、回归或修复复验截图是否归档到 `docs/codex/assets/qa/<Work ID>/`。
+- UI 修改或视觉修复是否提供 `VISUAL_REFERENCES.md` 中的参考截图 ID 或 Lean 等价视觉依据；Execution 产生的 before/after、smoke、回归或修复复验截图是否已按档位记录，Lean 可在对话/轻量验收表中记录，Standard/Enterprise 归档到 `docs/codex/assets/qa/<Work ID>/`。
 - 如果用户在验收期间补充新的修改截图、标注截图或目标效果图，是否已作为新的实现依据归档/登记，并生成 Fix Request 或回 PM Thread 更新范围与验收标准。
 - 人工验收点是否有结论。
 - 如果本轮来自打回修复，Fix Response 是否逐条回应 Fix Request。
 - 修改范围是否符合 Handoff。
 - 禁止修改范围是否未被触碰。
 - 是否新增未经确认的功能、依赖、接口或数据字段。
-- 是否更新对应文档：`TASKS.md`、`CODEX_QA.md`、`PHASE_PLAN.md`、必要时更新 `DECISIONS.md`。
-- 验收通过时，是否已要求从 `TASKS.md` 活跃工作安排中移除该 Work ID，并归档摘要。
+- 是否更新对应文档：Lean 可在对话中归档摘要；Standard/Enterprise 更新 `TASKS.md`、`CODEX_QA.md`、`PHASE_PLAN.md`、必要时更新 `DECISIONS.md`。
+- 验收通过时，是否已要求从活跃工作安排中移除该 Work ID，并归档摘要；Lean 可在对话中标记完成，Standard/Enterprise 更新 `TASKS.md`。
 - 是否存在阻塞风险、未关闭缺陷或跨模块影响。
 
 ## 输出格式

@@ -8,7 +8,9 @@
 
 ### Changed
 
-- 修正截图与视觉证据存档边界：用户/外部提供的参考图、修改图、目标效果图和验收目标图归档到 `docs/codex/assets/visual-references/` 或记录来源；Codex 执行、浏览器检查和验收产生的 before/after、smoke、回归或修复复验截图归档到 `docs/codex/assets/qa/<Work ID>/`，并在 `VISUAL_REFERENCES.md`、Handoff、Validation、QA 和 Phase Acceptance 中引用。
+- 明确默认当前对话就是 PM Thread：PM 线程只做需求、范围、计划、风险、验收和派发；Level 2 / Standard 与 Level 3 / Enterprise 项目必须安排独立 Execution Thread 或已有执行线程修改代码，不能由 PM 自己改。无线程工具时必须显式声明环境降级并切换执行阶段；README 总览图和 `THREADS.md` 模板同步区分 Lean 当前线程执行与 Level 2/3 Execution Thread。
+- 增加 Lean 快速路径瘦身规则：低风险 bugfix、文案、静态内容、视觉微调、一次性脚本和单页 Demo 只需目标、非目标、允许修改、禁止修改、验收方式、回滚方式 6 个字段；允许聊天内轻量 Work ID / 等价工作单 / 替代验证清单 / 截图观察证据，避免把完整 PRD、DESIGN、TECH_SPEC、HANDOFF、PHASE_PLAN、VALIDATION、截图目录或独立验收线程强加给小任务。
+- 修正截图与视觉证据存档边界：用户/外部提供的参考图、修改图、目标效果图和验收目标图归档到 `docs/codex/assets/visual-references/` 或记录来源；Codex 执行、浏览器检查和验收产生的 before/after、smoke、回归或修复复验截图必须可追溯，Lean 可在对话或轻量验收表中记录，Standard/Enterprise 归档到 `docs/codex/assets/qa/<Work ID>/`，并在 `VISUAL_REFERENCES.md`、Handoff、Validation、QA 和 Phase Acceptance 中引用。
 - 重新审视上下文后统一 Goal / Handoff / 执行线程关系：开发前先形成对齐包和 Handoff 草案，再输出一段式 Goal；Goal 只承载授权目标，不替代执行上下文；复制给其他 Codex 时必须同时提供对齐包或 Handoff。
 - 放松 `AGENTS.md` 中过硬的执行规则：Execution Thread 优先新开但允许无线程工具时在当前线程显式切换；Lean 小任务可压缩任务前后输出；主分支限制改为受保护/生产/发布分支需确认。
 - 明确多线程判断时机：PM 第一轮只做预判；技术方案/架构影响面阶段只做可拆性分析；阶段计划与验证方案完成后，在 Goal Prompt / Execution 前输出执行前线程方案并确定 single-thread / N threads / defer，缺线程责任、数据/API 契约、验证矩阵、合并顺序或回滚策略时不得并行开发。
