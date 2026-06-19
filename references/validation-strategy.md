@@ -55,9 +55,10 @@ UI 验收、截图和本地页面检查不要默认使用外置 Chrome。
 
 截图证据必须可追溯：
 
-- 参考截图、修改前截图和用户给的修改截图，引用 `VISUAL_REFERENCES.md` 中的 ID 或存档路径。
-- 执行/验收产生的截图存入 `docs/codex/assets/qa/<Work ID>/`，并在 `VALIDATION.md`、`CODEX_QA.md` 或 `PHASE_ACCEPTANCE.md` 中记录。
+- 用户/外部提供的参考截图、修改截图、目标效果图、验收目标图，引用 `VISUAL_REFERENCES.md` 中的 ID 或存档路径。
+- Codex 执行/验收产生的 before/after、smoke、回归或修复复验截图存入 `docs/codex/assets/qa/<Work ID>/`，并在 `VALIDATION.md`、`CODEX_QA.md` 或 `PHASE_ACCEPTANCE.md` 中记录。
 - UI 修改类任务至少保留可对照的 before/after 或参考/实现截图；无法截图时必须写明原因和替代观察证据。
+- 验收或修复期间用户新增的截图先登记为新的 `VISUAL_REFERENCES.md` 依据，再进入 Fix Request 或 Handoff 更新。
 - 截图含敏感信息时先脱敏；不能脱敏时记录不可入库原因，不提交原图。
 
 ## QA 验证矩阵
@@ -89,7 +90,7 @@ Lean 可以只保留自动测试和人工主链路；Standard 必须包含回归
 - 浏览器验收工具：内置浏览器 / Playwright / 外置 Chrome / 不需要
 - 使用外置 Chrome 原因：
 - 参考截图 / 视觉依据：
-- 验收截图归档目录：docs/codex/assets/qa/<Work ID>/
+- 执行/验收截图归档目录：docs/codex/assets/qa/<Work ID>/
 
 ## 自动命令
 

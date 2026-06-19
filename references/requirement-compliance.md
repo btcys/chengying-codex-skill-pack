@@ -16,7 +16,7 @@
 - `PRD.md` 或 PM Handoff 中的完整 PRD。
 - 产品原型 / 交互草图结论，或明确的无需原型说明。
 - `DESIGN.md` / `VISUAL_REFERENCES.md` 或明确的无用户可见界面说明。
-- 涉及截图对照时，参考截图、修改前/修改后截图和验收截图的存档路径或不可入库原因。
+- 涉及截图对照时，用户/外部参考截图、修改截图、目标效果图或验收目标图的 `VISUAL_REFERENCES.md` ID、存档路径或不可入库原因，以及 Codex 执行/验收截图的 `docs/codex/assets/qa/<Work ID>/` 路径。
 - 已确认的一段式 Goal 指令和用户确认记录。
 - Work ID、活跃工作安排归档或阶段验收记录。
 - `PHASE_PLAN.md`。
@@ -36,8 +36,8 @@
 - PRD 功能是否全部覆盖。
 - 非目标是否没有被偷做。
 - 设计规范是否被遵守。
-- 参考截图、修改截图或设计稿截图是否已按 `VISUAL_REFERENCES.md` 和 Handoff 对照实现。
-- UI 修改的 before/after 或验收截图是否已归档到 `docs/codex/assets/qa/<Work ID>/`，并在 QA/验收记录中引用。
+- 用户/外部参考截图、修改截图、设计稿截图、目标效果图是否已按 `VISUAL_REFERENCES.md` 和 Handoff 对照实现。
+- Codex 产生的 before/after、smoke、回归或修复复验截图是否已归档到 `docs/codex/assets/qa/<Work ID>/`，并在 QA/验收记录中引用。
 - 产品原型/交互草图已确认的结构、路径和状态是否被实现。
 - Goal 成功标准是否满足。
 - Work ID 对应工作单是否完成，且没有把其他工作混进来。

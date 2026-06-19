@@ -34,7 +34,8 @@ Lean 流程可以使用轻量验收表，不强制新开独立线程；Standard 
 - 替代验证清单是否覆盖当前阶段核心路径。
 - QA 验证矩阵是否覆盖当前流程档位、主链路、回归路径和人工检查项。
 - UI 验收如需浏览器，是否默认使用内置浏览器完成截图和 smoke；若使用外置 Chrome，是否说明登录态、Cookie、插件或用户指定等必要原因。
-- UI 修改或视觉修复是否提供参考截图 ID、before/after 或验收截图，并归档到 `docs/codex/assets/qa/<Work ID>/`。
+- UI 修改或视觉修复是否提供 `VISUAL_REFERENCES.md` 中的参考截图 ID；Execution 产生的 before/after、smoke、回归或修复复验截图是否归档到 `docs/codex/assets/qa/<Work ID>/`。
+- 如果用户在验收期间补充新的修改截图、标注截图或目标效果图，是否已作为新的实现依据归档/登记，并生成 Fix Request 或回 PM Thread 更新范围与验收标准。
 - 人工验收点是否有结论。
 - 如果本轮来自打回修复，Fix Response 是否逐条回应 Fix Request。
 - 修改范围是否符合 Handoff。
@@ -66,6 +67,9 @@ Lean 流程可以使用轻量验收表，不强制新开独立线程；Standard 
 - 使用外置 Chrome 原因：
 - 地址：
 - 视口：
+- 参考截图 ID：
+- before 截图：
+- after 截图：
 - 截图/证据：
 
 ### 打回项
@@ -78,6 +82,7 @@ Lean 流程可以使用轻量验收表，不强制新开独立线程；Standard 
 
 ### Fix Request
 - 修复目标：
+- 参考截图 ID / 新增参考截图路径：
 - 必须修改范围：
 - 禁止修改范围：
 - 必须重新运行的验证：
