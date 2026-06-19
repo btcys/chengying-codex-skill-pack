@@ -9,6 +9,8 @@
 - 使用的验证方式：
 - 浏览器验收工具：内置浏览器 / Playwright / 外置 Chrome / 不需要
 - 使用外置 Chrome 原因：
+- 参考截图 / 视觉依据：
+- 验收截图归档目录：docs/codex/assets/qa/<Work ID>/
 
 ## 自动命令
 
@@ -37,6 +39,9 @@
 - 使用工具：内置浏览器 / Playwright / 外置 Chrome / 不需要
 - 地址：
 - 视口：
+- 参考截图 ID：
+- before 截图：
+- after 截图：
 - 截图/证据：
 - 使用外置 Chrome 原因：
 

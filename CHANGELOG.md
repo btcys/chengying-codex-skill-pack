@@ -8,6 +8,7 @@
 
 ### Changed
 
+- 新增截图与视觉证据存档规则：用户提供的参考截图、修改截图、旧系统/设计稿/验收截图需归档到 `docs/codex/assets/visual-references/` 或记录来源；执行和验收截图归档到 `docs/codex/assets/qa/<Work ID>/`，并在 `VISUAL_REFERENCES.md`、Handoff、Validation、QA 和 Phase Acceptance 中引用。
 - 重新审视上下文后统一 Goal / Handoff / 执行线程关系：开发前先形成对齐包和 Handoff 草案，再输出一段式 Goal；Goal 只承载授权目标，不替代执行上下文；复制给其他 Codex 时必须同时提供对齐包或 Handoff。
 - 放松 `AGENTS.md` 中过硬的执行规则：Execution Thread 优先新开但允许无线程工具时在当前线程显式切换；Lean 小任务可压缩任务前后输出；主分支限制改为受保护/生产/发布分支需确认。
 - 明确多线程判断时机：PM 第一轮只做预判；技术方案/架构影响面阶段只做可拆性分析；阶段计划与验证方案完成后，在 Goal Prompt / Execution 前输出执行前线程方案并确定 single-thread / N threads / defer，缺线程责任、数据/API 契约、验证矩阵、合并顺序或回滚策略时不得并行开发。

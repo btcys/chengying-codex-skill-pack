@@ -19,6 +19,7 @@
 - 有用户可见界面的项目必须按档位补齐设计规范；用户不确定时必须给方案选择。
 - UI 项目必须询问参考产品、截图、Figma、原型、草图、品牌素材、现有页面或竞品 URL；没有明确视觉目标时必须确认是否调用 Product Design:get-context -> ideate 生成 3 个方向。
 - Product Design brief 未确认、视觉方向未选择或明确跳过原因未记录时，不得进入 UI 实现。
+- 用户提供参考截图、修改截图、旧系统截图、设计稿截图或验收截图作为依据时，必须归档到 `docs/codex/assets/visual-references/` 或登记来源，并在 `VISUAL_REFERENCES.md`、Handoff、Validation 或验收记录中引用。
 - 设计规范阶段必须判断是否调用 Product Design、ui-ux-design-advisor、motion-quality、better-icons、ImageGen、Figma 或审查类 Skill；需要 UI brief / 视觉探索时优先走 Product Design:get-context -> Product Design:ideate。
 - 需要动效、过渡、加载或高级交互动效时，必须用 motion-quality 定义动效原则、降级和验证项。
 - 需要图标体系时，必须用 better-icons 或项目既有图标库确定一致图标风格。
@@ -37,6 +38,7 @@
 - 自动开发必须受控执行；确认 Goal、Handoff 和自动化模式后，才允许在阶段内连续开发、测试、修复。
 - 自动开发前必须有测试命令或 VALIDATION.md 替代验证方案，并包含 QA 验证矩阵。
 - UI 验收、localhost 页面检查、截图、视觉 smoke 默认使用 Codex 内置浏览器；只有需要用户 Chrome 登录态、Cookie、插件、已打开页面状态或用户明确要求时，才使用外置 Chrome。
+- UI 修改后的 before/after、浏览器 smoke、视觉回归或修复复验截图必须归档到 `docs/codex/assets/qa/<Work ID>/`，并记录到 `CODEX_QA.md`、`VALIDATION.md` 或 `PHASE_ACCEPTANCE.md`。
 - 进入任何下一阶段前必须对照全流程门禁；门禁不通过不得继续推进。
 - Execution Thread 不得自我验收；Standard / Enterprise 每轮或每阶段完成后必须进入独立 Phase Acceptance Thread，Lean 可用轻量验收表。
 - Phase Acceptance Thread 未通过，必须打回 Execution Thread 或回 PM Thread 重新确认，不能继续下一阶段。

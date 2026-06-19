@@ -34,6 +34,7 @@ Lean 流程可以使用轻量验收表，不强制新开独立线程；Standard 
 - 替代验证清单是否覆盖当前阶段核心路径。
 - QA 验证矩阵是否覆盖当前流程档位、主链路、回归路径和人工检查项。
 - UI 验收如需浏览器，是否默认使用内置浏览器完成截图和 smoke；若使用外置 Chrome，是否说明登录态、Cookie、插件或用户指定等必要原因。
+- UI 修改或视觉修复是否提供参考截图 ID、before/after 或验收截图，并归档到 `docs/codex/assets/qa/<Work ID>/`。
 - 人工验收点是否有结论。
 - 如果本轮来自打回修复，Fix Response 是否逐条回应 Fix Request。
 - 修改范围是否符合 Handoff。

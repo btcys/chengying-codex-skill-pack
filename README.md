@@ -15,6 +15,7 @@
 - 逼问出完整、可实现、可测试、可验收的 PRD。
 - 新软件、产品、网站、App、小程序、SaaS、后台和内部系统默认要有产品原型或交互草图；Lean 可轻量，Standard/Enterprise 必须覆盖核心路径、页面/模块结构、关键交互和状态。
 - 逼问出完整设计规范；必须询问产品原型、参考产品、截图、Figma、草图、品牌素材、现有页面或竞品 URL。
+- 用户提供参考截图、修改截图、旧系统截图、设计稿截图或验收截图时，必须归档到 `docs/codex/assets/visual-references/` 或登记来源；执行和验收截图归档到 `docs/codex/assets/qa/<Work ID>/`，并在 Handoff / Validation / QA / Phase Acceptance 中引用。
 - 没有明确原型或视觉目标时，先确认是否调用 Product Design:get-context -> Product Design:ideate；brief 经用户确认后生成 3 个方向，等用户选择后才能进入实现。
 - 明确 `可执行完整需求` 的判断标准：必须满足当前档位和本轮目标的全部开发前提，能完整支撑开发前对齐包、Handoff、阶段计划、Goal Prompt、验证和回滚；资料完整仍不等于执行授权。
 - 标准项目在 PRD 冻结前轻量查竞品、同类产品和开源方案；长期商业项目在 PRD 冻结前评估竞品边界和可商用开源二开底座，用来指导 PM 判断和缩短开发周期，但不默认采用。
@@ -334,6 +335,10 @@ your-project/
       REVIEW_CHECKLIST.md
       PRIVACY_AUDIT.md
       RELEASES.md
+      assets/
+        visual-references/
+        qa/
+          <Work ID>/
 ```
 
 规则：
@@ -416,6 +421,12 @@ PM 启动：
 
 ```text
 请在产品原型与设计规范阶段先问我有没有产品原型、流程草图、参考产品、截图、Figma、品牌素材、现有页面或竞品 URL；如果没有明确原型或视觉目标，请确认是否调用 Product Design:get-context 建立 brief，brief 经我确认后再用 Product Design:ideate 给 3 个方向；不要进入 image-to-code，直到我选定产品原型/视觉方向，并明确授权按 Goal Prompt 执行。
+```
+
+截图存档：
+
+```text
+如果我提供了参考截图、修改截图、旧系统截图或验收截图，请先把可访问图片归档到 docs/codex/assets/visual-references/，在 VISUAL_REFERENCES.md 记录 ID、路径、页面/模块、对照点和禁止点；执行和验收时把 before/after 截图归档到 docs/codex/assets/qa/<Work ID>/，并在 Handoff、VALIDATION、CODEX_QA 或 PHASE_ACCEPTANCE 中引用。
 ```
 
 同类产品 / 开源方案：

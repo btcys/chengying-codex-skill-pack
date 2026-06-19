@@ -62,6 +62,7 @@ PM 阶段核心文档：
 - `docs/codex/PROJECT_BRIEF.md`
 - `docs/codex/PRODUCT_RESEARCH.md`
 - `docs/codex/DESIGN.md`
+- `docs/codex/VISUAL_REFERENCES.md`（有截图、设计稿、参考图或视觉对照时）
 - `docs/codex/TECH_SPEC.md`
 - `docs/codex/PHASE_PLAN.md`
 - `docs/codex/VALIDATION.md`
@@ -81,7 +82,6 @@ PM 阶段核心文档：
 
 在 Standard 基础上增加：
 
-- `docs/codex/VISUAL_REFERENCES.md`
 - `docs/codex/ROADMAP.md`
 - `docs/codex/DECISIONS.md`
 - `docs/codex/CONTEXT.md`
@@ -91,6 +91,13 @@ PM 阶段核心文档：
 - `docs/codex/REVIEW_CHECKLIST.md`
 - `docs/codex/RELEASES.md`
 - `docs/codex/PRIVACY_AUDIT.md`
+
+截图和视觉证据目录按需创建：
+
+- `docs/codex/assets/visual-references/`：用户提供的参考截图、修改截图、设计稿截图、旧系统截图、竞品截图、Product Design/Figma 导出的参考图。
+- `docs/codex/assets/qa/<Work ID>/`：执行和验收过程中的 before/after 截图、浏览器 smoke 截图、视觉回归证据、修复复验截图。
+
+如果截图包含客户数据、个人信息、密钥、内部敏感信息或生产数据，优先脱敏后存档；不能脱敏时，只记录来源、用途、不可入库原因和可访问位置，不把敏感图片提交到仓库。
 
 ## Level 1 文档
 
@@ -134,7 +141,7 @@ PM 阶段核心文档：
 - `ACCEPTANCE.md`：需求一致性审核，逐条对照 PRD、产品原型、设计、已确认 Goal 指令、Handoff 和实现结果。
 - `DESIGN.md`：产品原型、用户路径、页面结构、视觉方向、交互原则。
 - `TECH_SPEC.md`：技术栈、模块边界、数据/API/权限契约、依赖、风险、验证和回滚方案。
-- `VISUAL_REFERENCES.md`：参考产品、截图、风格取舍。
+- `VISUAL_REFERENCES.md`：参考产品、截图、风格取舍、截图存档路径、对照点和禁止点。
 - `ROADMAP.md`：阶段规划、版本目标。
 - `TASKS.md`：任务池、活跃工作安排登记、当前任务、状态和完成记录。
 - `FEEDBACK_LOG.md`：用户反馈、重复问题、处理状态和升级到哪些项目文档。
@@ -154,6 +161,7 @@ PM 阶段核心文档：
 - 文档只记录已确认事实、明确假设和待确认问题。
 - 不要把聊天流水账完整复制进文档。
 - 不要把敏感信息、密钥、token 写入仓库。
+- 用户提供的参考截图、修改截图、设计截图或验收截图，能访问到文件时必须复制或归档到 `docs/codex/assets/visual-references/` 或 `docs/codex/assets/qa/<Work ID>/`，并在相关文档中记录路径、来源、页面/模块、用途、对照点和确认状态。
 - 任务完成后必须更新相关文档。
 - PM 派发工作前必须先在 `TASKS.md` 或等价位置登记活跃工作安排；验收通过后必须从活跃登记中移除，并归档摘要到验收或 QA 记录。
 - 从活跃登记中移除不等于删除历史证据；已完成工作必须保留可追溯摘要。

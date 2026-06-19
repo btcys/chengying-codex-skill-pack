@@ -103,6 +103,7 @@ description: 对话式软件项目协作工作流。用于把“开发一个 xxx
 - 用户发送需求、补充 PRD、描述“目标是……”或要求“整理一个 Goal”不等于确认执行；只有用户明确说“按这个 Goal 执行 / 开始开发 / 进入 Execution”等，才算开发授权。
 - 新软件、产品、网站、App、小程序、SaaS、后台或内部系统默认需要产品原型或交互草图；未确认用户流程、页面/模块结构、关键交互和状态，不得进入实现。纯后端/API、CLI、脚本、库、局部 bugfix 或低风险小改可以明确说明原因后跳过原型。
 - 涉及视觉界面时，未确认参考产品、截图、Figma、原型、草图、品牌素材、现有页面、竞品 URL、Product Design 方向，或未明确跳过视觉确认，不得进入 UI 实现。
+- 用户提供参考截图、修改截图、设计稿截图或验收截图时，必须存档或登记来源；可访问的图片文件存入 `docs/codex/assets/visual-references/` 或 `docs/codex/assets/qa/<Work ID>/`，并在 `VISUAL_REFERENCES.md`、Handoff、Validation 或验收记录中引用，方便开发对照和验收追溯。
 - PM 派发执行前必须登记 Work ID 或等价工作单；执行依据是 Work ID、Handoff、阶段计划、验证矩阵和验收标准。
 - 自动开发只能在已确认 Goal、范围、阶段计划、验证方式和自动化模式内进行；遇到越界、失败、风险或产品判断必须停止。
 - Execution 不得自我验收。Lean 可用轻量验收表；Standard/Enterprise 应使用独立 Phase Acceptance。

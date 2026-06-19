@@ -101,6 +101,7 @@ Execution Thread 的执行依据是 Work ID、PM Handoff、阶段计划、验证
 - 不允许格式化、重排或清理与本任务无关的旧代码；只清理本次修改造成的无用导入、变量和临时代码。
 - 不允许跳过测试和总结。
 - UI 验收、截图、localhost 页面检查默认使用 Codex 内置浏览器；只有需要用户 Chrome 登录态、Cookie、插件、已打开页面状态或用户明确要求时，才切外置 Chrome，并在执行结果中说明原因。
+- UI 修改或视觉修复任务必须引用 Handoff / `VISUAL_REFERENCES.md` 中的参考截图 ID；执行产生的 before/after、浏览器 smoke 或修复复验截图必须归档到 `docs/codex/assets/qa/<Work ID>/`，并在执行结果或 QA 记录中写明路径。
 
 ## 自动开发、测试、修复闭环
 
