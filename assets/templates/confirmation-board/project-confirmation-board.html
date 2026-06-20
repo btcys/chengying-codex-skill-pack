@@ -1,0 +1,1179 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>项目开发前确认台</title>
+  <style>
+    :root {
+      --bg: #f4f7f8;
+      --panel: #ffffff;
+      --panel-soft: #eef4f5;
+      --ink: #18242b;
+      --muted: #657580;
+      --line: #d7e1e6;
+      --accent: #0f766e;
+      --accent-soft: #dff4f1;
+      --warn: #a05a00;
+      --warn-soft: #fff3dc;
+      --bad: #b42318;
+      --bad-soft: #ffe4df;
+      --defer: #525f9c;
+      --defer-soft: #eaedff;
+      --shadow: 0 14px 36px rgba(24, 36, 43, 0.08);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      color: var(--ink);
+      background: var(--bg);
+      font: 14px/1.5 ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    button,
+    input,
+    textarea {
+      font: inherit;
+    }
+
+    button {
+      min-height: 36px;
+      padding: 7px 11px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: var(--panel);
+      color: var(--ink);
+      cursor: pointer;
+    }
+
+    button:hover {
+      border-color: #9fb0b8;
+    }
+
+    input,
+    textarea {
+      width: 100%;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: #fff;
+      color: var(--ink);
+      padding: 8px 10px;
+    }
+
+    textarea {
+      min-height: 72px;
+      resize: vertical;
+    }
+
+    .shell {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 390px;
+      gap: 16px;
+      max-width: 1420px;
+      margin: 0 auto;
+      padding: 18px;
+    }
+
+    .topbar,
+    .notice,
+    .overview,
+    .section,
+    .side-panel {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+      box-shadow: var(--shadow);
+    }
+
+    .topbar {
+      grid-column: 1 / -1;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      padding: 16px;
+    }
+
+    .title h1 {
+      margin: 0;
+      font-size: 22px;
+      line-height: 1.2;
+      letter-spacing: 0;
+    }
+
+    .title p {
+      margin: 5px 0 0;
+      color: var(--muted);
+    }
+
+    .meta-fields {
+      display: grid;
+      grid-template-columns: 170px 170px 170px;
+      gap: 8px;
+      min-width: 534px;
+    }
+
+    .notice {
+      grid-column: 1 / -1;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 14px;
+      align-items: center;
+      padding: 14px 16px;
+      border-left: 6px solid var(--accent);
+      background: #f8fcfb;
+    }
+
+    .notice strong {
+      display: block;
+      margin-bottom: 3px;
+      font-size: 15px;
+    }
+
+    .notice span {
+      color: var(--muted);
+    }
+
+    .primary-actions {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .btn-primary {
+      border-color: var(--accent);
+      background: var(--accent);
+      color: #fff;
+      font-weight: 750;
+    }
+
+    .btn-ghost {
+      background: #f9fbfb;
+    }
+
+    .layout {
+      display: grid;
+      gap: 14px;
+      align-content: start;
+    }
+
+    .overview {
+      display: grid;
+      grid-template-columns: 1.35fr repeat(4, minmax(120px, 1fr));
+      gap: 0;
+      overflow: hidden;
+    }
+
+    .focus {
+      padding: 16px;
+      border-right: 1px solid var(--line);
+      background: var(--accent-soft);
+    }
+
+    .focus-label {
+      display: inline-flex;
+      align-items: center;
+      height: 24px;
+      padding: 0 8px;
+      border-radius: 999px;
+      background: var(--accent);
+      color: #fff;
+      font-size: 12px;
+      font-weight: 750;
+    }
+
+    .focus h2 {
+      margin: 10px 0 6px;
+      font-size: 24px;
+      line-height: 1.2;
+      letter-spacing: 0;
+    }
+
+    .focus p {
+      margin: 0;
+      color: #334852;
+    }
+
+    .metric {
+      display: grid;
+      align-content: center;
+      min-height: 116px;
+      padding: 16px;
+      border-right: 1px solid var(--line);
+    }
+
+    .metric:last-child {
+      border-right: 0;
+    }
+
+    .metric strong {
+      display: block;
+      font-size: 30px;
+      line-height: 1;
+    }
+
+    .metric span {
+      margin-top: 7px;
+      color: var(--muted);
+      font-weight: 700;
+    }
+
+    .toolbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 8px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+    }
+
+    .filters,
+    .quick-actions {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .filter.active {
+      border-color: var(--accent);
+      background: var(--accent-soft);
+      color: #07564f;
+      font-weight: 750;
+    }
+
+    .section {
+      overflow: hidden;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 13px 14px;
+      border-bottom: 1px solid var(--line);
+      background: var(--panel-soft);
+    }
+
+    .section-header h2 {
+      margin: 0;
+      font-size: 16px;
+      letter-spacing: 0;
+    }
+
+    .section-count {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 750;
+    }
+
+    .items {
+      display: grid;
+      gap: 10px;
+      padding: 12px;
+    }
+
+    .item {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fff;
+      overflow: hidden;
+    }
+
+    .item.status-pending {
+      border-left: 5px solid #9aa8b2;
+    }
+
+    .item.status-confirm,
+    .item.status-adopt {
+      border-left: 5px solid var(--accent);
+    }
+
+    .item.status-revise {
+      border-left: 5px solid var(--warn);
+    }
+
+    .item.status-reject {
+      border-left: 5px solid var(--bad);
+    }
+
+    .item.status-defer {
+      border-left: 5px solid var(--defer);
+    }
+
+    .item-head {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 10px;
+      align-items: start;
+      padding: 12px;
+    }
+
+    .item-title {
+      margin: 0;
+      font-size: 15px;
+      line-height: 1.35;
+      letter-spacing: 0;
+    }
+
+    .item-desc {
+      margin: 5px 0 0;
+      color: var(--muted);
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      height: 26px;
+      padding: 0 9px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: #f8fafb;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 750;
+      white-space: nowrap;
+    }
+
+    .pill.confirm,
+    .pill.adopt {
+      border-color: #91d4ca;
+      background: var(--accent-soft);
+      color: #07564f;
+    }
+
+    .pill.revise {
+      border-color: #f0c274;
+      background: var(--warn-soft);
+      color: #764000;
+    }
+
+    .pill.reject {
+      border-color: #ffa79d;
+      background: var(--bad-soft);
+      color: #82180f;
+    }
+
+    .pill.defer {
+      border-color: #bbc2ff;
+      background: var(--defer-soft);
+      color: #39447d;
+    }
+
+    .item-body {
+      display: grid;
+      gap: 10px;
+      padding: 0 12px 12px;
+    }
+
+    .suggestion {
+      padding: 10px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: #f9fbfb;
+      color: #334852;
+    }
+
+    .decision-row {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(84px, 1fr));
+      gap: 8px;
+    }
+
+    .decision-row button {
+      min-height: 40px;
+      font-weight: 750;
+    }
+
+    .decision-row button.active[data-status="confirm"],
+    .decision-row button.active[data-status="adopt"] {
+      border-color: var(--accent);
+      background: var(--accent-soft);
+      color: #07564f;
+    }
+
+    .decision-row button.active[data-status="revise"] {
+      border-color: #df9f38;
+      background: var(--warn-soft);
+      color: #764000;
+    }
+
+    .decision-row button.active[data-status="reject"] {
+      border-color: var(--bad);
+      background: var(--bad-soft);
+      color: #82180f;
+    }
+
+    .decision-row button.active[data-status="defer"] {
+      border-color: var(--defer);
+      background: var(--defer-soft);
+      color: #39447d;
+    }
+
+    .note-label {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 750;
+    }
+
+    .note-label strong {
+      color: var(--bad);
+      font-weight: 750;
+    }
+
+    .collapsed-summary {
+      display: none;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 0 12px 12px;
+      color: var(--muted);
+    }
+
+    .item.is-collapsed .item-body {
+      display: none;
+    }
+
+    .item.is-collapsed .collapsed-summary {
+      display: flex;
+    }
+
+    .side {
+      display: grid;
+      gap: 14px;
+      align-content: start;
+      position: sticky;
+      top: 18px;
+    }
+
+    .side-panel {
+      overflow: hidden;
+    }
+
+    .side-panel h2 {
+      margin: 0;
+      padding: 13px 14px;
+      border-bottom: 1px solid var(--line);
+      background: var(--panel-soft);
+      font-size: 16px;
+      letter-spacing: 0;
+    }
+
+    .side-body {
+      display: grid;
+      gap: 10px;
+      padding: 12px;
+    }
+
+    .blocker-list {
+      display: grid;
+      gap: 8px;
+    }
+
+    .blocker {
+      padding: 9px 10px;
+      border: 1px solid #ffa79d;
+      border-radius: 6px;
+      background: var(--bad-soft);
+      color: #82180f;
+    }
+
+    .empty {
+      color: var(--muted);
+      padding: 9px 10px;
+      border: 1px dashed var(--line);
+      border-radius: 6px;
+      background: #fbfcfd;
+    }
+
+    #reply {
+      min-height: 380px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+      font-size: 12px;
+      line-height: 1.55;
+    }
+
+    .toast {
+      position: fixed;
+      left: 50%;
+      bottom: 18px;
+      transform: translateX(-50%);
+      z-index: 10;
+      display: none;
+      min-width: 220px;
+      max-width: calc(100vw - 32px);
+      padding: 10px 13px;
+      border-radius: 7px;
+      background: #18242b;
+      color: #fff;
+      text-align: center;
+      box-shadow: var(--shadow);
+    }
+
+    .toast.show {
+      display: block;
+    }
+
+    @media (max-width: 1100px) {
+      .shell {
+        grid-template-columns: 1fr;
+      }
+
+      .meta-fields,
+      .overview {
+        grid-template-columns: 1fr 1fr;
+        min-width: 0;
+        width: 100%;
+      }
+
+      .topbar {
+        align-items: stretch;
+        flex-direction: column;
+      }
+
+      .focus {
+        grid-column: 1 / -1;
+        border-right: 0;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .side {
+        position: static;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .shell {
+        padding: 10px;
+      }
+
+      .notice,
+      .overview,
+      .meta-fields,
+      .decision-row {
+        grid-template-columns: 1fr;
+      }
+
+      .metric {
+        min-height: auto;
+        border-right: 0;
+        border-top: 1px solid var(--line);
+      }
+
+      .toolbar {
+        align-items: stretch;
+        flex-direction: column;
+      }
+
+      .primary-actions,
+      .filters,
+      .quick-actions {
+        justify-content: stretch;
+      }
+
+      .primary-actions button,
+      .filters button,
+      .quick-actions button {
+        flex: 1;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <header class="topbar">
+      <div class="title">
+        <h1>项目开发前确认台</h1>
+        <p>用于 PRD、设计、技术方案、阶段计划、验收计划和交接的本轮确认。</p>
+      </div>
+      <div class="meta-fields" aria-label="项目元信息">
+        <input id="projectName" value="sample-project" aria-label="项目名称">
+        <input id="workId" value="CY-YYYYMMDD-001" aria-label="Work ID">
+        <input id="docVersion" value="对齐包 v0.1" aria-label="文档版本">
+      </div>
+    </header>
+
+    <section class="notice" aria-label="使用边界">
+      <div>
+        <strong>这里只收集开发前对齐反馈</strong>
+        <span>不替代 PRD、TECH_SPEC、PHASE_PLAN、VALIDATION、Handoff，也不代表最终 Goal 授权。确认结果需要复制回 Codex。</span>
+      </div>
+      <div class="primary-actions">
+        <button class="btn-primary" id="confirmAll" type="button">剩余全部确认</button>
+        <button class="btn-ghost" id="copyTop" type="button">复制回复</button>
+      </div>
+    </section>
+
+    <section class="layout" aria-label="确认项">
+      <div class="overview">
+        <div class="focus">
+          <span class="focus-label">当前焦点</span>
+          <h2 id="focusTitle">先处理待确认项</h2>
+          <p id="focusDetail">逐项选择确认、采纳、需修改、拒绝或后置；已选择的项目会自动折叠。</p>
+        </div>
+        <div class="metric">
+          <strong id="metricPending">0</strong>
+          <span>待处理</span>
+        </div>
+        <div class="metric">
+          <strong id="metricBlocked">0</strong>
+          <span>阻塞项</span>
+        </div>
+        <div class="metric">
+          <strong id="metricDone">0</strong>
+          <span>已表态</span>
+        </div>
+        <div class="metric">
+          <strong id="metricTotal">0</strong>
+          <span>确认项</span>
+        </div>
+      </div>
+
+      <div class="toolbar" aria-label="筛选与快捷操作">
+        <div class="filters">
+          <button class="filter active" type="button" data-filter="all">全部</button>
+          <button class="filter" type="button" data-filter="pending">待处理</button>
+          <button class="filter" type="button" data-filter="blocked">阻塞</button>
+          <button class="filter" type="button" data-filter="done">已表态</button>
+        </div>
+        <div class="quick-actions">
+          <button id="expandAll" type="button">展开全部</button>
+          <button id="collapseDone" type="button">折叠已表态</button>
+          <button id="resetBoard" type="button">重置</button>
+        </div>
+      </div>
+
+      <div id="sections"></div>
+    </section>
+
+    <aside class="side" aria-label="反馈输出">
+      <section class="side-panel">
+        <h2>阻塞与待补充</h2>
+        <div class="side-body">
+          <div id="blockers" class="blocker-list"></div>
+        </div>
+      </section>
+
+      <section class="side-panel">
+        <h2>给 Codex 的回复</h2>
+        <div class="side-body">
+          <textarea id="reply" readonly aria-label="给 Codex 的回复"></textarea>
+          <div class="primary-actions">
+            <button class="btn-primary" id="copyReply" type="button">复制</button>
+            <button class="btn-ghost" id="downloadReply" type="button">下载 .md</button>
+          </div>
+        </div>
+      </section>
+    </aside>
+  </main>
+
+  <div id="toast" class="toast" role="status"></div>
+
+  <script>
+    const STORAGE_KEY = "chengying-predev-confirmation-board-v1";
+
+    const statusLabels = {
+      pending: "待处理",
+      confirm: "确认",
+      adopt: "采纳",
+      revise: "需修改",
+      reject: "拒绝",
+      defer: "后置"
+    };
+
+    const sections = [
+      {
+        id: "prd",
+        title: "PRD",
+        items: [
+          {
+            id: "prd-mvp",
+            title: "目标与 MVP 范围",
+            desc: "确认本轮只覆盖最小可交付路径，避免把后续想法提前塞进开发。",
+            suggestion: "建议写清主用户、主路径、交付物、非本轮范围和验收口径。"
+          },
+          {
+            id: "prd-nongoals",
+            title: "非目标与边界",
+            desc: "确认哪些能力本轮不做，防止执行线程自行扩展。",
+            suggestion: "建议把商业化、多租户、移动端适配、后台权限等边界单独列出。"
+          }
+        ]
+      },
+      {
+        id: "design",
+        title: "设计",
+        items: [
+          {
+            id: "design-direction",
+            title: "视觉方向是否冻结",
+            desc: "确认采用点、不采用点和待改点，避免把视觉探索误当成 PRD 进展。",
+            suggestion: "建议在 DESIGN_DECISION 中记录选中方案、采用点、不采用点、待改点和是否冻结。"
+          },
+          {
+            id: "design-flow",
+            title: "核心交互路径",
+            desc: "确认页面、状态、空态、错误态和关键操作是否足够支撑开发。",
+            suggestion: "建议只冻结本轮核心路径；非核心页面可标为后置。"
+          }
+        ]
+      },
+      {
+        id: "tech",
+        title: "技术方案",
+        items: [
+          {
+            id: "tech-boundary",
+            title: "实现边界与依赖",
+            desc: "确认技术栈、目录、数据源、外部服务和关键依赖。",
+            suggestion: "涉及登录、API Key、Token、部署、自动化或外部抓取时，应升级 Standard 并补 TECH_SPEC。"
+          },
+          {
+            id: "tech-security",
+            title: "密钥、权限和部署约束",
+            desc: "确认密钥不进前端、不进产物，并写清权限验证方式。",
+            suggestion: "建议把 secret scan、未登录访问、权限接口和部署 smoke 写进 VALIDATION。"
+          }
+        ]
+      },
+      {
+        id: "phase",
+        title: "阶段计划",
+        items: [
+          {
+            id: "phase-version",
+            title: "阶段版本与执行顺序",
+            desc: "确认每阶段使用三段式阶段版本，并明确先做什么、后做什么。",
+            suggestion: "建议用 0.0.1、0.1.0、0.4.5 这类阶段版本，不用 P0/P1 替代阶段。"
+          },
+          {
+            id: "phase-audit",
+            title: "独立审计与验收",
+            desc: "确认每阶段都有输入、输出、独立审计点、验收标准和回滚方式。",
+            suggestion: "没有可独立审计和验收的阶段，不应进入最终 Goal 或派发 Execution Thread。"
+          }
+        ]
+      },
+      {
+        id: "validation",
+        title: "验收计划",
+        items: [
+          {
+            id: "validation-required",
+            title: "必跑验证",
+            desc: "确认 lint、build、测试、浏览器截图、Docker、权限、安全扫描等哪些属于本轮阻塞项。",
+            suggestion: "阻塞验证缺工具时不能直接验收通过，应先请求权限或标记 blocked_validation_missing。"
+          },
+          {
+            id: "validation-evidence",
+            title: "证据留存",
+            desc: "确认截图、日志、命令输出、部署地址和验证结果记录在哪里。",
+            suggestion: "Lean 可轻量记录；Standard/Enterprise 应写入 QA、Handoff 或 Phase Acceptance。"
+          }
+        ]
+      },
+      {
+        id: "handoff",
+        title: "交接",
+        items: [
+          {
+            id: "handoff-thread",
+            title: "Execution Thread 派发",
+            desc: "确认 Level 2/3 项目由独立执行线程或已有执行线程改代码。",
+            suggestion: "PM Thread 只做需求、范围、计划、风险、验收和派发，不应自己进入开发。"
+          },
+          {
+            id: "handoff-goal",
+            title: "最终 Goal 前置条件",
+            desc: "确认 PRD、TECH_SPEC、PHASE_PLAN、VALIDATION、Handoff 已冻结后，再生成最终 Goal Prompt。",
+            suggestion: "Goal Prompt 只作为最后执行授权，不能替代开发前对齐包。"
+          }
+        ]
+      }
+    ];
+
+    const defaultState = {
+      meta: {
+        projectName: "sample-project",
+        workId: "CY-YYYYMMDD-001",
+        docVersion: "对齐包 v0.1"
+      },
+      decisions: {},
+      filter: "all"
+    };
+
+    let state = loadState();
+
+    function loadState() {
+      try {
+        const saved = JSON.parse(localStorage.getItem(STORAGE_KEY));
+        if (saved && saved.decisions) {
+          return {
+            ...defaultState,
+            ...saved,
+            meta: { ...defaultState.meta, ...(saved.meta || {}) }
+          };
+        }
+      } catch (error) {
+        console.warn("无法读取本地状态", error);
+      }
+      return structuredClone(defaultState);
+    }
+
+    function saveState() {
+      state.meta.projectName = document.querySelector("#projectName").value.trim();
+      state.meta.workId = document.querySelector("#workId").value.trim();
+      state.meta.docVersion = document.querySelector("#docVersion").value.trim();
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    }
+
+    function getDecision(id) {
+      return state.decisions[id] || { status: "pending", note: "", collapsed: false };
+    }
+
+    function setDecision(id, patch) {
+      state.decisions[id] = { ...getDecision(id), ...patch };
+      saveState();
+      render();
+    }
+
+    function allItems() {
+      return sections.flatMap((section) => section.items.map((item) => ({ ...item, section: section.title })));
+    }
+
+    function statusClass(status) {
+      return status === "pending" ? "pending" : status;
+    }
+
+    function isBlocked(status) {
+      return status === "revise" || status === "reject";
+    }
+
+    function shouldShow(item) {
+      const decision = getDecision(item.id);
+      if (state.filter === "pending") return decision.status === "pending";
+      if (state.filter === "blocked") return isBlocked(decision.status);
+      if (state.filter === "done") return decision.status !== "pending";
+      return true;
+    }
+
+    function render() {
+      renderMeta();
+      renderOverview();
+      renderFilters();
+      renderSections();
+      renderBlockers();
+      renderReply();
+    }
+
+    function renderMeta() {
+      document.querySelector("#projectName").value = state.meta.projectName;
+      document.querySelector("#workId").value = state.meta.workId;
+      document.querySelector("#docVersion").value = state.meta.docVersion;
+    }
+
+    function renderOverview() {
+      const items = allItems();
+      const pending = items.filter((item) => getDecision(item.id).status === "pending");
+      const blocked = items.filter((item) => isBlocked(getDecision(item.id).status));
+      const done = items.length - pending.length;
+
+      document.querySelector("#metricPending").textContent = pending.length;
+      document.querySelector("#metricBlocked").textContent = blocked.length;
+      document.querySelector("#metricDone").textContent = done;
+      document.querySelector("#metricTotal").textContent = items.length;
+
+      if (blocked.length > 0) {
+        document.querySelector("#focusTitle").textContent = `先处理 ${blocked.length} 个阻塞项`;
+        document.querySelector("#focusDetail").textContent = "需修改或拒绝的项目会阻止最终 Goal 生成，请补齐原因或改法。";
+      } else if (pending.length > 0) {
+        document.querySelector("#focusTitle").textContent = `还有 ${pending.length} 个待处理`;
+        document.querySelector("#focusDetail").textContent = "逐项选择后会自动折叠，右侧会同步生成给 Codex 的回复。";
+      } else {
+        document.querySelector("#focusTitle").textContent = "本轮已全部表态";
+        document.querySelector("#focusDetail").textContent = "复制右侧回复给 Codex，用于更新开发前对齐包；这仍不是最终 Goal 授权。";
+      }
+    }
+
+    function renderFilters() {
+      document.querySelectorAll(".filter").forEach((button) => {
+        button.classList.toggle("active", button.dataset.filter === state.filter);
+      });
+    }
+
+    function renderSections() {
+      const root = document.querySelector("#sections");
+      root.innerHTML = sections.map((section) => {
+        const visibleItems = section.items.filter(shouldShow);
+        const handled = section.items.filter((item) => getDecision(item.id).status !== "pending").length;
+        if (visibleItems.length === 0) return "";
+        return `
+          <section class="section">
+            <div class="section-header">
+              <h2>${escapeHtml(section.title)}</h2>
+              <span class="section-count">${handled}/${section.items.length} 已表态</span>
+            </div>
+            <div class="items">
+              ${visibleItems.map(renderItem).join("")}
+            </div>
+          </section>
+        `;
+      }).join("");
+
+      root.querySelectorAll("[data-action='decision']").forEach((button) => {
+        button.addEventListener("click", () => handleDecision(button.dataset.itemId, button.dataset.status));
+      });
+
+      root.querySelectorAll("[data-action='toggle']").forEach((button) => {
+        button.addEventListener("click", () => {
+          const decision = getDecision(button.dataset.itemId);
+          setDecision(button.dataset.itemId, { collapsed: !decision.collapsed });
+        });
+      });
+
+      root.querySelectorAll("[data-action='note']").forEach((textarea) => {
+        textarea.addEventListener("input", () => {
+          state.decisions[textarea.dataset.itemId] = {
+            ...getDecision(textarea.dataset.itemId),
+            note: textarea.value
+          };
+          saveState();
+          renderBlockers();
+          renderReply();
+        });
+      });
+    }
+
+    function renderItem(item) {
+      const decision = getDecision(item.id);
+      const status = decision.status;
+      const collapsed = decision.collapsed && status !== "pending";
+      const noteRequired = status === "reject";
+      return `
+        <article class="item status-${statusClass(status)} ${collapsed ? "is-collapsed" : ""}">
+          <div class="item-head">
+            <div>
+              <h3 class="item-title">${escapeHtml(item.title)}</h3>
+              <p class="item-desc">${escapeHtml(item.desc)}</p>
+            </div>
+            <span class="pill ${statusClass(status)}">${statusLabels[status]}</span>
+          </div>
+          <div class="item-body">
+            <div class="suggestion">${escapeHtml(item.suggestion)}</div>
+            <div class="decision-row">
+              ${renderDecisionButton(item.id, status, "confirm")}
+              ${renderDecisionButton(item.id, status, "adopt")}
+              ${renderDecisionButton(item.id, status, "revise")}
+              ${renderDecisionButton(item.id, status, "reject")}
+              ${renderDecisionButton(item.id, status, "defer")}
+            </div>
+            <label>
+              <span class="note-label">
+                <span>补充说明 / 修改意见 / 拒绝原因</span>
+                ${noteRequired ? "<strong>拒绝必填</strong>" : ""}
+              </span>
+              <textarea data-action="note" data-item-id="${item.id}" placeholder="可填写给 Codex 的具体说明。拒绝时必须填写原因。">${escapeHtml(decision.note || "")}</textarea>
+            </label>
+          </div>
+          <div class="collapsed-summary">
+            <span>${escapeHtml(summaryText(item, decision))}</span>
+            <button type="button" data-action="toggle" data-item-id="${item.id}">展开修改</button>
+          </div>
+        </article>
+      `;
+    }
+
+    function renderDecisionButton(itemId, currentStatus, nextStatus) {
+      const active = currentStatus === nextStatus ? "active" : "";
+      return `<button class="${active}" type="button" data-action="decision" data-item-id="${itemId}" data-status="${nextStatus}">${statusLabels[nextStatus]}</button>`;
+    }
+
+    function summaryText(item, decision) {
+      const note = decision.note ? `：${decision.note}` : "";
+      return `${item.title} - ${statusLabels[decision.status]}${note}`;
+    }
+
+    function handleDecision(itemId, status) {
+      const decision = getDecision(itemId);
+      const note = (decision.note || "").trim();
+      if (status === "reject" && !note) {
+        const textarea = document.querySelector(`textarea[data-item-id="${itemId}"]`);
+        if (textarea) textarea.focus();
+        showToast("请先填写拒绝原因");
+        return;
+      }
+      setDecision(itemId, { status, collapsed: status !== "pending" });
+    }
+
+    function renderBlockers() {
+      const blockers = allItems().filter((item) => isBlocked(getDecision(item.id).status));
+      const root = document.querySelector("#blockers");
+      if (blockers.length === 0) {
+        root.innerHTML = `<div class="empty">暂无阻塞项。</div>`;
+        return;
+      }
+      root.innerHTML = blockers.map((item) => {
+        const decision = getDecision(item.id);
+        const note = decision.note ? `：${escapeHtml(decision.note)}` : "";
+        return `<div class="blocker"><strong>${escapeHtml(item.section)} / ${escapeHtml(item.title)}</strong><br>${statusLabels[decision.status]}${note}</div>`;
+      }).join("");
+    }
+
+    function renderReply() {
+      const items = allItems();
+      const lines = [];
+      lines.push("# 本轮对齐反馈");
+      lines.push("");
+      lines.push(`项目：${state.meta.projectName || "未填写"}`);
+      lines.push(`Work ID：${state.meta.workId || "未填写"}`);
+      lines.push(`文档版本：${state.meta.docVersion || "未填写"}`);
+      lines.push("执行授权：未请求。本页只做开发前对齐反馈，不代表允许进入开发。");
+      lines.push("");
+      lines.push("## 已表态");
+
+      const handled = items.filter((item) => getDecision(item.id).status !== "pending");
+      if (handled.length === 0) {
+        lines.push("- 暂无。");
+      } else {
+        handled.forEach((item) => {
+          const decision = getDecision(item.id);
+          const note = decision.note ? `；说明：${decision.note}` : "";
+          lines.push(`- ${item.section} / ${item.title}：${statusLabels[decision.status]}${note}`);
+        });
+      }
+
+      lines.push("");
+      lines.push("## 待处理");
+      const pending = items.filter((item) => getDecision(item.id).status === "pending");
+      if (pending.length === 0) {
+        lines.push("- 无。");
+      } else {
+        pending.forEach((item) => lines.push(`- ${item.section} / ${item.title}`));
+      }
+
+      lines.push("");
+      lines.push("## 需要 Codex 下一步处理");
+      const blockers = items.filter((item) => isBlocked(getDecision(item.id).status));
+      if (blockers.length === 0) {
+        lines.push("- 根据以上反馈更新 PRD / DESIGN_DECISION / TECH_SPEC / PHASE_PLAN / VALIDATION / Handoff。");
+      } else {
+        blockers.forEach((item) => {
+          const decision = getDecision(item.id);
+          const note = decision.note ? `：${decision.note}` : "";
+          lines.push(`- 处理 ${item.section} / ${item.title}${note}`);
+        });
+      }
+
+      document.querySelector("#reply").value = lines.join("\n");
+    }
+
+    function copyReply() {
+      const value = document.querySelector("#reply").value;
+      navigator.clipboard.writeText(value).then(
+        () => showToast("已复制给 Codex 的回复"),
+        () => {
+          document.querySelector("#reply").select();
+          showToast("无法自动复制，请手动复制文本");
+        }
+      );
+    }
+
+    function downloadReply() {
+      const value = document.querySelector("#reply").value;
+      const blob = new Blob([value], { type: "text/markdown;charset=utf-8" });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = `${state.meta.workId || "codex-confirmation"}-feedback.md`;
+      link.click();
+      URL.revokeObjectURL(url);
+    }
+
+    function showToast(message) {
+      const toast = document.querySelector("#toast");
+      toast.textContent = message;
+      toast.classList.add("show");
+      window.clearTimeout(showToast.timer);
+      showToast.timer = window.setTimeout(() => toast.classList.remove("show"), 1800);
+    }
+
+    function escapeHtml(value) {
+      return String(value).replace(/[&<>"']/g, (char) => ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        '"': "&quot;",
+        "'": "&#39;"
+      }[char]));
+    }
+
+    document.querySelectorAll("#projectName, #workId, #docVersion").forEach((input) => {
+      input.addEventListener("input", () => {
+        saveState();
+        renderReply();
+      });
+    });
+
+    document.querySelectorAll(".filter").forEach((button) => {
+      button.addEventListener("click", () => {
+        state.filter = button.dataset.filter;
+        saveState();
+        render();
+      });
+    });
+
+    document.querySelector("#confirmAll").addEventListener("click", () => {
+      allItems().forEach((item) => {
+        const decision = getDecision(item.id);
+        if (decision.status === "pending") {
+          state.decisions[item.id] = { ...decision, status: "confirm", collapsed: true };
+        }
+      });
+      saveState();
+      render();
+      showToast("剩余项目已标记为确认");
+    });
+
+    document.querySelector("#expandAll").addEventListener("click", () => {
+      allItems().forEach((item) => {
+        state.decisions[item.id] = { ...getDecision(item.id), collapsed: false };
+      });
+      saveState();
+      render();
+    });
+
+    document.querySelector("#collapseDone").addEventListener("click", () => {
+      allItems().forEach((item) => {
+        const decision = getDecision(item.id);
+        state.decisions[item.id] = { ...decision, collapsed: decision.status !== "pending" };
+      });
+      saveState();
+      render();
+    });
+
+    document.querySelector("#resetBoard").addEventListener("click", () => {
+      if (!window.confirm("确认重置本页所有选择吗？")) return;
+      state = structuredClone(defaultState);
+      localStorage.removeItem(STORAGE_KEY);
+      render();
+    });
+
+    document.querySelector("#copyReply").addEventListener("click", copyReply);
+    document.querySelector("#copyTop").addEventListener("click", copyReply);
+    document.querySelector("#downloadReply").addEventListener("click", downloadReply);
+
+    render();
+  </script>
+</body>
+</html>
