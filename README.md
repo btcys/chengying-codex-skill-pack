@@ -1,12 +1,46 @@
 # 橙影 · Codex 企业级工作流 Skill Pack
 
-面向 Codex 的对话式软件项目协作工作流 Skill Pack。
+![Codex Skill Pack](https://img.shields.io/badge/Codex-Skill%20Pack-0f766e?style=flat-square)
+![Workflow](https://img.shields.io/badge/Workflow-Lean%20%2F%20Standard%20%2F%20Enterprise-2563eb?style=flat-square)
+![PM to Execution](https://img.shields.io/badge/PM%20%E2%86%92%20Execution-controlled-7c3aed?style=flat-square)
+![Validation](https://img.shields.io/badge/Validation-required-b45309?style=flat-square)
 
-它适合把“开发一个 xxx 程序”的粗略想法、半成型需求，或已有 PRD / 原型 / 设计稿 / 代码仓库 / 技术方案的可执行完整需求，先通过对话交给 Codex 判断输入成熟度、流程档位和风险，再按需要完成 PM 访谈、PRD 前期竞品/同类产品方向校准、完整 PRD、产品原型/交互草图、设计规范、技术方案/ADR、架构影响面、阶段开发计划、QA 验证矩阵、执行前线程方案、开发前对齐包 / Handoff 草案和一段式 Goal Prompt；等用户明确确认“按这个 Goal 执行”后，Lean 可在当前线程显式切换执行，Level 2 / Level 3 则由 PM 派发到 Execution Thread 或已有执行线程，做受控自动开发、自动测试、自动修复。
+面向 Codex 的对话式软件项目协作工作流 Skill Pack。它把粗略想法、半成型需求或已有 PRD / 设计稿 / 代码仓库，整理成可开发、可验收、可交接的 Codex 工作单。
 
-核心原则很简单：先像真实软件团队一样把项目想清楚，再让 Codex 写代码。
+> 先像真实软件团队一样把项目想清楚，再让 Codex 写代码。
 
-## 能解决什么
+## 一眼看懂
+
+| 项目 | 说明 |
+| --- | --- |
+| 它是什么 | Codex 软件项目的 PM、Handoff、Execution、验收和审查工作流 |
+| 适合谁 | 想让 Codex 做小工具、网站、App、SaaS、后台、企业系统或长期商业项目的人 |
+| 解决什么 | 防止 Codex 一句话开干、PM 自己改代码、Goal 出太早、验收不严格、需求和实现断链 |
+| 如何分流 | Lean 快速做小任务，Standard 稳定做正式项目，Enterprise 管长期和高风险项目 |
+| 核心边界 | PM Thread 负责对齐和派发；Level 2/3 必须交给 Execution Thread 开发 |
+
+## 核心能力
+
+| 能力 | 结果 |
+| --- | --- |
+| PM 对齐 | 把想法整理成 PRD、非目标、设计依据、技术边界和验收标准 |
+| 开发前确认 | 用状态表、事实分层、确认台和精简 Handoff 降低反复沟通成本 |
+| 受控执行 | Goal 授权后再进入 Execution，按阶段计划开发、测试和修复 |
+| 严格验收 | Phase Acceptance、需求一致性审核、Code Review、截图和阻塞验证分层把关 |
+| 文档沉淀 | 将项目事实、Work ID、Handoff、QA、反馈和版本结果写入 `docs/codex/` |
+| 风险升级 | 登录、权限、API Key、Token、部署、自动化、外部数据源等自动升级 Standard / Enterprise |
+
+## 快速导航
+
+- [适用项目](#适用项目)
+- [工作流总览](#工作流总览)
+- [流程档位](#流程档位)
+- [线程职责图](#线程职责图)
+- [安装](#安装)
+- [快速开始](#快速开始)
+- [常用提示词](#常用提示词)
+
+## 详细能力
 
 - 避免 Codex 一上来就建项目、写代码、选技术栈。
 - 避免 Codex 阿谀奉承或迎合式确认；有风险、矛盾或不可实现点时必须直接指出。
