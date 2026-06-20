@@ -36,6 +36,7 @@
 - 同一阶段或同一审核问题自动修复最多 3 轮；仍失败则回 PM Thread 或技术方案重新确认。
 - 全部阶段验收未通过，不进入需求一致性审核。
 - 需求一致性审核未通过，不进入代码审查。
+- Standard 项目命中认证/权限、API/数据模型、数据库迁移、密钥/API Key/Token、上传/支付/外部服务、自动化、部署/发布、公共组件/共享模块、生产客户主链路、多线程共享契约、安全/隐私风险时，必须进入 Code Review Thread 或等价独立代码审查；未命中时可以跳过，但必须写明跳过原因和剩余风险。
 - 有 P0 / 阻塞风险，不进入发布。
 - 用户未确认 Goal，不进入 Execution Thread；但 PM Thread 必须继续按阶段开发计划沟通缺口、风险、建议和下一步选择。
 - Goal Draft / Goal Prompt 不是执行授权。只有用户明确说“按这个 Goal 执行 / 开始开发 / 进入 Execution”等，才进入执行授权。
@@ -60,7 +61,7 @@
 | 7. Execution Thread | Work ID、PM Handoff、当前 Task、或 Fix Request | 代码修改、测试结果、自动修复记录、Fix Response | 当前阶段测试通过或阻塞原因明确；被打回时已逐条回应 Fix Request | 自动修复，最多 3 轮；仍失败则停止 |
 | 8. Phase Acceptance Thread | Work ID、阶段计划、Handoff、执行结果、测试结果、验证证据 | `PHASE_ACCEPTANCE.md` 或等价验收表；不通过时输出 Fix Request；通过时从 PM 台账活跃区删除该 Work ID 条目并归档摘要 | 当前阶段计划项全部完成；全部阻塞验证项已运行且有可追溯证据；未运行、失败、缺工具或无证据的验证项均已判定为非阻塞并有确认记录；Lean 可用轻量验收表 | 生成 Fix Request 打回 Execution Thread；缺验证工具或环境时标记 `blocked` 并给出补验证路径；验收标准问题回 PM Thread 重新确认 |
 | 9. 需求一致性审核 | PRD、产品原型、设计规范、Goal、阶段计划、Handoff、全部阶段验收结果 | `ACCEPTANCE.md` 或等价审核表；不通过时输出 Fix Request | 无漏做、错做、多做、越界修改；偏差已确认 | 生成 Fix Request 回 Execution Thread，或回 PM Thread 重新确认 |
-| 10. Code Review Thread | 已完成代码、测试结果、影响面、需求一致性审核 | 审查发现清单；P0/P1 输出 Fix Request | 无 P0；P1 有处理计划 | 生成 Fix Request 回 Execution Thread 修复 |
+| 10. Code Review Thread | 已完成代码、测试结果、影响面、需求一致性审核、Standard 风险触发判断 | 审查发现清单；P0/P1 输出 Fix Request；未触发时写跳过原因 | Enterprise 必须审查；Standard 命中风险触发条件时必须审查；无 P0，P1 有处理计划 | 生成 Fix Request 回 Execution Thread 修复；未触发时记录跳过原因和剩余风险 |
 | 11. Release Thread | 审查结果、构建结果 | 隐私审计、版本文档、回滚方案 | 隐私、构建、发布后主链路验证通过 | 阻塞发布 |
 | 12. Version Close | 发布结果、版本文档、验收记录 | 当前版本关闭记录 | 当前版本目标完成或明确终止 | 不回 PM，除非有新需求/变更/返工 |
 | 13. Feedback Evolution | 用户反馈、发布/审查/返工记录 | `FEEDBACK_LOG.md`、决策、上下文、检查清单或项目规则更新 | 可复用规则已记录；重复或高影响问题已升级 | 补写文档，或回到相关阶段修正 |

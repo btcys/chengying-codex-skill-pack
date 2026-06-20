@@ -14,6 +14,7 @@
 - 默认当前对话就是 PM Thread；Level 2 / Standard 和 Level 3 / Enterprise 必须由 PM 安排独立 Execution Thread 或已有执行线程修改代码，不能由 PM 自己改。
 - 先判断 Lean / Standard / Enterprise 流程档位，让小项目快走、正式项目完整走、长期商业项目严格走。
 - Lean 快速路径只保留目标、非目标、允许修改、禁止修改、验收方式和回滚方式，避免小修、文案、视觉微调、一次性脚本被完整 PRD / TECH_SPEC / Handoff 拖重。
+- Standard 默认使用压缩输出：全流程状态表、已确认 / 我的建议 / 待确认、精简 Handoff、Goal 就绪判断和下一步选择。完整模板是字段池，不是每轮必须展开的表单。
 - Goal Prompt 只能作为最后的执行授权；`TECH_SPEC` / `PHASE_PLAN` / `VALIDATION` / Handoff 或等价工作单未形成前，只能输出“当前还不能生成最终 Goal”的阶段状态、缺口和下一步。
 - PM 对齐超过两轮或用户问“还缺什么”时，必须输出全流程状态表；Standard/Enterprise 对齐达到三轮后，必须输出可复制的 PRD / TECH_SPEC / PHASE_PLAN / VALIDATION / Handoff v0.x。v0.x 只表示草案，进入最终 Goal / Work ID / Execution 前必须升级为 v1.0、本轮冻结版或 Lean 等价冻结工作单。
 - 开发前确认项较多、用户逐项回复困难或 Codex 给出多个建议时，可使用 `assets/templates/confirmation-board/project-confirmation-board.html` 项目开发前确认台辅助表态；它只收集本轮反馈，不展示开发进度，不替代正式文档或最终 Goal Prompt。
@@ -42,6 +43,7 @@
 - 每轮/每阶段完成后进入独立 Phase Acceptance Thread，不合格直接打回执行线程。
 - 审查或验收不通过时生成 Fix Request，Execution Thread 按打回包定向修复并输出 Fix Response，最多自动修复 3 轮。
 - 全部阶段验收通过后，再做需求一致性审核，确认严格符合 PRD、产品原型、设计规范、Goal、阶段计划和 Handoff。
+- Standard 命中认证/权限、API/数据模型、密钥、上传/支付/外部服务、自动化、部署/发布、公共组件、生产主链路、多线程共享契约、安全/隐私风险时，必须进入独立 Code Review；未命中时可跳过但要写明原因。
 - 加入隐私审计、打包发布、版本文档、独立代码审查线程和自进化记录。
 - 用户反馈问题时先记录到 `FEEDBACK_LOG.md`；重复、高影响或导致返工的问题升级为检查项、决策或项目硬规则。
 - 适配轻量 Demo、正式产品、长期商业项目三种复杂度。
@@ -99,7 +101,7 @@ flowchart LR
 | 档位 | 适用 | 特点 |
 | --- | --- | --- |
 | Lean | 小工具、Demo、单页、小改动 | 1 到 2 轮 PM；低风险快速路径只需 6 字段工作单，竞品调研可跳过，轻量验收 |
-| Standard | 正式小程序、网站、App、后台、中小型 SaaS | 完整 PRD、产品原型、设计规范、轻量调研、阶段计划、验证方案、一段式 Goal 指令和阶段验收 |
+| Standard | 正式小程序、网站、App、后台、中小型 SaaS | 默认压缩输出，保留完整门禁；完整 PRD、产品原型、设计规范、轻量调研、阶段计划、验证方案、一段式 Goal 指令和阶段验收 |
 | Enterprise | 长期商业项目、用户数据、权限、上传、计费、发布、多线程 | 完整文档体系、技术方案/ADR、架构影响面、多线程治理、需求一致性审核、Code Review、隐私审计和发布文档 |
 
 默认映射：Level 1 -> Lean，Level 2 -> Standard，Level 3 -> Enterprise。涉及登录、权限、上传、支付、客户数据、schema/API、发布或商用交付时必须升级流程档位。
@@ -232,19 +234,17 @@ PM Thread 会逐步逼问并确认：
 当需求清楚后，对 Codex 说：
 
 ```text
-请整理开发前对齐包 / PM Handoff 草案。Lean 快速路径只需 Work ID、目标、非目标、允许修改、禁止修改、验收方式和回滚方式；Standard/Enterprise 需要 Work ID 字段、目标线程、派发条件、完整 PRD、产品原型/交互草图结论、设计规范、一段式 Goal 授权、阶段开发计划、执行前线程方案、MVP、非目标、技术路线、当前 Task、修改范围、禁止修改范围、架构影响面、风险点、验证方式和验收标准。
+请整理开发前对齐包 / PM Handoff 草案。Lean 快速路径只需 Work ID、目标、非目标、允许修改、禁止修改、验收方式和回滚方式；Standard 默认先输出精简 Handoff：Work ID、目标线程、当前阶段、目标、非目标、修改范围、禁止修改范围、设计/技术依据、阶段版本与顺序、验收方式、必须运行的验证、Code Review 是否 required、回滚方式和 Goal 就绪判断。完整 PRD、设计规范、TECH_SPEC、PHASE_PLAN、VALIDATION、Handoff 字段作为字段池，只在风险触发、准备写入仓库文档、冻结 v1.0、派发线程、进入验收/审查或 Enterprise 时展开。
 ```
 
 交接包应至少包含：
 
 - 项目一句话说明
 - 当前阶段目标
-- 完整 PRD
-- 产品原型/交互草图结论或无需生成原因
-- 完整设计规范
+- PRD / 产品原型 / 设计规范的已确认依据，或无需展开原因
 - Work ID、目标线程和 PM 台账状态
 - 一段式 Goal 授权和用户确认结果；如果只是复制 Goal 给另一个 Codex，还要附开发前对齐包 / Handoff 草案
-- 阶段开发计划
+- 阶段计划版本、阶段版本和执行顺序
 - MVP 范围
 - 非目标清单
 - 推荐技术路线
@@ -548,7 +548,7 @@ Goal Prompt 与执行授权：
 - 每轮/每阶段完成后必须进入独立 Phase Acceptance Thread，不合格打回。
 - 打回必须有 Fix Request；修复必须有 Fix Response；同一问题最多自动修复 3 轮。
 - Code Review 前必须先做需求一致性审核。
-- 复杂项目必须有独立 Code Review Thread。
+- 复杂项目和 Enterprise 必须有独立 Code Review Thread；Standard 命中认证/权限、API/数据模型、密钥、外部服务、自动化、部署/发布、公共组件、生产主链路、多线程共享契约、安全/隐私风险时也必须审查。
 - 正式版本必须做隐私审计、打包发布检查和版本文档。
 - 用户反馈问题必须先记录；重复、高影响或导致返工的问题必须升级到相关文档或检查项。
 - 当前版本关闭后不自动回 PM，只有新需求、变更、返工或下一版本才回 PM。
