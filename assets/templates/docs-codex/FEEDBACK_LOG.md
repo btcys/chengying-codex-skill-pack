@@ -2,7 +2,7 @@
 
 ## 用途
 
-记录用户反馈、重复问题、返工原因和文档升级去向。这里保存原始问题，不替代 `DECISIONS.md`、`REVIEW_CHECKLIST.md` 或 `AGENTS.md`。
+记录用户反馈、重复问题、返工原因和文档升级去向。这里保存原始问题，不替代 `docs/codex/DECISIONS.md`、`docs/codex/REVIEW_CHECKLIST.md` 或 `AGENTS.md`。
 
 ## 处理规则
 
@@ -33,4 +33,4 @@
 
 | 问题类型 | 最近出现日期 | 次数 | 当前规则位置 | 下次触发时动作 |
 | --- | --- | ---: | --- | --- |
-| 待补充 | YYYY-MM-DD | 1 | FEEDBACK_LOG.md | 观察 |
+| 待补充 | YYYY-MM-DD | 1 | docs/codex/FEEDBACK_LOG.md | 观察 |

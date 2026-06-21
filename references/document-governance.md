@@ -1,44 +1,45 @@
 # 文档治理
 
-文档只在帮助开发、交接、验证或长期维护时创建。不要为了流程完整创建全套文档。
+文档是 AI 开发闭环的阶段产物，要求短、可执行、可交接。
 
 ## 第一上下文
 
-长期项目优先维护：
+`docs/codex/CURRENT_STATE.md` 是长期项目第一入口，控制在 80 行以内：
 
-```text
-docs/codex/CURRENT_STATE.md
-```
-
-控制在 80 行以内，记录：
-
-- 项目一句话说明
-- 当前目标
+- 当前 Goal
+- 当前环节
+- 接手入口：仓库/分支、运行入口、验证入口、环境变量名称
 - 已确认事实
-- 正在进行的任务
+- 线程 ownership
+- 最近决策
+- 正在进行
 - 不要做什么
 - 下一步
 - 风险/阻塞
 - 最近验证
 
-每次重要开发、验收、决策或用户反馈后更新。
+它必须支持换电脑、新 Codex 线程或上下文断开后接手开发。只写必要事实，不写密钥值；外部账号、API Key、部署权限只记录名称、用途和获取方式。
 
-## 按需文档
+## 默认产物
 
-| 文档 | 什么时候创建 |
+| 环节 | 文档 |
 | --- | --- |
-| `PRD.md` | 新正式项目、需求边界复杂、长期维护 |
-| `TECH_SPEC.md` | 架构/API/数据/权限/部署/密钥/外部服务 |
-| `PHASE_PLAN.md` | 多阶段、跨模块或需要排期 |
-| `VALIDATION.md` | 验证路径复杂或测试缺失 |
-| `HANDOFF.md` | 交给其他线程/人 |
-| `DECISIONS.md` | 重要取舍、用户确认、长期约束 |
-| `TASKS.md` | 有多项活跃任务需要跟踪 |
-| `CODEX_QA.md` | 记录验证证据和未验证项 |
-| `FEEDBACK_LOG.md` | 用户反馈、返工、重复问题 |
+| Product Research | `docs/codex/PRODUCT_RESEARCH.md` |
+| Product Spec | `docs/codex/PRD.md` |
+| Design Brief | `docs/codex/DESIGN_BRIEF.md` |
+| Visual References | `docs/codex/VISUAL_REFERENCES.md` / `docs/codex/assets/visual-references/` |
+| Prototype / Design | `docs/codex/PROTOTYPE.md` / `docs/codex/DESIGN.md` |
+| Dev Planner | `docs/codex/DEV_PLAN.md` |
+| Dev Threads | `docs/codex/THREAD_TASK.md` / `docs/codex/HANDOFF.md` |
+| Review / QA | `docs/codex/CODEX_QA.md` / `docs/codex/ACCEPTANCE.md` |
+| Release | `docs/codex/RELEASES.md` |
+| Evolution | `docs/codex/CURRENT_STATE.md` / `docs/codex/FEEDBACK_LOG.md` / `docs/codex/DECISIONS.md` |
 
 ## 规则
 
-- 文档要短，优先链接事实来源，不复制大段聊天。
-- 活跃任务完成后，从活跃区移除，摘要归档到 QA/完成记录。
-- 仓库文档和聊天记忆冲突时，以仓库文档为准；如果文档过期，先更新再执行。
+- 不复制大段聊天，写结论和链接。
+- 复杂项目先做竞品/同类产品和开源候选调研；结论写入 `docs/codex/PRODUCT_RESEARCH.md`，再进入 PRD 冻结。
+- 用户提供截图、竞品、Figma、旧页面或目标效果图时，使用前先存档或记录不可存档原因。
+- 文档未完美不阻塞开发；但 PRD、设计依据、Dev Plan 和线程 ownership 不清时，不要并行开发。
+- `docs/codex/CURRENT_STATE.md` 每次重要变更后更新，保证新环境能先运行、再验证、再继续改。
+- 活跃任务完成后从 `TASKS.md` 活跃区移除，保留完成摘要和证据。

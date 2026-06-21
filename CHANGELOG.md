@@ -4,7 +4,7 @@
 
 ### Added
 
-- 初始化橙影 Codex 企业级工作流技能包。
+- 初始化橙影 Codex 开发工作流技能包。
 - 新增项目开发前确认台静态模板和使用说明：用于 PRD / 设计 / TECH_SPEC / PHASE_PLAN / VALIDATION / Handoff 的开发前多项确认；只收集本轮反馈，不展示开发进度，不替代最终 Goal Prompt。
 
 ### Changed

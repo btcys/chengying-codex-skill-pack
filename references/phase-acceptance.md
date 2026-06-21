@@ -8,7 +8,7 @@
 - 是否越界修改。
 - 测试/构建/lint/截图/接口检查是否运行。
 - 未验证项是否写明原因和风险。
-- 文档或 `CURRENT_STATE.md` 是否需要更新。
+- 文档或 `docs/codex/CURRENT_STATE.md` 是否需要更新。
 
 ## 通过
 

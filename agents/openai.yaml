@@ -1,4 +1,4 @@
 interface:
-  display_name: "橙影 Codex 正式项目工作流"
-  short_description: "把正式/长期项目快速收敛成可执行、可验证、可维护的 Codex 开发任务"
-  default_prompt: "Use $chengying-codex-enterprise-skill for formal or long-running software projects. First clarify the goal, current state, impact, implementation approach, validation, and risks. Produce a short task card, then continue implementation, testing, and fixing in the current thread unless a critical ambiguity, destructive operation, architecture/auth/data/deploy/security risk, or explicit handoff requires stopping. Do not use multi-tier process modes. Keep documents minimal: maintain docs/codex/CURRENT_STATE.md for long-running context, create PRD/TECH_SPEC/PHASE_PLAN/VALIDATION/HANDOFF only when needed, and never let process documents block straightforward development."
+  display_name: "橙影 Codex 开发工作流"
+  short_description: "按任务强度生成 PRD、设计、计划；需要时最多拆 3-5 个开发线程"
+  default_prompt: "Use $chengying-codex-enterprise-skill for formal or long-running software projects: judge task intensity first, create the needed Goal Contract, PRD/Product Spec, Design Brief, Prototype basis, and Dev Plan, split up to 3-5 independent Dev Threads only when ownership is clear, run independent Code Review with Fix Request -> Fix Response -> re-validation, then deliver release/evolution updates by target."

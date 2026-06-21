@@ -4,9 +4,9 @@
 
 只保留当前未完成任务。完成后从本区移除，并在完成记录中留摘要。
 
-| Work ID | 目标 | 状态 | owner | 下一步 | 更新时间 |
+| Work ID | 环节 | 目标 | 状态 | owner | 下一步 | 更新时间 |
 | --- | --- | --- | --- | --- | --- |
-| W-001 |  | planned / doing / review / blocked / done |  |  |  |
+| W-001 | Product Spec / Design / Dev / Review / Release |  | planned / doing / review / blocked / done |  |  |  |
 
 ## 任务卡模板
 
@@ -20,6 +20,7 @@
 - 修改方案：
 - 验收标准：
 - 风险/回滚：
+- 是否拆子线程：
 ```
 
 ## 完成记录

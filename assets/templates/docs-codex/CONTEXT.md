@@ -1,6 +1,6 @@
 # CONTEXT.md
 
-历史上下文归档。新线程优先读取 `CURRENT_STATE.md`，不要把本文件写成超长聊天记录。
+历史上下文归档。新线程、新电脑或上下文断开后优先读取 `docs/codex/CURRENT_STATE.md`，不要把本文件写成超长聊天记录。
 
 ## 长期偏好
 

@@ -1,5 +1,5 @@
 <svg width="1280" height="520" viewBox="0 0 1280 520" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
-  <title id="title">橙影 Codex 企业级工作流 Skill Pack</title>
+  <title id="title">橙影 Codex 开发工作流 Skill Pack</title>
   <desc id="desc">A visual overview of PM alignment, handoff, execution, validation, code review, and release governance for Codex software projects.</desc>
   <defs>
     <linearGradient id="bg" x1="0" y1="0" x2="1280" y2="520" gradientUnits="userSpaceOnUse">
@@ -30,7 +30,7 @@
     <rect x="0" y="0" width="126" height="34" rx="17" fill="#D9F3EF"/>
     <text x="18" y="23" fill="#0F766E" font-family="Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="15" font-weight="700">Codex Skill</text>
 
-    <text x="0" y="98" fill="#111827" font-family="Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="52" font-weight="800" letter-spacing="0">橙影 Codex 企业级工作流</text>
+    <text x="0" y="98" fill="#111827" font-family="Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="52" font-weight="800" letter-spacing="0">橙影 Codex 开发工作流</text>
     <text x="0" y="147" fill="#334155" font-family="Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="24" font-weight="600">把软件想法收敛成可开发、可验收、可交接的 Codex 工作单</text>
     <text x="0" y="187" fill="#64748B" font-family="Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="18">短任务卡 · 连续开发测试修复 · 必要时沉淀文档</text>
   </g>
