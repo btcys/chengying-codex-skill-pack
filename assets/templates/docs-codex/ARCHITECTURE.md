@@ -1,41 +1,19 @@
 # ARCHITECTURE.md
 
-## 架构图规则
+## 模块
 
-按项目复杂度决定是否生成架构图。
+| 模块 | 职责 | 输入 | 输出 | 风险 |
+| --- | --- | --- | --- | --- |
+|  |  |  |  |  |
 
-### Level 1
+## 共享资源
 
-只写模块列表。
+- API：
+- 数据：
+- 权限：
+- 公共组件：
+- 配置：
 
-### Level 2
+## 变更影响
 
-生成简单 Mermaid 依赖图。
-
-### Level 3
-
-生成：
-
-- 模块结构图
-- 依赖关系图
-- 数据流图
-- 多线程图
-- 风险模块标记
-
-## Mermaid 示例
-
-```mermaid
-flowchart LR
-  UI[UI Layer] --> State[State Store]
-  State --> API[API Layer]
-  API --> Domain[Domain Service]
-  Domain --> Data[Data Layer]
-```
-
-## 风险检查
-
-- 跨层调用
-- 循环依赖
-- 状态污染
-- UI 直接操作底层数据
-- 多线程冲突
+- 待补充

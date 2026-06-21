@@ -737,7 +737,7 @@
             id: "tech-boundary",
             title: "实现边界与依赖",
             desc: "确认技术栈、目录、数据源、外部服务和关键依赖。",
-            suggestion: "涉及登录、API Key、Token、部署、自动化或外部抓取时，应升级 Standard 并补 TECH_SPEC。"
+            suggestion: "涉及登录、API Key、Token、部署、自动化或外部抓取时，应补 TECH_SPEC 或 ADR。"
           },
           {
             id: "tech-security",
@@ -754,8 +754,8 @@
           {
             id: "phase-version",
             title: "阶段版本与执行顺序",
-            desc: "确认每阶段使用三段式阶段版本，并明确先做什么、后做什么。",
-            suggestion: "建议用 0.0.1、0.1.0、0.4.5 这类阶段版本，不用 P0/P1 替代阶段。"
+            desc: "确认每阶段目标、先后顺序、允许修改范围和验收方式。",
+            suggestion: "多阶段任务用短阶段表即可，不需要为普通任务强制版本化。"
           },
           {
             id: "phase-audit",
@@ -779,7 +779,7 @@
             id: "validation-evidence",
             title: "证据留存",
             desc: "确认截图、日志、命令输出、部署地址和验证结果记录在哪里。",
-            suggestion: "Lean 可轻量记录；Standard/Enterprise 应写入 QA、Handoff 或 Phase Acceptance。"
+            suggestion: "长期项目写入 QA、Handoff 或 CURRENT_STATE；普通任务在结果说明中记录即可。"
           }
         ]
       },
@@ -789,15 +789,15 @@
         items: [
           {
             id: "handoff-thread",
-            title: "Execution Thread 派发",
-            desc: "确认 Level 2/3 项目由独立执行线程或已有执行线程改代码。",
-            suggestion: "PM Thread 只做需求、范围、计划、风险、验收和派发，不应自己进入开发。"
+            title: "是否需要交接",
+            desc: "确认当前线程能否继续开发，还是需要交给其他线程或人员。",
+            suggestion: "默认当前线程继续执行；只有长任务、高风险、并行或用户要求时才 Handoff。"
           },
           {
             id: "handoff-goal",
-            title: "最终 Goal 前置条件",
-            desc: "确认 PRD、TECH_SPEC、PHASE_PLAN、VALIDATION、Handoff 已冻结后，再生成最终 Goal Prompt。",
-            suggestion: "Goal Prompt 只作为最后执行授权，不能替代开发前对齐包。"
+            title: "任务卡是否清楚",
+            desc: "确认目标、范围、验收、风险和待确认项是否足够支撑开发。",
+            suggestion: "任务卡清楚即可进入开发；不需要为普通任务强制生成最终 Goal。"
           }
         ]
       }

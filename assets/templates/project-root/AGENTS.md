@@ -2,15 +2,21 @@
 
 ## Collaboration Rules
 
-- Communicate requirements, scope, risks, validation, and rollback before coding.
+- Think before coding: clarify goal, current state, impact, plan, validation, and rollback.
 - Use the smallest change that satisfies the current task.
-- Do not modify unrelated modules.
-- Do not touch data, permissions, APIs, deployment, or dependencies without explicit confirmation.
+- Read relevant files before editing and follow existing architecture/style.
+- Do not modify unrelated modules or perform opportunistic refactors.
+- Do not touch data, permissions, APIs, deployment, dependencies, protected branches, or destructive operations without explicit confirmation.
+- Do not claim validation passed unless it was actually run.
 
 ## Workflow
 
-- Lean: use a lightweight work order with goal, non-goal, allowed changes, forbidden changes, validation, and rollback.
-- Standard: use `docs/codex/` PRD, design, technical spec, phase plan, validation, and handoff documents.
-- Enterprise: add architecture, security, privacy, release, review, and threading governance.
-- PM Thread does not edit business code. Level 2 / Standard and Level 3 / Enterprise work must be dispatched to an Execution Thread or an existing execution thread; if thread tools are unavailable, output an Execution Thread task package and stop at `blocked_waiting_for_execution_thread`.
-- Required validation that is not run, has no evidence, fails, or is blocked by missing tools/environment must be marked `blocked_validation_missing` / `needs-fix`, not passed. Only explicitly non-blocking validation with accepted risk and owner may be deferred.
+- Use a short task card before code changes.
+- Continue implementation, testing, and fixing in the current thread when the task is clear.
+- Create PRD / TECH_SPEC / PHASE_PLAN / VALIDATION / HANDOFF only when they help execution, verification, handoff, or long-term maintenance.
+- Keep `docs/codex/CURRENT_STATE.md` updated for long-running project context.
+- Use Handoff only when work must move to another thread/person.
+
+## Result
+
+After changes, report what changed, files touched, validation run, unverified risks, and next steps.

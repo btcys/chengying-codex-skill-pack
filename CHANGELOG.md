@@ -9,6 +9,7 @@
 
 ### Changed
 
+- 大幅精简工作流：移除 Demo/Lean/Standard/Enterprise 多档流程心智，合并为正式项目/长期项目统一流程；默认使用短任务卡并在当前线程连续开发、测试、修复，只有关键不确定、高风险、跨模块、长期沉淀或交接需要时才补 PRD、TECH_SPEC、PHASE_PLAN、VALIDATION、Handoff、审查或分线程。新增 `CURRENT_STATE.md` 模板作为长期项目第一上下文入口，并同步压缩 `SKILL.md`、`AGENTS.md`、README、references 和 docs-codex 模板。
 - 精简 GitHub 首页 README：把首页从完整规则手册调整为产品式入口页，保留视觉头图、核心能力、档位、安装、快速开始、确认台和文档索引；详细流程规则下沉到 `SKILL.md`、`AGENTS.md` 和 `references/`，降低首次阅读负担。
 - 优化 GitHub 首页 README 顶部呈现：增加视觉头图、流程图、徽章、项目定位表、核心能力表和快速导航，把原先大段纯文字说明下沉为详细能力，方便访客快速理解仓库用途。
 - 收紧 Standard 顺畅性规则：默认输出全流程状态、事实分层、精简 Handoff 和 Goal 就绪判断；完整模板只作为字段池，在用户要求、风险触发、写入仓库文档、冻结版本、派发线程或 Enterprise 场景才展开。同时明确 Standard 命中认证/权限、API/数据模型、密钥、外部服务、自动化、部署/发布、公共组件、生产主链路、多线程共享契约、安全/隐私等风险时必须进入独立 Code Review；未命中时可跳过但必须写明原因。

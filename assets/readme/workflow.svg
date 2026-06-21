@@ -4,20 +4,20 @@
   <rect width="1280" height="360" rx="28" fill="#F8FAFC"/>
   <rect x="1" y="1" width="1278" height="358" rx="27" stroke="#DDE7EF" stroke-width="2"/>
   <text x="64" y="68" fill="#0F172A" font-family="Inter, ui-sans-serif, system-ui" font-size="32" font-weight="800">从想法到可验收交付</text>
-  <text x="64" y="101" fill="#64748B" font-family="Inter, ui-sans-serif, system-ui" font-size="17">Goal 不是捷径；Handoff、验证和线程边界才是执行上下文。</text>
+  <text x="64" y="101" fill="#64748B" font-family="Inter, ui-sans-serif, system-ui" font-size="17">先形成短任务卡；能开发就连续开发、测试、修复，风险出现再补文档和审查。</text>
 
   <g transform="translate(64 150)">
     <g>
       <rect x="0" y="0" width="138" height="92" rx="18" fill="#ECFDF5" stroke="#99F6E4"/>
-      <text x="22" y="38" fill="#0F766E" font-family="Inter, ui-sans-serif, system-ui" font-size="20" font-weight="800">PM 对齐</text>
-      <text x="22" y="64" fill="#475569" font-family="Inter, ui-sans-serif, system-ui" font-size="13">PRD / 设计 / 风险</text>
+      <text x="22" y="38" fill="#0F766E" font-family="Inter, ui-sans-serif, system-ui" font-size="20" font-weight="800">理解目标</text>
+      <text x="22" y="64" fill="#475569" font-family="Inter, ui-sans-serif, system-ui" font-size="13">现状 / 风险</text>
     </g>
     <path d="M150 46H194" stroke="#CBD5E1" stroke-width="3" stroke-linecap="round"/>
     <path d="M185 36L197 46L185 56" stroke="#CBD5E1" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
     <g transform="translate(206 0)">
       <rect x="0" y="0" width="138" height="92" rx="18" fill="#EFF6FF" stroke="#BFDBFE"/>
-      <text x="22" y="38" fill="#1D4ED8" font-family="Inter, ui-sans-serif, system-ui" font-size="20" font-weight="800">Handoff</text>
-      <text x="22" y="64" fill="#475569" font-family="Inter, ui-sans-serif, system-ui" font-size="13">Work ID / 边界</text>
+      <text x="22" y="38" fill="#1D4ED8" font-family="Inter, ui-sans-serif, system-ui" font-size="20" font-weight="800">任务卡</text>
+      <text x="22" y="64" fill="#475569" font-family="Inter, ui-sans-serif, system-ui" font-size="13">范围 / 验收</text>
     </g>
     <path d="M356 46H400" stroke="#CBD5E1" stroke-width="3" stroke-linecap="round"/>
     <path d="M391 36L403 46L391 56" stroke="#CBD5E1" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
@@ -30,31 +30,31 @@
     <path d="M597 36L609 46L597 56" stroke="#CBD5E1" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
     <g transform="translate(618 0)">
       <rect x="0" y="0" width="138" height="92" rx="18" fill="#FFF7ED" stroke="#FED7AA"/>
-      <text x="22" y="38" fill="#C2410C" font-family="Inter, ui-sans-serif, system-ui" font-size="20" font-weight="800">验收</text>
-      <text x="22" y="64" fill="#475569" font-family="Inter, ui-sans-serif, system-ui" font-size="13">证据 / 打回</text>
+      <text x="22" y="38" fill="#C2410C" font-family="Inter, ui-sans-serif, system-ui" font-size="20" font-weight="800">验证</text>
+      <text x="22" y="64" fill="#475569" font-family="Inter, ui-sans-serif, system-ui" font-size="13">测试 / 截图</text>
     </g>
     <path d="M768 46H812" stroke="#CBD5E1" stroke-width="3" stroke-linecap="round"/>
     <path d="M803 36L815 46L803 56" stroke="#CBD5E1" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
     <g transform="translate(824 0)">
       <rect x="0" y="0" width="138" height="92" rx="18" fill="#FDF2F8" stroke="#FBCFE8"/>
-      <text x="22" y="38" fill="#BE185D" font-family="Inter, ui-sans-serif, system-ui" font-size="20" font-weight="800">审查</text>
-      <text x="22" y="64" fill="#475569" font-family="Inter, ui-sans-serif, system-ui" font-size="13">一致性 / Review</text>
+      <text x="22" y="38" fill="#BE185D" font-family="Inter, ui-sans-serif, system-ui" font-size="20" font-weight="800">沉淀</text>
+      <text x="22" y="64" fill="#475569" font-family="Inter, ui-sans-serif, system-ui" font-size="13">状态 / 决策</text>
     </g>
     <path d="M974 46H1018" stroke="#CBD5E1" stroke-width="3" stroke-linecap="round"/>
     <path d="M1009 36L1021 46L1009 56" stroke="#CBD5E1" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
     <g transform="translate(1030 0)">
       <rect x="0" y="0" width="138" height="92" rx="18" fill="#EEF2FF" stroke="#C7D2FE"/>
-      <text x="22" y="38" fill="#4338CA" font-family="Inter, ui-sans-serif, system-ui" font-size="20" font-weight="800">发布</text>
-      <text x="22" y="64" fill="#475569" font-family="Inter, ui-sans-serif, system-ui" font-size="13">审计 / 归档</text>
+      <text x="22" y="38" fill="#4338CA" font-family="Inter, ui-sans-serif, system-ui" font-size="20" font-weight="800">交付</text>
+      <text x="22" y="64" fill="#475569" font-family="Inter, ui-sans-serif, system-ui" font-size="13">结果 / 风险</text>
     </g>
   </g>
 
   <g transform="translate(64 288)">
     <rect x="0" y="0" width="358" height="34" rx="17" fill="#E0F2FE"/>
-    <text x="18" y="23" fill="#075985" font-family="Inter, ui-sans-serif, system-ui" font-size="14" font-weight="700">Lean: 6 字段快速路径</text>
+    <text x="18" y="23" fill="#075985" font-family="Inter, ui-sans-serif, system-ui" font-size="14" font-weight="700">任务卡：目标、范围、验收、风险</text>
     <rect x="376" y="0" width="382" height="34" rx="17" fill="#DCFCE7"/>
-    <text x="394" y="23" fill="#166534" font-family="Inter, ui-sans-serif, system-ui" font-size="14" font-weight="700">Standard: 默认压缩输出，保留完整门禁</text>
+    <text x="394" y="23" fill="#166534" font-family="Inter, ui-sans-serif, system-ui" font-size="14" font-weight="700">自动推进：开发、测试、修复连续完成</text>
     <rect x="776" y="0" width="350" height="34" rx="17" fill="#FAE8FF"/>
-    <text x="794" y="23" fill="#86198F" font-family="Inter, ui-sans-serif, system-ui" font-size="14" font-weight="700">Enterprise: 审查、隐私、发布闭环</text>
+    <text x="794" y="23" fill="#86198F" font-family="Inter, ui-sans-serif, system-ui" font-size="14" font-weight="700">风险触发：技术方案、审查、Handoff</text>
   </g>
 </svg>

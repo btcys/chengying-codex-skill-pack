@@ -21,7 +21,7 @@
 
 ## Codex Workflow
 
-- Process mode: Lean / Standard / Enterprise
-- Project docs: `docs/codex/`
-- Current handoff:
-- Execution dispatch: Level 2 / Level 3 require Execution Thread or existing execution thread; no PM Thread coding.
+- Current state: `docs/codex/CURRENT_STATE.md`
+- Active tasks: `docs/codex/TASKS.md`
+- Decisions: `docs/codex/DECISIONS.md`
+- QA evidence: `docs/codex/CODEX_QA.md`

@@ -5,7 +5,7 @@
 - 用户/外部提供的参考截图、修改截图、旧系统截图、设计稿截图、Figma 导出图、竞品截图、目标效果图、验收目标图：存入 `docs/codex/assets/visual-references/`，作为实现依据。
 - Codex 执行、浏览器检查和验收产生的 smoke、before/after、视觉回归、修复复验截图：存入 `docs/codex/assets/qa/<Work ID>/`，作为执行证据。
 - 图片含敏感信息时先脱敏；不能脱敏时只记录来源和不可入库原因。
-- Handoff、Validation、Phase Acceptance 和 Code Review 必须引用相关截图 ID 或路径。
+- Handoff、Validation、QA 或结果说明应引用相关截图 ID 或路径。
 
 ## 视觉参考记录
 
