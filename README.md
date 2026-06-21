@@ -1,9 +1,15 @@
 # 橙影 · Codex 企业级工作流 Skill Pack
 
-![Codex Skill Pack](https://img.shields.io/badge/Codex-Skill%20Pack-0f766e?style=flat-square)
-![Workflow](https://img.shields.io/badge/Workflow-Lean%20%2F%20Standard%20%2F%20Enterprise-2563eb?style=flat-square)
-![PM to Execution](https://img.shields.io/badge/PM%20%E2%86%92%20Execution-controlled-7c3aed?style=flat-square)
-![Validation](https://img.shields.io/badge/Validation-required-b45309?style=flat-square)
+<p align="center">
+  <img src="assets/readme/hero.svg" alt="橙影 Codex 企业级工作流 Skill Pack" width="100%">
+</p>
+
+<p align="center">
+  <img alt="Codex Skill Pack" src="https://img.shields.io/badge/Codex-Skill%20Pack-0f766e?style=flat-square">
+  <img alt="Workflow" src="https://img.shields.io/badge/Workflow-Lean%20%2F%20Standard%20%2F%20Enterprise-2563eb?style=flat-square">
+  <img alt="PM to Execution" src="https://img.shields.io/badge/PM%20%E2%86%92%20Execution-controlled-7c3aed?style=flat-square">
+  <img alt="Validation" src="https://img.shields.io/badge/Validation-required-b45309?style=flat-square">
+</p>
 
 面向 Codex 的对话式软件项目协作工作流 Skill Pack。它把粗略想法、半成型需求或已有 PRD / 设计稿 / 代码仓库，整理成可开发、可验收、可交接的 Codex 工作单。
 
@@ -29,6 +35,10 @@
 | 严格验收 | Phase Acceptance、需求一致性审核、Code Review、截图和阻塞验证分层把关 |
 | 文档沉淀 | 将项目事实、Work ID、Handoff、QA、反馈和版本结果写入 `docs/codex/` |
 | 风险升级 | 登录、权限、API Key、Token、部署、自动化、外部数据源等自动升级 Standard / Enterprise |
+
+<p align="center">
+  <img src="assets/readme/workflow.svg" alt="橙影 Codex 工作流主链路" width="100%">
+</p>
 
 ## 快速导航
 
