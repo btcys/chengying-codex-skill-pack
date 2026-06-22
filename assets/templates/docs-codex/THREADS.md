@@ -2,9 +2,9 @@
 
 > 默认不拆线程。只有长任务、并行任务、独立审查或用户要求时使用。
 
-| Thread | 目标 | 允许修改 | 禁止修改 | 状态 | 备注 |
-| --- | --- | --- | --- | --- | --- |
-|  |  |  |  | planned / active / done / archived |  |
+| Work ID | Owner / Thread | Scope | 允许修改 | 禁止修改 | 依赖 / 阻塞 | 状态 | Review | 更新时间 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+|  |  |  |  |  |  | planned / active / blocked / review / done / archived | none / self / independent |  |
 
 ## 合并/归档
 

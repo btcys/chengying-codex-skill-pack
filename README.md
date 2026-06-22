@@ -11,7 +11,7 @@
   <img alt="Review" src="https://img.shields.io/badge/Code%20Review-independent-b45309?style=flat-square">
 </p>
 
-面向正式项目 / 长期项目的 Codex 开发工作流。用户定目标，AI 先判断任务强度，再生成必要的 PRD、设计规范、原型依据和开发计划；需要并行且 ownership 清楚时，PM 主控线程最多拆 3-5 个互不依赖开发线程，最后独立总 Code Review、交付和自进化沉淀。
+面向正式项目 / 长期项目的 Codex 开发工作流。用户定目标，AI 先按输出强度路由选择短任务卡、必要 PRD、设计规范、原型依据和开发计划；涉及 UI 时先锁定目标端、手机支持范围和视口 / 比例基准；需要并行且 ownership 清楚时，PM 主控线程最多拆 3-5 个互不依赖开发线程，并按风险判断独立 Code Review、交付和自进化沉淀。
 
 > 人定目标和关键取舍，AI 负责规划、开发、审查、修复和沉淀。
 

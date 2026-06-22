@@ -11,6 +11,7 @@
 ## Design / Prototype 前
 
 - 有 UI 时必须有 Design Brief。
+- 涉及 UI 时必须写明主目标端、是否支持手机 / 平板、最小与目标视口、比例参考；未明确时默认桌面 Web 优先，不承诺完整移动适配。
 - 复杂 UI 必须有原型/交互依据。
 - 没有 UI 时写明跳过原因。
 
@@ -29,6 +30,7 @@
 - 每个 Dev Thread 返回 Dev Result。
 - 已运行相关验证或说明未验证原因。
 - 总 Code Review 独立，不写业务代码。
+- Code Review 轻量触发：auth / permission、data / migration、API contract / schema、shared types / utils、build / deploy config、跨线程合并、发布前必须独立 review；低风险单文件文案 / 样式 / 局部修复可自查。
 - Code Review 输出 Fix Request 后必须派回 owner Dev Thread；收到 Fix Response 后重新验证。
 
 ## Release 前

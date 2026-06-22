@@ -1,4 +1,4 @@
 interface:
   display_name: "橙影 Codex 开发工作流"
-  short_description: "按任务强度生成 PRD、设计、计划；需要时最多拆 3-5 个开发线程"
-  default_prompt: "Use $chengying-codex-enterprise-skill for formal or long-running software projects: judge task intensity first, create the needed Goal Contract, PRD/Product Spec, Design Brief, Prototype basis, and Dev Plan, split up to 3-5 independent Dev Threads only when ownership is clear, run independent Code Review with Fix Request -> Fix Response -> re-validation, then deliver release/evolution updates by target."
+  short_description: "按输出强度路由生成任务卡/PRD/设计/计划，明确端与视口基准，必要时拆 3-5 个线程"
+  default_prompt: "Use $chengying-codex-enterprise-skill for formal or long-running software projects: route by output intensity first, keep docs minimal, confirm UI target platform and viewport/aspect baseline when relevant, create only the needed Goal Contract, PRD/Product Spec, Design Brief, Prototype basis, and Dev Plan, split up to 3-5 independent Dev Threads only when ownership is clear, run independent Code Review when risk requires it, then deliver release/evolution updates by target."
