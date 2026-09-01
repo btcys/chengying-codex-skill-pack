@@ -1,5 +1,16 @@
 # 帧芯开发工作流 5.8
 
+<p align="center">
+  <img src="assets/hero.svg" alt="帧芯开发工作流 5.8" width="100%" />
+</p>
+
+<p align="center">
+  <a href="https://github.com/btcys/chengying-codex-skill-pack"><img src="https://img.shields.io/badge/version-5.8.0-2563eb?style=flat-square" alt="Version 5.8.0" /></a>
+  <a href="https://github.com/btcys/chengying-codex-skill-pack/blob/main/LICENSE"><img src="https://img.shields.io/badge/license-MIT-16a34a?style=flat-square" alt="MIT License" /></a>
+  <a href="https://github.com/btcys/chengying-codex-skill-pack/tree/main/skills"><img src="https://img.shields.io/badge/skills-20-7c3aed?style=flat-square" alt="20 skills" /></a>
+  <a href="https://github.com/btcys/chengying-codex-skill-pack/tree/main/tests"><img src="https://img.shields.io/badge/tests-workflow%20routing-f59e0b?style=flat-square" alt="Workflow routing tests" /></a>
+</p>
+
 帧芯开发工作流是一个面向长期、多模块商业软件项目的 Codex Skill Pack。它把产品需求、UI 设计、架构选型、版本计划、代码实现、验收和发布治理串成一条可追踪的开发链路，同时保持简单任务的开发速度。
 
 ## 解决什么问题
@@ -12,6 +23,8 @@
 - 区分本地开发、测试环境和正式发布的授权边界：本地测试以效率为主，生产发布才严格收口。
 
 ## 核心流程
+
+![帧芯开发工作流核心流程](assets/workflow-overview.svg)
 
 ```text
 指定 PRD
@@ -33,6 +46,8 @@
 ## Skill 组成
 
 包内共有 20 个 Skill：
+
+![帧芯开发工作流 Skill 分层](assets/skill-map.svg)
 
 - 产品与设计：`brainstorming`、`product-spec-governance`
 - 计划与执行：`writing-plans`、`executing-plans`、`subagent-driven-development`

@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 520" role="img" aria-labelledby="title desc">
+  <title id="title">帧芯开发工作流核心流程</title>
+  <desc id="desc">从 PRD、UI 和 Spec 到开发、验证、验收和发布的流程图</desc>
+  <defs>
+    <linearGradient id="canvas" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f8fafc"/>
+      <stop offset="1" stop-color="#eef2ff"/>
+    </linearGradient>
+    <filter id="soft" x="-20%" y="-30%" width="140%" height="170%">
+      <feDropShadow dx="0" dy="5" stdDeviation="8" flood-color="#475569" flood-opacity="0.14"/>
+    </filter>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+      <path d="M0 0L10 5L0 10Z" fill="#64748b"/>
+    </marker>
+    <marker id="loopArrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+      <path d="M0 0L10 5L0 10Z" fill="#e11d48"/>
+    </marker>
+  </defs>
+  <rect width="1280" height="520" rx="24" fill="url(#canvas)"/>
+  <text x="64" y="64" fill="#0f172a" font-size="30" font-weight="800" font-family="Arial, PingFang SC, Microsoft YaHei, sans-serif">从需求到发布：一条可追踪的交付链</text>
+  <text x="64" y="96" fill="#64748b" font-size="16" font-family="Arial, PingFang SC, Microsoft YaHei, sans-serif">只有需要时才进入完整路线；简单任务直接走普通 Codex 开发。</text>
+
+  <g transform="translate(64 145)" filter="url(#soft)">
+    <g>
+      <rect width="150" height="106" rx="18" fill="#fce7f3" stroke="#f9a8d4"/>
+      <text x="75" y="43" text-anchor="middle" fill="#9d174d" font-size="20" font-weight="800" font-family="Arial, PingFang SC, sans-serif">1</text>
+      <text x="75" y="73" text-anchor="middle" fill="#334155" font-size="18" font-weight="700" font-family="Arial, PingFang SC, Microsoft YaHei, sans-serif">PRD 与范围</text>
+      <text x="75" y="94" text-anchor="middle" fill="#64748b" font-size="13" font-family="Arial, PingFang SC, sans-serif">访谈 · 版本 · 非目标</text>
+    </g>
+    <path d="M160 53H207" stroke="#64748b" stroke-width="2.5" marker-end="url(#arrow)"/>
+    <g transform="translate(217)">
+      <rect width="150" height="106" rx="18" fill="#d1fae5" stroke="#6ee7b7"/>
+      <text x="75" y="43" text-anchor="middle" fill="#047857" font-size="20" font-weight="800" font-family="Arial, sans-serif">2</text>
+      <text x="75" y="73" text-anchor="middle" fill="#334155" font-size="18" font-weight="700" font-family="Arial, PingFang SC, Microsoft YaHei, sans-serif">UI 与架构</text>
+      <text x="75" y="94" text-anchor="middle" fill="#64748b" font-size="13" font-family="Arial, PingFang SC, sans-serif">Visual Companion · 复用</text>
+    </g>
+    <path d="M377 53H424" stroke="#64748b" stroke-width="2.5" marker-end="url(#arrow)"/>
+    <g transform="translate(434)">
+      <rect width="150" height="106" rx="18" fill="#dbeafe" stroke="#93c5fd"/>
+      <text x="75" y="43" text-anchor="middle" fill="#1d4ed8" font-size="20" font-weight="800" font-family="Arial, sans-serif">3</text>
+      <text x="75" y="73" text-anchor="middle" fill="#334155" font-size="18" font-weight="700" font-family="Arial, PingFang SC, Microsoft YaHei, sans-serif">Spec 与 Plan</text>
+      <text x="75" y="94" text-anchor="middle" fill="#64748b" font-size="13" font-family="Arial, PingFang SC, sans-serif">批准后才执行</text>
+    </g>
+    <path d="M594 53H641" stroke="#64748b" stroke-width="2.5" marker-end="url(#arrow)"/>
+    <g transform="translate(651)">
+      <rect width="150" height="106" rx="18" fill="#fef3c7" stroke="#fcd34d"/>
+      <text x="75" y="43" text-anchor="middle" fill="#b45309" font-size="20" font-weight="800" font-family="Arial, sans-serif">4</text>
+      <text x="75" y="73" text-anchor="middle" fill="#334155" font-size="18" font-weight="700" font-family="Arial, PingFang SC, Microsoft YaHei, sans-serif">批次开发</text>
+      <text x="75" y="94" text-anchor="middle" fill="#64748b" font-size="13" font-family="Arial, PingFang SC, sans-serif">子智能体 · worktree</text>
+    </g>
+    <path d="M811 53H858" stroke="#64748b" stroke-width="2.5" marker-end="url(#arrow)"/>
+    <g transform="translate(868)">
+      <rect width="150" height="106" rx="18" fill="#ede9fe" stroke="#c4b5fd"/>
+      <text x="75" y="43" text-anchor="middle" fill="#6d28d9" font-size="20" font-weight="800" font-family="Arial, sans-serif">5</text>
+      <text x="75" y="73" text-anchor="middle" fill="#334155" font-size="18" font-weight="700" font-family="Arial, PingFang SC, Microsoft YaHei, sans-serif">Review 与验证</text>
+      <text x="75" y="94" text-anchor="middle" fill="#64748b" font-size="13" font-family="Arial, PingFang SC, sans-serif">最新 diff · 新鲜证据</text>
+    </g>
+    <path d="M1028 53H1075" stroke="#64748b" stroke-width="2.5" marker-end="url(#arrow)"/>
+    <g transform="translate(1085)">
+      <rect width="150" height="106" rx="18" fill="#cffafe" stroke="#67e8f9"/>
+      <text x="75" y="43" text-anchor="middle" fill="#0e7490" font-size="20" font-weight="800" font-family="Arial, sans-serif">6</text>
+      <text x="75" y="73" text-anchor="middle" fill="#334155" font-size="18" font-weight="700" font-family="Arial, PingFang SC, Microsoft YaHei, sans-serif">真页验收</text>
+      <text x="75" y="94" text-anchor="middle" fill="#64748b" font-size="13" font-family="Arial, PingFang SC, sans-serif">PASS · FAIL · BLOCKED</text>
+    </g>
+  </g>
+
+  <path d="M1160 270C1160 405 260 435 260 274" fill="none" stroke="#e11d48" stroke-width="2.5" stroke-dasharray="8 8" marker-end="url(#loopArrow)"/>
+  <rect x="410" y="372" width="460" height="72" rx="18" fill="#fff1f2" stroke="#fda4af"/>
+  <text x="640" y="402" text-anchor="middle" fill="#be123c" font-size="17" font-weight="800" font-family="Arial, PingFang SC, Microsoft YaHei, sans-serif">返工回路</text>
+  <text x="640" y="426" text-anchor="middle" fill="#475569" font-size="14" font-family="Arial, PingFang SC, Microsoft YaHei, sans-serif">代码 / 接口 / 状态 / 数据变化 → 旧 PASS 失效 → 重新 Review、验证和验收</text>
+</svg>

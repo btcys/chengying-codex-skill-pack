@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 610" role="img" aria-labelledby="title desc">
+  <title id="title">帧芯开发工作流 Skill 分层</title>
+  <desc id="desc">帧芯开发工作流的五类 Skill 能力分层图</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0f172a"/>
+      <stop offset="1" stop-color="#1e293b"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="150%">
+      <feDropShadow dx="0" dy="7" stdDeviation="9" flood-color="#020617" flood-opacity="0.32"/>
+    </filter>
+  </defs>
+  <rect width="1280" height="610" rx="24" fill="url(#bg)"/>
+  <text x="60" y="62" fill="#f8fafc" font-size="30" font-weight="800" font-family="Arial, PingFang SC, Microsoft YaHei, sans-serif">20 个 Skill，按阶段加载</text>
+  <text x="60" y="94" fill="#cbd5e1" font-size="16" font-family="Arial, PingFang SC, Microsoft YaHei, sans-serif">主 Skill 负责路由和门禁，详细合同放在 references，避免把上下文一次性塞满。</text>
+
+  <g transform="translate(60 130)" filter="url(#shadow)">
+    <g>
+      <rect width="218" height="176" rx="20" fill="#3b1d3f" stroke="#f9a8d4" stroke-width="2"/>
+      <circle cx="34" cy="38" r="18" fill="#f9a8d4"/><text x="34" y="45" text-anchor="middle" fill="#3b1d3f" font-size="16" font-weight="800" font-family="Arial, sans-serif">01</text>
+      <text x="66" y="44" fill="#fce7f3" font-size="18" font-weight="800" font-family="Arial, PingFang SC, sans-serif">产品与设计</text>
+      <text x="24" y="90" fill="#f8fafc" font-size="14" font-family="Arial, PingFang SC, sans-serif">brainstorming</text>
+      <text x="24" y="120" fill="#f8fafc" font-size="14" font-family="Arial, PingFang SC, sans-serif">product-spec-governance</text>
+      <text x="24" y="151" fill="#fbcfe8" font-size="13" font-family="Arial, PingFang SC, sans-serif">范围 · UI · 领域事实</text>
+    </g>
+    <g transform="translate(238)">
+      <rect width="218" height="176" rx="20" fill="#123a37" stroke="#6ee7b7" stroke-width="2"/>
+      <circle cx="34" cy="38" r="18" fill="#6ee7b7"/><text x="34" y="45" text-anchor="middle" fill="#123a37" font-size="16" font-weight="800" font-family="Arial, sans-serif">02</text>
+      <text x="66" y="44" fill="#d1fae5" font-size="18" font-weight="800" font-family="Arial, PingFang SC, sans-serif">计划与执行</text>
+      <text x="24" y="90" fill="#f8fafc" font-size="14" font-family="Arial, PingFang SC, sans-serif">writing-plans</text>
+      <text x="24" y="120" fill="#f8fafc" font-size="14" font-family="Arial, PingFang SC, sans-serif">subagent-driven-development</text>
+      <text x="24" y="151" fill="#a7f3d0" font-size="13" font-family="Arial, PingFang SC, sans-serif">批次 · 依赖 · 并行</text>
+    </g>
+    <g transform="translate(476)">
+      <rect width="218" height="176" rx="20" fill="#172f52" stroke="#93c5fd" stroke-width="2"/>
+      <circle cx="34" cy="38" r="18" fill="#93c5fd"/><text x="34" y="45" text-anchor="middle" fill="#172f52" font-size="16" font-weight="800" font-family="Arial, sans-serif">03</text>
+      <text x="66" y="44" fill="#dbeafe" font-size="18" font-weight="800" font-family="Arial, PingFang SC, sans-serif">工程质量</text>
+      <text x="24" y="90" fill="#f8fafc" font-size="14" font-family="Arial, PingFang SC, sans-serif">TDD · systematic-debugging</text>
+      <text x="24" y="120" fill="#f8fafc" font-size="14" font-family="Arial, PingFang SC, sans-serif">Review · verification</text>
+      <text x="24" y="151" fill="#bfdbfe" font-size="13" font-family="Arial, PingFang SC, sans-serif">根因 · 回归 · 证据</text>
+    </g>
+    <g transform="translate(714)">
+      <rect width="218" height="176" rx="20" fill="#3d2e13" stroke="#fcd34d" stroke-width="2"/>
+      <circle cx="34" cy="38" r="18" fill="#fcd34d"/><text x="34" y="45" text-anchor="middle" fill="#3d2e13" font-size="16" font-weight="800" font-family="Arial, sans-serif">04</text>
+      <text x="66" y="44" fill="#fef3c7" font-size="18" font-weight="800" font-family="Arial, PingFang SC, sans-serif">验收与交付</text>
+      <text x="24" y="90" fill="#f8fafc" font-size="14" font-family="Arial, PingFang SC, sans-serif">product-acceptance</text>
+      <text x="24" y="120" fill="#f8fafc" font-size="14" font-family="Arial, PingFang SC, sans-serif">finishing-a-development-branch</text>
+      <text x="24" y="151" fill="#fde68a" font-size="13" font-family="Arial, PingFang SC, sans-serif">真页 · 分支 · 收尾</text>
+    </g>
+    <g transform="translate(952)">
+      <rect width="218" height="176" rx="20" fill="#30204b" stroke="#c4b5fd" stroke-width="2"/>
+      <circle cx="34" cy="38" r="18" fill="#c4b5fd"/><text x="34" y="45" text-anchor="middle" fill="#30204b" font-size="16" font-weight="800" font-family="Arial, sans-serif">05</text>
+      <text x="66" y="44" fill="#ede9fe" font-size="18" font-weight="800" font-family="Arial, PingFang SC, sans-serif">发布与维护</text>
+      <text x="24" y="90" fill="#f8fafc" font-size="14" font-family="Arial, PingFang SC, sans-serif">release-risk-review</text>
+      <text x="24" y="120" fill="#f8fafc" font-size="14" font-family="Arial, PingFang SC, sans-serif">release-governance · writing-skills</text>
+      <text x="24" y="151" fill="#ddd6fe" font-size="13" font-family="Arial, PingFang SC, sans-serif">正式发布 · 复盘 · 卸载</text>
+    </g>
+  </g>
+
+  <g transform="translate(60 350)">
+    <rect width="1108" height="166" rx="20" fill="#0b1220" stroke="#475569"/>
+    <text x="28" y="40" fill="#e2e8f0" font-size="16" font-weight="800" font-family="Arial, PingFang SC, Microsoft YaHei, sans-serif">默认暴露策略</text>
+    <g transform="translate(28 63)">
+      <rect width="500" height="68" rx="14" fill="#172554"/>
+      <text x="22" y="28" fill="#bfdbfe" font-size="15" font-weight="700" font-family="Arial, PingFang SC, Microsoft YaHei, sans-serif">18 个常用 Skill</text>
+      <text x="22" y="51" fill="#cbd5e1" font-size="13" font-family="Arial, PingFang SC, Microsoft YaHei, sans-serif">允许隐式调用，按当前任务阶段加载</text>
+    </g>
+    <g transform="translate(550 63)">
+      <rect width="500" height="68" rx="14" fill="#3f1d2e"/>
+      <text x="22" y="28" fill="#fbcfe8" font-size="15" font-weight="700" font-family="Arial, PingFang SC, Microsoft YaHei, sans-serif">2 个显式 Skill</text>
+      <text x="22" y="51" fill="#cbd5e1" font-size="13" font-family="Arial, PingFang SC, Microsoft YaHei, sans-serif">工作流复盘、卸载，避免误触发</text>
+    </g>
+  </g>
+</svg>
