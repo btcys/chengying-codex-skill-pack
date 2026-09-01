@@ -1,0 +1,4 @@
+interface:
+  display_name: "处理Review意见"
+  short_description: "验证并按技术事实处理用户或独立Reviewer的反馈"
+  default_prompt: "使用 $receiving-code-review 处理这批Review意见。"

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Git Worktree隔离"
+  short_description: "为长期项目计划执行选择或安全创建隔离开发工作区并验证基线"
+  default_prompt: "使用 $using-git-worktrees 为当前版本准备隔离工作区。"

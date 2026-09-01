@@ -1,0 +1,4 @@
+interface:
+  display_name: "Skill编写与维护"
+  short_description: "为帧芯工作流编写、测试和验证准确可发现的Codex Skill"
+  default_prompt: "使用 $writing-skills 创建或修改当前工作流Skill。"

@@ -1,0 +1,4 @@
+interface:
+  display_name: "产品与文档治理"
+  short_description: "管理指定PRD、版本、Spec、Plan、Task、证据和归档"
+  default_prompt: "使用 $product-spec-governance 整理当前项目的产品与版本文档。"

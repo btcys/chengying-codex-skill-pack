@@ -1,0 +1,4 @@
+interface:
+  display_name: "需求与可视化设计"
+  short_description: "澄清需求、调研架构复用方案并用Visual Companion确认重大UI"
+  default_prompt: "使用 $brainstorming 把当前需求、架构复用选择和重大UI方案整理成可批准的设计。"

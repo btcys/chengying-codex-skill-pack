@@ -1,0 +1,4 @@
+interface:
+  display_name: "发布治理"
+  short_description: "在完整验证、产品验收和风险审查后准备并管控正式发布"
+  default_prompt: "使用 $release-governance 准备当前版本的正式发布计划。"

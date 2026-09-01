@@ -1,0 +1,4 @@
+interface:
+  display_name: "子智能体驱动开发"
+  short_description: "由主任务按功能批次组织子智能体开发、整合与最终Review"
+  default_prompt: "使用 $subagent-driven-development 按功能批次执行当前计划。"

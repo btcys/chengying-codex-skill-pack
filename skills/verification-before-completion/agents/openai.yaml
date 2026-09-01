@@ -1,0 +1,4 @@
+interface:
+  display_name: "完成前验证"
+  short_description: "在声称完成、修复、通过或可合并前取得最新可核验证据"
+  default_prompt: "使用 $verification-before-completion 验证当前交付是否真的完成。"

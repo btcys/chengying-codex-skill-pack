@@ -1,0 +1,6 @@
+interface:
+  display_name: "卸载帧芯开发工作流"
+  short_description: "从Codex安全移除工作流插件安装并保留全部项目资料"
+  default_prompt: "使用 $uninstall-development-workflow 一键卸载帧芯开发工作流插件。"
+policy:
+  allow_implicit_invocation: false

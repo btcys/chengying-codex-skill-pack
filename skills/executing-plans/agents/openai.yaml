@@ -1,0 +1,4 @@
+interface:
+  display_name: "单线程计划执行"
+  short_description: "在没有子智能体能力或用户明确要求单线程时连续执行既有计划"
+  default_prompt: "使用 $executing-plans 单线程执行这份已批准计划。"

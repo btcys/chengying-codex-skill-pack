@@ -1,94 +1,108 @@
-# 橙影 Codex 开发工作流 Skill Pack
+# 帧芯开发工作流 5.8
 
-<p align="center">
-  <img src="assets/readme/hero.svg" alt="橙影 Codex 开发工作流 Skill Pack" width="100%">
-</p>
+帧芯开发工作流是一个面向长期、多模块商业软件项目的 Codex Skill Pack。它把产品需求、UI 设计、架构选型、版本计划、代码实现、验收和发布治理串成一条可追踪的开发链路，同时保持简单任务的开发速度。
 
-<p align="center">
-  <img alt="Codex Skill Pack" src="https://img.shields.io/badge/Codex-Skill%20Pack-0f766e?style=flat-square">
-  <img alt="Workflow" src="https://img.shields.io/badge/Workflow-Codex%20Dev-2563eb?style=flat-square">
-  <img alt="Dev Threads" src="https://img.shields.io/badge/Dev%20Threads-up%20to%203--5-7c3aed?style=flat-square">
-  <img alt="Review" src="https://img.shields.io/badge/Code%20Review-independent-b45309?style=flat-square">
-</p>
+## 解决什么问题
 
-面向正式项目 / 长期项目的 Codex 开发工作流。用户定目标，AI 先按输出强度路由选择短任务卡、必要 PRD、设计规范、原型依据和开发计划；涉及 UI 时先锁定目标端、手机支持范围和视口 / 比例基准；需要并行且 ownership 清楚时，PM 主控线程最多拆 3-5 个互不依赖开发线程，并按风险判断独立 Code Review、交付和自进化沉淀。
+- 让长期项目按版本和交付单元推进，不再依赖聊天记录记忆阶段。
+- 新页面或重大 UI 改动先确认真实交互，再进入实现，减少“功能完成后才返工 UI”。
+- 用 Spec、Plan、Task 和证据记录明确边界，避免 AI 顺手增加未批准功能或过度工程化。
+- 让子智能体按功能批次并行开发，控制共享文件、状态、接口和 worktree 冲突。
+- 在真实入口完成产品验收，并在代码再次变化时自动使旧 PASS 证据失效。
+- 区分本地开发、测试环境和正式发布的授权边界：本地测试以效率为主，生产发布才严格收口。
 
-> 人定目标和关键取舍，AI 负责规划、开发、审查、修复和沉淀。
-
-## 一眼看懂
-
-| 项目 | 说明 |
-| --- | --- |
-| 它是什么 | Codex 正式项目 / 长期项目开发工作流 |
-| 核心链路 | Goal -> PRD -> Design Brief -> Prototype -> Dev Plan -> Dev Threads -> Review -> Release -> Evolution |
-| 线程策略 | PM 主控编排；需要时最多 3-5 个开发线程；UI 可独立；总 Code Review 独立；发布/运维外置 |
-| 解决什么 | 既保留可开发 PRD、可执行设计决策、可验收开发计划，又避免人工推进过慢和文档过重 |
-| 长期保障 | `docs/codex/CURRENT_STATE.md`、QA、决策和反馈持续沉淀，换电脑/新线程也能接手 |
-
-## 主流程
+## 核心流程
 
 ```text
-1. Goal Contract
-2. Product Spec Builder
-3. Design Brief Builder
-4. Design Maker
-5. Dev Planner
-6. Dev Builders
-7. Code Reviewer
-8. Release Builder
-9. Evolution Runner
+指定 PRD
+  → 适度需求访谈
+  → 必要时架构复用调研
+  → 必要时 Visual Companion UI 确认
+  → Spec 批准
+  → Implementation Plan 批准
+  → 子智能体按功能批次开发
+  → 一次独立 Review
+  → 最新完整验证
+  → 真实产品验收
+  → 分支收尾
+  → 正式发布风险审查与发布治理
 ```
 
-## 产物
+单文件修改、确定性小 Bug、文案和样式微调不会强制走完整流程。
 
-| 阶段 | 默认产物 |
-| --- | --- |
-| Goal | Goal Contract |
-| 产品/开源调研 | `docs/codex/PRODUCT_RESEARCH.md` |
-| PRD | `docs/codex/PRD.md` 短版 |
-| 设计规范 | `docs/codex/DESIGN_BRIEF.md` |
-| 视觉参考 | `docs/codex/VISUAL_REFERENCES.md` |
-| 原型/交互 | `docs/codex/PROTOTYPE.md` 或 `docs/codex/DESIGN.md` |
-| 开发计划 | `docs/codex/DEV_PLAN.md` |
-| 子线程任务 | `docs/codex/THREAD_TASK.md` / `docs/codex/HANDOFF.md` |
-| 验证 | `docs/codex/CODEX_QA.md` / `docs/codex/VALIDATION.md` |
-| 发布 | `docs/codex/RELEASES.md` |
-| 进化 | `docs/codex/CURRENT_STATE.md` / `docs/codex/FEEDBACK_LOG.md` / `docs/codex/DECISIONS.md` |
+## Skill 组成
 
-## 线程硬规则
+包内共有 20 个 Skill：
 
-- 需要拆线程时，开发线程最多 3-5 个，不含 PM、总 Code Review、运维/发布线程。
-- 有 UI 且需要拆开发线程时，UI 必须独立成一个开发线程。
-- 子线程必须互不依赖或依赖契约已冻结，能并行最佳。
-- 禁止多个开发线程同时修改同一文件、同一 API contract、同一 schema/migration、同一权限模块、同一 shared utils/types。
-- 必须修改共享文件时，只能指定唯一 owner。
+- 产品与设计：`brainstorming`、`product-spec-governance`
+- 计划与执行：`writing-plans`、`executing-plans`、`subagent-driven-development`
+- 并行与隔离：`dispatching-parallel-agents`、`using-git-worktrees`
+- 工程质量：`test-driven-development`、`systematic-debugging`、`requesting-code-review`、`receiving-code-review`、`verification-before-completion`
+- 验收与交付：`product-acceptance`、`finishing-a-development-branch`
+- 正式发布：`release-risk-review`、`release-governance`
+- 工作流维护：`writing-skills`、`optimizing-development-workflow`、`uninstall-development-workflow`
 
-## 安装
+其中 18 个常用 Skill 默认允许隐式调用；工作流复盘和卸载是显式调用 Skill，避免误触发。
+
+## 使用方式
+
+在 Codex 中明确启动：
+
+```text
+使用帧芯开发工作流，基于我指定的 PRD 推进当前版本。
+```
+
+也可以直接调用某个阶段：
+
+```text
+$zhenxin-development-workflow:brainstorming
+$zhenxin-development-workflow:writing-plans
+$zhenxin-development-workflow:subagent-driven-development
+$zhenxin-development-workflow:product-acceptance
+```
+
+复盘和卸载必须明确调用：
+
+```text
+$zhenxin-development-workflow:optimizing-development-workflow
+$zhenxin-development-workflow:uninstall-development-workflow
+```
+
+## 包结构
+
+```text
+.
+├── .codex-plugin/plugin.json   # 插件名称、版本和界面信息
+├── skills/                     # 20 个运行时 Skill
+├── scripts/                    # 包校验、上下文审计、代码热点扫描
+├── tests/                      # 路由场景和脚本烟测
+├── NOTICE.md                   # 上游来源、许可和版本记录
+├── LICENSE                     # MIT 许可
+└── README.md
+```
+
+业务项目的 PRD、Spec、Plan、Task、截图和发布记录应保存在业务项目自己的 `docs/` 目录，不放入本仓库。
+
+## 维护与验证
+
+修改 Skill 前先检查相邻 Skill、reference、脚本和测试。完成后运行：
 
 ```bash
-mkdir -p ~/.codex/skills
-git clone https://github.com/btcys/chengying-codex-skill-pack.git ~/.codex/skills/chengying-codex-enterprise-skill
+python3 scripts/validate-package.py
+bash tests/workflow-scripts-smoke.sh
+python3 scripts/audit-context.py
 ```
 
-## 快速开始
+主 Skill 只保留路由、边界和关键门禁；详细模板和例外放在对应的 `references/`，避免上下文膨胀。
 
-```text
-启动橙影 Codex 开发工作流。请先判断任务强度，把我的目标整理成 Goal Contract，再按需要生成短 PRD、设计规范、原型依据和开发计划；需要并行且 ownership 清楚时，最多拆 3-5 个互不依赖开发线程推进。
-```
+## 版本
 
-```text
-按橙影工作流接管这个已有项目。先读 README、AGENTS、docs/codex/CURRENT_STATE.md 和相关代码，确认运行入口、验证入口和当前未完成任务，再生成 Dev Plan 和线程 ownership 表。
-```
+当前版本：`5.8.0`
 
-## 详细规则
+- `5.6`：PRD 唯一事实源、领域索引、变更记录和文档归档。
+- `5.7`：代码或合同变化后旧 PASS 证据自动失效并重新验证。
+- `5.8`：最小实现边界、本地/测试/生产执行模式、Task 继承、返工证据和完成状态统一。
 
-| 文件 | 内容 |
-| --- | --- |
-| [`SKILL.md`](SKILL.md) | Skill 入口和 Codex 开发工作流 |
-| [`AGENTS.md`](AGENTS.md) | 主控线程、子线程和审查线程规则 |
-| [`references/pm-thread.md`](references/pm-thread.md) | Goal Contract / Product Spec Builder |
-| [`references/prd-design-plan.md`](references/prd-design-plan.md) | Design Brief / Prototype / Dev Plan |
-| [`references/architecture-threading.md`](references/architecture-threading.md) | 最多 3-5 个开发线程和 ownership |
-| [`references/execution-contract.md`](references/execution-contract.md) | Dev Builder 自动循环 |
-| [`references/release-review-evolution.md`](references/release-review-evolution.md) | Code Review / Release / Evolution |
-| [`references/document-governance.md`](references/document-governance.md) | 文档和 `docs/codex/CURRENT_STATE.md` |
+## 来源与许可
+
+通用开发方法基于 MIT 许可的 [obra/superpowers](https://github.com/obra/superpowers)，并参考 [oil-oil/oil-frontend](https://github.com/oil-oil/oil-frontend) 的前端实施规则。本项目的适配范围和许可说明见 [NOTICE.md](NOTICE.md)。

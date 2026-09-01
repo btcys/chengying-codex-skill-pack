@@ -1,0 +1,4 @@
+interface:
+  display_name: "帧芯开发工作流 5.8"
+  short_description: "长期商业项目的产品、UI、版本计划与智能体开发治理"
+  default_prompt: "使用 $using-development-workflow 基于我指定的PRD规划并推进当前商业项目版本。"

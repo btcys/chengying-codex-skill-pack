@@ -1,0 +1,4 @@
+interface:
+  display_name: "正式发布风险审查"
+  short_description: "仅在正式发布前检查商业、安全、数据、计费和回滚风险"
+  default_prompt: "使用 $release-risk-review 审查当前正式发布候选版本。"

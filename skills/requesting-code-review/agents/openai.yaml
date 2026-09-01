@@ -1,0 +1,4 @@
+interface:
+  display_name: "发起独立Review"
+  short_description: "在整个Plan完成后进行一次Spec合规和代码质量Review"
+  default_prompt: "使用 $requesting-code-review 审查当前完整交付单元。"

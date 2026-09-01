@@ -1,0 +1,4 @@
+interface:
+  display_name: "实施计划编写"
+  short_description: "扫描代码热点并把已批准Spec写成按版本执行的功能批次计划"
+  default_prompt: "使用 $writing-plans 为已批准的Spec编写实施计划。"

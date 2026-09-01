@@ -1,0 +1,4 @@
+interface:
+  display_name: "产品验收"
+  short_description: "从真实产品入口验收用户闭环、界面状态、权限和数据结果"
+  default_prompt: "使用 $product-acceptance 验收当前版本的真实产品结果。"

@@ -1,0 +1,4 @@
+interface:
+  display_name: "测试驱动开发"
+  short_description: "为业务逻辑、状态、接口、数据和Bug建立可靠回归防线"
+  default_prompt: "使用 $test-driven-development 实现当前行为或Bug修复。"

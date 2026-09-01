@@ -1,0 +1,4 @@
+interface:
+  display_name: "并行子智能体"
+  short_description: "并行处理没有共享文件、共享状态或顺序依赖的独立任务"
+  default_prompt: "使用 $dispatching-parallel-agents 并行处理这些独立任务。"

@@ -1,0 +1,4 @@
+interface:
+  display_name: "开发分支收尾"
+  short_description: "在完整验证和产品验收后由用户选择合并、PR、保留或丢弃"
+  default_prompt: "使用 $finishing-a-development-branch 收尾当前开发分支。"
