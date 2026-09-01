@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 520" role="img" aria-labelledby="title desc">
+<svg xmlns="http://www.w3.org/2000/svg" width="2560" height="1040" viewBox="0 0 1280 520" role="img" aria-labelledby="title desc" style="shape-rendering:geometricPrecision;text-rendering:geometricPrecision">
   <title id="title">帧芯开发工作流核心流程</title>
   <desc id="desc">从 PRD、UI 和 Spec 到开发、验证、验收和发布的流程图</desc>
   <defs>
@@ -20,7 +20,7 @@
   <text x="64" y="64" fill="#0f172a" font-size="30" font-weight="800" font-family="Arial, PingFang SC, Microsoft YaHei, sans-serif">从需求到发布：一条可追踪的交付链</text>
   <text x="64" y="96" fill="#64748b" font-size="16" font-family="Arial, PingFang SC, Microsoft YaHei, sans-serif">只有需要时才进入完整路线；简单任务直接走普通 Codex 开发。</text>
 
-  <g transform="translate(64 145)" filter="url(#soft)">
+  <g transform="translate(40 145)" filter="url(#soft)">
     <g>
       <rect width="150" height="106" rx="18" fill="#fce7f3" stroke="#f9a8d4"/>
       <text x="75" y="43" text-anchor="middle" fill="#9d174d" font-size="20" font-weight="800" font-family="Arial, PingFang SC, sans-serif">1</text>

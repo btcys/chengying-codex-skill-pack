@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 360" role="img" aria-labelledby="title desc">
+<svg xmlns="http://www.w3.org/2000/svg" width="2560" height="720" viewBox="0 0 1280 360" role="img" aria-labelledby="title desc" style="shape-rendering:geometricPrecision;text-rendering:geometricPrecision">
   <title id="title">帧芯开发工作流 5.8</title>
   <desc id="desc">面向长期商业项目的产品、UI、计划与智能体开发工作流</desc>
   <defs>
