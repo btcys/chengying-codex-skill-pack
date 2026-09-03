@@ -3,7 +3,7 @@ name: using-development-workflow
 description: 用于长期、多模块、按版本推进的商业软件项目，从指定PRD、UI可视化确认、Spec与Plan到子智能体开发、产品验收和正式发布治理；单文件修改、确定性小Bug和短任务不使用。
 ---
 
-# 帧芯开发工作流 5.8
+# 帧芯开发工作流 6.2
 
 把产品事实、当前版本设计、实施任务和发布治理分开，让长期项目持续推进而不被流程拖慢。
 
@@ -22,8 +22,8 @@ description: 用于长期、多模块、按版本推进的商业软件项目，�
 ## 上下文控制
 
 - 每次只加载当前阶段的主Skill和当前问题需要的reference，不预读全部Skill；
-- PRD、Visual Companion确认、Spec、Plan和brief逐级承接结论，下一阶段以文件合同为准，不重复粘贴历史对话；
-- `CONTEXT.md`存在时只作为领域词汇表使用，不作为需求来源；
+- PRD、Design-Brief、Visual Companion确认、Spec、Plan和Task逐级承接结论，下一阶段以文件合同为准，不重复粘贴历史对话；
+- `CONTEXT.md`存在时只作为领域词汇表使用，不作为需求来源；有 UI/页面/交互时，`Design-Brief.md`是项目设计规范入口；没有时先建立最小设计规范并确认，纯后端或脚本项目不强制；
 - 开发子智能体只读取Task brief、必要Spec片段、Global Constraints、相关词条和证据，不读取完整PRD、完整词汇表与其他批次报告；
 - 开发和验收按 [执行模式](references/execution-modes.md) 处理；`LOCAL_DEV`/`STAGING_QA`允许范围内的正常测试操作，`PRODUCTION_RELEASE`仍需严格授权；
 - UI证据只交给相关UI Task，后端Task只接收其必须遵守的接口和状态合同；
@@ -36,7 +36,7 @@ description: 用于长期、多模块、按版本推进的商业软件项目，�
 2. 用户明确指定PRD时，只把该文件当作本轮产品来源；不要自动读取其他PRD、旧计划、状态文件或旧工作流文档。根 `CONTEXT.md`存在时可读取相关词条解释术语，但不能从中增加需求。
 3. 先检查现有代码、依赖、类型、测试和相似实现；使用PRD、Spec或Plan前，按文档现实性规则核对本次任务的版本、路径、接口、状态和验收，不做全库审计。
 4. 发现文档与代码冲突时标记`DOC_STALE`或`CODE_DRIFT`，列出期望、实际和证据，停止受影响范围；不得自动判断应该改文档还是改代码。
-5. 没有仓库或代码为空时，从产品边界和第一个可交付单元开始，不提前设计完整企业架构。
+5. 涉及 UI/页面/交互时，先检查根 `Design-Brief.md` 及相关设计域；缺失时先建立并确认最小 Design-Brief，再进入页面设计或 Spec。没有仓库或代码为空时，从产品边界和第一个可交付单元开始，不提前设计完整企业架构。
 
 需要建立或整理产品文档、版本和证据目录时，使用 `$zhenxin-development-workflow:product-spec-governance`。
 
@@ -45,7 +45,7 @@ description: 用于长期、多模块、按版本推进的商业软件项目，�
 项目没有代码时按以下顺序开始：
 
 1. 只读取用户指定的PRD，确认产品目标、首批用户、核心闭环、非目标和首个可验收结果；
-2. 用产品治理Skill建立最小文档骨架和ROADMAP，不一次创建所有未来领域文档；
+2. 用产品治理Skill建立最小文档骨架和ROADMAP，不一次创建所有未来领域文档；有 UI/页面时先建立或确认最小 `Design-Brief.md`，没有 UI 时跳过；
 3. 把第一个结果编号为独立交付单元；
 4. 首次决定项目骨架或昂贵底层能力前，调研仓库现有能力和成熟开源方案，明确采用、薄适配、参考或自研；
 5. 涉及新页面或重大界面时，在需求讨论中用Visual Companion确认组件复用、设计规范、布局、交互、关键状态与动效；
@@ -53,21 +53,21 @@ description: 用于长期、多模块、按版本推进的商业软件项目，�
 7. 从第一个端到端可运行的功能批次开始开发，后续版本按ROADMAP继续。
 
 在空项目中也不要仅凭长篇PRD提前生成全部服务、模块、Schema和抽象层。
-
 ## 标准路线
 
 ```text
 指定PRD
 → 需求澄清与版本范围
-→ 必要时架构复用调研或Spike
+→ 检查或建立Design-Brief（有UI时）→ 必要时架构复用调研或Spike
 → 必要时Visual Companion确认UI方案
-→ 可交付Spec并由用户批准
-→ Implementation Plan（用户批准后）
+→ 可交付Spec并由用户批准 → 必要时确认并建立项目质量门禁
+→ Implementation Plan与执行启动卡（用户回复1或2后执行）
 → 子智能体按功能批次开发
 → 一次独立Review
 → 完整验证
-→ 产品验收
-→ 分支收尾
+→ 产品验收与文档收尾
+→ READY_FOR_GIT
+→ 用户选择Git操作
 → 发布风险审查与发布治理（仅正式发布时）
 ```
 
@@ -77,7 +77,7 @@ description: 用于长期、多模块、按版本推进的商业软件项目，�
 - 新增功能先按复杂度进行适度需求访谈；每个关键问题给推荐方案、备选和取舍，达到停止条件后立即进入设计，不持续追问。
 - 空项目骨架、新子系统和昂贵底层能力先调查项目现有能力与成熟开源方案；结论写入Spec，不单建调研流程。
 - 先把大型需求拆成可独立验收的交付单元；每个交付单元一份Spec和一份Plan。
-- 产品事实变化先由PM更新PRD或唯一领域PRD并让用户确认，再同步`PRD-CHANGELOG.md`；实现细节只进入Spec或Plan。
+- 产品事实变化先由PM更新PRD或唯一领域PRD并让用户确认，再同步`PRD-CHANGELOG.md`；后续返工、补充需求和新指令默认增量处理，不覆盖已批准Spec、Plan或Task，替换、取消和冲突取舍必须先展示差异并确认。
 
 ### 2. UI可视化确认
 
@@ -85,17 +85,17 @@ description: 用于长期、多模块、按版本推进的商业软件项目，�
 
 - 展示浏览器mockup、布局比较、架构图、关键状态和必要动效；
 - 让用户直接选择或提出修改；
-- 请求确认前检查组件复用、设计规范、状态与动效，并把结果、状态矩阵和必要Golden写入Spec与Plan；
+- 请求确认前读取 `Design-Brief.md`；没有时先建立并确认最小设计规范；再检查组件复用、设计规范、状态与动效，并把结果、状态矩阵和必要Golden写入Spec与Plan；全局规则变化才更新Design-Brief；
 - 不再创建独立UI线程、第二套Preview项目或额外UI预览阶段。
 
 开发任务随后直接实现真实UI和功能；完成后由产品验收对照已确认设计检查实际页面。
 
 ### 3. 写Spec和Plan
 
-- Spec经用户确认后，使用 `$zhenxin-development-workflow:writing-plans`。
+- Spec经用户确认后，新项目、首次接入或新增技术能力时先使用 `$zhenxin-development-workflow:project-quality-gates` 只读推荐，用户确认后才生成项目门禁；随后使用 `$zhenxin-development-workflow:writing-plans`。
 - Plan必须写准确文件路径、接口、验证命令和Task依赖。
-- Plan前扫描一次项目代码行数，识别与本次交付有关的热点文件；不把全仓统计长期复制进文档。
-- `Goal`是Plan中的一句话交付结果，推荐写但不强制使用Codex运行时Goal；不要为了流程自动创建运行时Goal。
+- Plan前扫描一次项目代码行数，识别与本次交付有关的热点文件；项目较大、模块依赖不清或涉及跨模块改动时，建议使用 `$code-review-graph` 建立或更新代码图谱，用于派发前确认影响范围、开发后检查依赖边界、合并前辅助Review；简单任务不强制使用，不把全仓统计长期复制进文档。
+- `Goal`是Plan中的一句话交付结果；Plan完成后输出范围、非目标、预计交付和一段Goal执行文案，用户回复`1`表示批准并创建运行时Goal，回复`2`表示批准但正常执行，其他回复不得开始开发；运行时Goal最晚在文档收尾并标记`READY_FOR_GIT`时结束，不包含任何Git写操作。
 
 ### 4. 默认开发执行
 
@@ -122,7 +122,7 @@ description: 用于长期、多模块、按版本推进的商业软件项目，�
 ### 6. 验收与发布
 
 - 用户可见功能通过技术验证后，使用 `$zhenxin-development-workflow:product-acceptance` 从真实入口验收。
-- 产品验收通过后，先使用 `$zhenxin-development-workflow:finishing-a-development-branch` 由用户选择集成方式并形成准确候选commit。
+- 产品验收和文档收尾完成后标记`READY_FOR_GIT`，运行时Goal在此结束；再使用 `$zhenxin-development-workflow:finishing-a-development-branch` 展示数字选项。用户选择前不得`git add`、`commit`、`merge`或`push`。
 - `$zhenxin-development-workflow:release-risk-review` 只在正式首发、正式版本更新或生产hotfix发布前使用，不进入日常开发循环。
 - 正式候选确定后再执行发布风险审查；通过后使用 `$zhenxin-development-workflow:release-governance`，生产执行仍需单独授权。
 

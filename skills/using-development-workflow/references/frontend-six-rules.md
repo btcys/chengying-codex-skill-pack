@@ -8,6 +8,11 @@
 - 新页面、重大布局或跨页面改动才综合检查六点；不因文件出现CSS、Tailwind或动画库而全量读取。
 - 只把相关条目和当前Spec、Plan、Task、Golden或Evidence交给子智能体，不传完整PRD、历史文档或其他批次报告。
 
+## UI检查强度
+
+- 普通小改也必须在真实页面快速检查一遍：核对相关主题、状态、文案/溢出、组件和Token；不启动Visual Companion或外部参考搜索。
+- 新页面、大改版、没有Design-Brief，或用户连续两轮明确不满意时，改用完整UI验收循环；规则见 `product-acceptance/references/ui-acceptance-checklist.md`。
+
 ## 六点检查
 
 ### 1. 先确认用户任务和业务对象

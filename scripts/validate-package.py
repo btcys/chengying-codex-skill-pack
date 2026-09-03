@@ -29,10 +29,11 @@ EXPECTED_SKILLS = {
     "release-risk-review",
     "release-governance",
     "optimizing-development-workflow",
+    "project-quality-gates",
 }
 
-PACKAGE_VERSION = "5.8.0"
-DISPLAY_NAME = "帧芯开发工作流 5.8"
+PACKAGE_VERSION = "6.2.0"
+DISPLAY_NAME = "帧芯开发工作流 6.2"
 
 
 def parse_frontmatter(path: Path) -> dict[str, str]:
@@ -177,12 +178,12 @@ def main() -> int:
                 errors.append(f"{runtime_file}: 含禁用运行时词 {term}")
 
     if errors:
-        print("帧芯开发工作流5.8校验失败：")
+        print("帧芯开发工作流6.2校验失败：")
         for error in errors:
             print(f"- {error}")
         return 1
 
-    print(f"帧芯开发工作流5.8静态包校验通过：{len(EXPECTED_SKILLS)}个Skill，manifest、界面版本、frontmatter、链接、命名、上下文预算和测试文件清单检查正常；运行脚本需另行烟测。")
+    print(f"帧芯开发工作流6.2静态包校验通过：{len(EXPECTED_SKILLS)}个Skill，manifest、界面版本、frontmatter、链接、命名、上下文预算和测试文件清单检查正常；运行脚本需另行烟测。")
     return 0
 
 

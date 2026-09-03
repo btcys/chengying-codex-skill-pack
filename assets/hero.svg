@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="2560" height="720" viewBox="0 0 1280 360" role="img" aria-labelledby="title desc" style="shape-rendering:geometricPrecision;text-rendering:geometricPrecision">
-  <title id="title">帧芯开发工作流 5.8</title>
-  <desc id="desc">面向长期商业项目的产品、UI、计划与智能体开发工作流</desc>
+  <title id="title">帧芯开发工作流 6.2</title>
+  <desc id="desc">面向长期商业项目的产品、Design-Brief、UI、计划与智能体开发工作流</desc>
   <defs>
     <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
       <stop offset="0" stop-color="#10182f"/>
@@ -29,7 +29,7 @@
     <text x="2" y="208" fill="#a7f3d0" font-size="18" font-family="Arial, PingFang SC, Microsoft YaHei, sans-serif">从指定 PRD 到真实验收与正式发布，保持边界清楚、证据可追踪、开发不拖慢。</text>
     <g transform="translate(0 238)">
       <rect width="96" height="34" rx="17" fill="#ffffff" opacity="0.12"/>
-      <text x="48" y="23" text-anchor="middle" fill="#ffffff" font-size="16" font-weight="700" font-family="Arial, sans-serif">v5.8.0</text>
+      <text x="48" y="23" text-anchor="middle" fill="#ffffff" font-size="16" font-weight="700" font-family="Arial, sans-serif">v6.2.0</text>
       <rect x="108" width="112" height="34" rx="17" fill="#ffffff" opacity="0.12"/>
       <text x="164" y="23" text-anchor="middle" fill="#ffffff" font-size="16" font-family="Arial, PingFang SC, sans-serif">MIT License</text>
     </g>

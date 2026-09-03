@@ -8,7 +8,7 @@ from pathlib import Path
 
 MAX_SKILL_LINES = 140
 MAX_REFERENCE_LINES = 180
-MAX_ALL_SKILL_LINES = 1300
+MAX_ALL_SKILL_LINES = 1400
 MAX_DESCRIPTION_CHARS = 7000
 
 
@@ -103,6 +103,12 @@ def main() -> int:
         if rule not in plan_text:
             errors.append(f"Plan缺少代码热点控制: {rule}")
 
+    quality_gates = root / "skills" / "project-quality-gates" / "SKILL.md"
+    quality_text = quality_gates.read_text(encoding="utf-8")
+    for rule in ("只读识别", ".codex/quality-gates.json", "check:product-contracts", "quality:fast", "1. 确认增加以上门禁", "基线只能减少"):
+        if rule not in quality_text:
+            errors.append(f"项目质量门禁缺少轻量边界: {rule}")
+
     document_system = (
         root / "skills" / "product-spec-governance" / "references" / "document-system.md"
     )
@@ -117,7 +123,7 @@ def main() -> int:
         changelog_text = prd_changelog.read_text(encoding="utf-8")
     if "CONTEXT.md职责" not in document_text or "不能新增或覆盖PRD需求" not in document_text:
         errors.append("产品文档体系缺少CONTEXT.md词汇边界")
-    for rule in ("文档现实性", "DOC_STALE", "CODE_DRIFT", "NO_CHANGE", "变更记录只属于PRD", "PRD-CHANGELOG.md", "150行"):
+    for rule in ("文档现实性", "DOC_STALE", "CODE_DRIFT", "NO_CHANGE", "变更记录只属于PRD", "PRD-CHANGELOG.md", "拆分PRD产品合同", "150行"):
         if rule not in document_text + changelog_text:
             errors.append(f"产品文档体系缺少现实性规则: {rule}")
 

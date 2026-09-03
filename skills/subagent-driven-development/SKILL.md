@@ -9,7 +9,7 @@ description: 在帧芯开发工作流已有批准Plan且当前环境支持子智
 
 ## 适用条件
 
-- 已有用户批准的Spec和可执行Plan；
+- 已有用户批准的Spec和最新可执行Plan修订，且`Execution Route`已由用户选择为`GOAL`或`NORMAL`；
 - Task可以组成职责清晰的功能批次；
 - 主任务可以持续统筹同一个工作区；
 - 当前运行时支持子智能体。
@@ -27,9 +27,9 @@ description: 在帧芯开发工作流已有批准Plan且当前环境支持子智
 ## 1. 准备
 
 1. 确认工作区已隔离或用户接受在当前checkout工作；需要worktree时先使用 `$zhenxin-development-workflow:using-git-worktrees`。
-2. 读取Plan、关联Spec、Global Constraints和适用项目指令。
+2. 读取最新Plan修订、关联Spec、Global Constraints和适用项目指令；确认`Approval=APPROVED`且`Execution Route`不是`PENDING`。
 3. 记录开始commit、当前未提交改动和用户已有改动；空仓库没有commit时准确记录 `UNBORN`，不得为了流程自动创建baseline commit；不得覆盖或归入用户成果。
-4. 检查Plan中的文件、接口、依赖和命令是否仍准确；关键缺陷先修订Plan并让用户确认。
+4. 检查Plan中的文件、接口、依赖和命令是否仍准确；关键缺陷先展示增量差异并让用户确认，未经确认不得修订已批准内容。
 5. 按依赖关系把Task组成少量功能批次。
 6. 运行 `scripts/execution-workspace.sh <plan>` 创建或恢复 `.codex/execution/<plan>/`；目录只保存简洁进度、brief、report和review。
 7. 已有 `progress.md` 时先核对当前Git状态、报告路径和Plan，再从第一个未完成批次继续；不能仅凭旧记录跳过工作。
@@ -97,5 +97,5 @@ description: 在帧芯开发工作流已有批准Plan且当前环境支持子智
 1. 使用 `$zhenxin-development-workflow:verification-before-completion` 运行完整验证；
 2. 若Plan含用户可见Acceptance，使用 `$zhenxin-development-workflow:product-acceptance`；纯API、内部数据或基础设施Plan记录`Product Acceptance: N/A`并完成技术验收。
 3. 汇总 `progress.md` 中主任务做出的范围裁定及其风险；
-4. 使用 `$zhenxin-development-workflow:finishing-a-development-branch` 让用户选择集成方式；
+4. 完成文档收尾并标记`READY_FOR_GIT`；运行时Goal在此结束，再使用 `$zhenxin-development-workflow:finishing-a-development-branch` 等待用户选择，选择前不执行Git写操作；
 5. 临时执行目录可在结果已被Plan、Git和验收证据承接后清理，清理必须使用解析后的精确目录。

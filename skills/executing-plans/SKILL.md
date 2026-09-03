@@ -9,7 +9,7 @@ description: 在帧芯开发工作流已有书面Plan，但当前环境没有子
 
 ## 1. 载入与审查
 
-1. 读取Plan、关联Spec、Global Constraints和适用项目指令。
+1. 读取最新Plan修订、关联Spec、Global Constraints和适用项目指令；确认`Approval=APPROVED`且`Execution Route`为`GOAL`或`NORMAL`，任一仍为`PENDING`时停止。
 2. 检查文件、接口、依赖和验证命令是否仍与仓库一致。
 3. 发现关键歧义、缺失前置条件或不合理设计时，在写代码前停止并报告。
 4. 按Task依赖排序，创建执行清单。
@@ -23,7 +23,7 @@ description: 在帧芯开发工作流已有书面Plan，但当前环境没有子
 1. 标记 `IN_PROGRESS`；
 2. 完成完整功能结果，不为每个微步骤增加门禁；
 3. 适用时执行TDD；
-4. 运行Task的定向验证；
+4. 运行Task的定向验证和项目已配置的相关`quality:fast`门禁；
 5. 更新Acceptance、Remaining和必要的Rework记录；
 6. 只有所有阻断性Acceptance满足才标记 `DONE`；明确标记为`Advisory`的事项不参与完成门禁。
 
@@ -37,7 +37,7 @@ description: 在帧芯开发工作流已有书面Plan，但当前环境没有子
 2. 阻断问题统一修复后只做一次定向复审；
 3. 运行完整test、typecheck、build和项目门禁；
 4. 用户可见能力进行产品验收；纯API、内部数据或基础设施Plan记录`Product Acceptance: N/A`并完成技术验收；
-5. 使用分支收尾Skill让用户选择集成方式。
+5. 完成文档收尾并标记`READY_FOR_GIT`；运行时Goal在此结束，再使用Git集成收尾Skill等待用户选择，选择前不执行Git写操作。
 
 ## 停止条件
 

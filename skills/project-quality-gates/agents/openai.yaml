@@ -1,0 +1,4 @@
+interface:
+  display_name: "项目质量门禁"
+  short_description: "识别项目能力并在确认后建立可独立运行的检查和CI门禁"
+  default_prompt: "使用 $project-quality-gates 检查当前项目需要哪些质量门禁，只推荐并等待我确认后再生成。"

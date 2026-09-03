@@ -11,7 +11,7 @@
     </filter>
   </defs>
   <rect width="1280" height="610" rx="24" fill="url(#bg)"/>
-  <text x="60" y="62" fill="#f8fafc" font-size="30" font-weight="800" font-family="Arial, PingFang SC, Microsoft YaHei, sans-serif">20 个 Skill，按阶段加载</text>
+  <text x="60" y="62" fill="#f8fafc" font-size="30" font-weight="800" font-family="Arial, PingFang SC, Microsoft YaHei, sans-serif">21 个 Skill，按阶段加载</text>
   <text x="60" y="94" fill="#cbd5e1" font-size="16" font-family="Arial, PingFang SC, Microsoft YaHei, sans-serif">主 Skill 负责路由和门禁，详细合同放在 references，避免把上下文一次性塞满。</text>
 
   <g transform="translate(60 130)" filter="url(#shadow)">
@@ -35,7 +35,7 @@
       <rect width="218" height="176" rx="20" fill="#172f52" stroke="#93c5fd" stroke-width="2"/>
       <circle cx="34" cy="38" r="18" fill="#93c5fd"/><text x="34" y="45" text-anchor="middle" fill="#172f52" font-size="16" font-weight="800" font-family="Arial, sans-serif">03</text>
       <text x="66" y="44" fill="#dbeafe" font-size="18" font-weight="800" font-family="Arial, PingFang SC, sans-serif">工程质量</text>
-      <text x="24" y="90" fill="#f8fafc" font-size="14" font-family="Arial, PingFang SC, sans-serif">TDD · systematic-debugging</text>
+      <text x="24" y="90" fill="#f8fafc" font-size="13" font-family="Arial, PingFang SC, sans-serif">quality-gates · TDD · debugging</text>
       <text x="24" y="120" fill="#f8fafc" font-size="14" font-family="Arial, PingFang SC, sans-serif">Review · verification</text>
       <text x="24" y="151" fill="#bfdbfe" font-size="13" font-family="Arial, PingFang SC, sans-serif">根因 · 回归 · 证据</text>
     </g>
@@ -62,7 +62,7 @@
     <text x="28" y="40" fill="#e2e8f0" font-size="16" font-weight="800" font-family="Arial, PingFang SC, Microsoft YaHei, sans-serif">默认暴露策略</text>
     <g transform="translate(28 63)">
       <rect width="500" height="68" rx="14" fill="#172554"/>
-      <text x="22" y="28" fill="#bfdbfe" font-size="15" font-weight="700" font-family="Arial, PingFang SC, Microsoft YaHei, sans-serif">18 个常用 Skill</text>
+      <text x="22" y="28" fill="#bfdbfe" font-size="15" font-weight="700" font-family="Arial, PingFang SC, Microsoft YaHei, sans-serif">19 个常用 Skill</text>
       <text x="22" y="51" fill="#cbd5e1" font-size="13" font-family="Arial, PingFang SC, Microsoft YaHei, sans-serif">允许隐式调用，按当前任务阶段加载</text>
     </g>
     <g transform="translate(550 63)">

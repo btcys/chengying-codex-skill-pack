@@ -13,8 +13,8 @@ description: 在帧芯开发工作流已启用且已有用户批准的Spec时，
 2. 阅读适用的 `AGENTS.md`。
 3. 探索现有目录、相似实现、依赖、类型、测试惯例和运行命令。
 4. 确认版本号、阶段目录和ROADMAP中的当前单元。
-5. 涉及新页面或重大界面时，确认Visual Companion的布局、交互、Golden和状态矩阵已经进入Spec。
-6. 运行 [scan-code-hotspots.py](../../scripts/scan-code-hotspots.py) 扫描一次项目代码行数；只把本次会修改或依赖的热点文件及处理决定写进Plan。
+5. 涉及新页面或重大界面时，确认项目 `Design-Brief.md` 已存在或已确认建立，并确认Visual Companion的布局、交互、Golden和状态矩阵已经进入Spec。
+6. 运行 [scan-code-hotspots.py](../../scripts/scan-code-hotspots.py) 扫描一次项目代码行数；只把本次会修改或依赖的热点文件及处理决定写进Plan。项目已有`.codex/quality-gates.json`时，同时读取本次适用的`quality:fast`和Plan收尾`quality:pr`准确命令。
 
 不要根据PRD猜文件名、接口、Schema或命令。无法确定的关键事实先调查，仍无法确定再向用户提问。
 
@@ -51,7 +51,7 @@ docs/plans/<stage>/<unit>-<feature>.md
 - 一个Task交付一个可验证的功能结果或工程边界，可以包含多个紧密相关步骤。
 - 不把“打开文件、写一行测试、运行一次命令”拆成独立Task。
 - 同一功能必须共同理解和修改的文件放在同一Task；能独立开发且不共享文件或状态的Task明确标注可并行。
-- 每个Task写清依赖、结果、验收、Files、Interfaces、步骤、定向验证和 `Remaining`。
+- 每个Task写清依赖、结果、验收、Files、Interfaces、步骤、定向验证和`Remaining`；Plan获批后，后续需求默认增量合并，新增需求建立新Task，修改或删除原Task先展示差异并确认，再按修订规则保留旧版。
 - `Rework`使用 [failure-evidence-contract.md](../product-spec-governance/references/failure-evidence-contract.md)；预期TDD RED和未改变Task状态的临时错误不记录。
 - 精确列出新建、修改和测试文件；如果需要改既有接口，写出接口名和调用关系。
 - 计划写行为和关键伪代码，不复制大段最终实现。
@@ -80,4 +80,4 @@ docs/plans/<stage>/<unit>-<feature>.md
 
 ## 执行交接
 
-计划保存后报告路径、版本、Task数量、可并行批次和阻断项，并等待用户明确批准（例如“批准Plan”或“按此Plan执行”）。未获批准不得派发开发子智能体或进入执行Skill；用户在同一轮明确授权按该Plan推进时，可直接视为批准。批准后默认交给 `$zhenxin-development-workflow:subagent-driven-development`；只有当前环境没有子智能体能力或用户明确要求单线程时使用 `$zhenxin-development-workflow:executing-plans`。
+计划保存后按 [Plan模板的执行启动卡](references/plan-template.md#执行启动卡) 输出范围、非目标、预计交付、Goal执行文案和`1/2`选项，不增加“Goal建议”或第二轮批准。只有用户直接回复当前启动卡的`1`或`2`才开始执行：两者都批准Plan和范围；`1`记录`GOAL`并创建运行时Goal，`2`记录`NORMAL`且不创建Goal。运行时Goal只推进到验收、文档收尾和`READY_FOR_GIT`，不包含Git写操作；其他回复保持`PENDING`。获批后默认交给子智能体执行，无子智能体或用户要求单线程时才使用`executing-plans`。

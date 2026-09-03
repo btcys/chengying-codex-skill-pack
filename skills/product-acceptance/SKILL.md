@@ -14,6 +14,7 @@ description: 在帧芯开发工作流已启用且技术验证完成后，用于�
 - Plan中的Acceptance与Global Constraints；
 - 需求、问题和Golden证据；
 - 最新技术验证结果。
+- UI任务按需读取 [UI验收检查表](references/ui-acceptance-checklist.md)。
 
 ## 验收方法
 
@@ -21,7 +22,7 @@ description: 在帧芯开发工作流已启用且技术验证完成后，用于�
 2. 启动本地验收服务时优先使用动态空闲端口；固定端口必须先确认没有被其他进程占用，并记录实际URL。`LOCAL_DEV`或`STAGING_QA`下可直接执行授权范围内的登录、上传、保存、生成和测试数据库写入，不逐次询问。
 3. 按真实角色和数据完成核心路径，覆盖与本次范围有关的默认、加载、空、错误、权限、刷新和重进状态。
 4. 验证写入、刷新、持久化、撤销或恢复、跨页面一致性和对已有数据的影响。
-5. UI改动与已确认Golden比较，并实际检查组件一致性、设计规范、关键状态与动效、连续操作、布局跳动及减弱动效路径；允许的差异必须有Spec依据。
+5. UI改动按范围选择快速或完整检查，与当前 `Design-Brief.md`、相关设计域、已确认Golden比较，并实际检查组件一致性、设计规范、关键状态与动效、连续操作、布局跳动及减弱动效路径；允许的差异必须有Spec依据。
 6. 将必要截图存入 `acceptance/`，在 `evidence.md` 建立 `ACCEPT-*` 记录。
 7. 对每条验收项给出 `PASS`、`FAIL` 或 `BLOCKED`，附可复核证据；Acceptance下的每一项默认都是阻断项。
 8. 验收 `PASS` 后回写原Plan Task的实际结果、Evidence、`Remaining`和`Spec Sync`/`Plan Sync`；没有产品或实现合同变化时写`NO_CHANGE`，不新建文档；有付费测试时同时记录次数和费用。

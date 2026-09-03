@@ -18,7 +18,7 @@ description: 在帧芯开发工作流准备声称功能完成、Bug修复、测�
 在说任何成功结论前：
 
 1. 明确该结论需要什么命令或可观察行为才能证明；
-2. 运行完整、准确且覆盖当前代码的验证；
+2. 运行完整、准确且覆盖当前代码的验证；项目已配置质量门禁时，普通Task运行相关`quality:fast`，Plan收尾运行`quality:pr`；
 3. 阅读退出码和完整相关输出，确认没有被截断、跳过或只运行了子集；
 4. 将结果与主张逐项对应；
 5. 证据不支持且Task因此转 `REWORK/BLOCKED` 时，按 [failure-evidence-contract.md](../product-spec-governance/references/failure-evidence-contract.md) 记录；预期TDD RED不记录；
@@ -29,6 +29,7 @@ description: 在帧芯开发工作流准备声称功能完成、Bug修复、测�
 - “测试通过”：项目适用的测试命令退出码为0，失败数为0；
 - “类型正确”：实际typecheck命令成功；
 - “构建成功”：从干净或项目规定状态完成build；
+- “项目门禁通过”：`.codex/quality-gates.json`对应档位的真实命令退出码为0，没有把缺少工具伪装成跳过；
 - “Bug已修复”：原复现路径或回归测试先失败后通过；
 - “UI完成”：真实入口、目标视口和关键状态与Golden或验收合同一致；
 - “需求完成”：逐条核对Spec与Plan Acceptance，不只看测试；

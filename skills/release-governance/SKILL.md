@@ -12,6 +12,7 @@ description: 在帧芯开发工作流的正式版本或生产hotfix已完成技�
 - 候选版本、commit和目标环境明确；
 - 分支收尾已由用户选择集成方式，并形成将实际发布的候选commit；
 - Plan完成，完整验证有新鲜证据；
+- 项目已有`.codex/quality-gates.json`时，`quality:release`有覆盖当前候选commit的新鲜证据；
 - 若候选版本包含用户可见Acceptance，相关项已通过产品验收；纯API、内部数据或基础设施交付可用`Product Acceptance: N/A`并以技术验收替代；
 - 正式发布风险审查结论允许继续；
 - 数据迁移、配置、Secret、监控和回滚方案已确认；

@@ -6,12 +6,15 @@
 项目根目录/
 ├── PRD.md
 ├── PRD-CHANGELOG.md                # 仅记录PRD产品事实变更
+├── Design-Brief.md                 # 有UI项目的全局设计规范唯一入口
 ├── CONTEXT.md                     # 有稳定领域词汇时按需创建
 └── docs/
     ├── prd/
     │   ├── README.md                 # 分域索引
     │   └── <domain>.md
     ├── ROADMAP.md
+    ├── design/<domain>.md           # 设计域，按需建立
+    ├── design/archive/              # 过期设计规范
     ├── specs/<stage>/<unit>-<topic>-design.md
     ├── plans/<stage>/<unit>-<feature>.md
     ├── evidence/<stage>/<unit>/
@@ -28,24 +31,25 @@
 
 ## 文档现实性
 
-文档新旧不按文件修改时间判断，而按当前版本链和本次代码核对判断。受控PRD、`PRD-CHANGELOG.md`、Spec、Plan、ROADMAP和CONTEXT头部写最小元数据；每次正文更新都更新`Last Updated`，版本按文档类型递增：PRD及其变更记录使用`Document Version`，其他受控文档使用`Version`。
+文档新旧不按文件修改时间判断，而按当前版本链和本次代码核对判断。受控PRD、`PRD-CHANGELOG.md`、`Design-Brief.md`、设计域、Spec、Plan、ROADMAP和CONTEXT头部写最小元数据；每次正文更新都更新`Last Updated`。PRD及其变更记录使用`Document Version`；Spec和Plan以`Version`记录交付单元、以`Revision`记录获批内容修订；其他受控文档使用`Version`。
 
 ```markdown
 **Status:** `APPROVED | ACTIVE | DONE | SUPERSEDED | ARCHIVED`
 **Version:** `0.6.8.1`
+**Revision:** `R1`（Spec和Plan适用）
 **Last Updated:** `YYYY-MM-DD`
 **Supersedes:** `NONE | <path>`
 ```
 
-当前依据只沿着“用户指定PRD → 当前ACTIVE Spec → 当前ACTIVE Plan → 当前Task”读取；`archive/`、旧版本和未被当前链引用的文档默认不读取。版本、路径、接口、状态或验收与代码不一致时，标记`DOC_STALE`或`CODE_DRIFT`并记录证据，不自动改写文档或代码。
+当前依据只沿着“用户指定PRD → Design-Brief（有UI时） → 当前ACTIVE Spec → 当前ACTIVE Plan → 当前Task”读取；`archive/`、旧版本和未被当前链引用的文档默认不读取。版本、路径、接口、状态或验收与代码不一致时，标记`DOC_STALE`或`CODE_DRIFT`并记录证据，不自动改写文档或代码。
 
-变更记录只属于PRD，单独放在根目录`PRD-CHANGELOG.md`（已有项目沿用等价命名，并在PRD头部链接）。PRD产品事实或规则获确认后，递增`Document Version`、更新`Last Updated`，并在变更记录按日期追加一条“稳定结论 + 影响领域 + 链接”；不写实现细节、Task状态、截图或失败日志。Spec、Plan、ROADMAP、CONTEXT、Evidence和执行记录不建立PRD式变更记录，只更新自身版本、日期、状态或记录字段。模板见[PRD变更记录](prd-changelog.md)。
+变更记录只属于PRD，单独放在根目录`PRD-CHANGELOG.md`（已有项目沿用等价命名，并在PRD头部链接）。PRD产品事实或规则获确认后，递增`Document Version`、更新`Last Updated`，并在变更记录按日期追加一条稳定结论；不写实现细节、Task状态、截图或失败日志。Design-Brief、设计域、Spec、Plan、ROADMAP、CONTEXT、Evidence和执行记录不建立PRD式变更记录，只更新自身版本、日期、状态或记录字段。模板见[PRD变更记录](prd-changelog.md)。
 
-Task验收通过或版本关闭时执行一次“文档收尾”：Task验收先在原Plan中回写实际结果、Evidence、`Remaining`和`Spec Sync`/`Plan Sync`；实现方式变化更新Plan，设计合同变化更新Spec，产品行为或规则变化先取得确认再更新PRD并追加PRD变更记录。无变化写`NO_CHANGE`，不创建文档同步Task。
+Task验收通过或版本关闭时执行一次“文档收尾”：Task验收先在原Plan中回写实际结果、Evidence、`Remaining`和`Spec Sync`/`Plan Sync`；局部设计变化经确认后按修订更新Spec，全局设计合同变化更新Design-Brief，产品行为或规则变化先取得确认再更新PRD并追加PRD变更记录。无变化写`NO_CHANGE`，不创建文档同步Task。
 
-版本关闭时，在同一次文档收尾中确认该版本全部Plan已完成、没有未处理的`CODE_DRIFT`、`DOC_STALE`或`BLOCKED`，更新`ROADMAP.md`；将已完成且不再被后续版本引用的Spec、Plan和Evidence标记为`SUPERSEDED`并移入`archive/`，仍被后续版本引用的保留原路径。单个Task完成时不归档；根PRD只有在产品基线被新版本正式替代后才归档。
+版本关闭时，在同一次文档收尾中确认该版本全部Plan已完成、没有未处理的`CODE_DRIFT`、`DOC_STALE`或`BLOCKED`，更新`ROADMAP.md`；将已完成且不再被后续版本引用的设计域、Spec、Plan和Evidence标记为`SUPERSEDED`并移入`archive/`，仍被后续版本引用的保留原路径。单个Task完成时不归档；根PRD和Design-Brief只有在产品或设计基线被正式替代后才归档。
 
-长期项目必须有 `PRD.md`、`docs/ROADMAP.md`、`docs/specs/` 和 `docs/plans/`。`CONTEXT.md`只有出现稳定领域词汇时才创建；只有用户确认将根PRD拆为领域文档时才创建 `docs/prd/`。不创建空目录，其余目录按需创建。
+长期项目必须有 `PRD.md`、`docs/ROADMAP.md`、`docs/specs/` 和 `docs/plans/`；有 UI 的项目还必须有根 `Design-Brief.md`。`CONTEXT.md`、`docs/design/`和`docs/prd/`按实际需要创建，不预建空目录。
 
 ## CONTEXT.md职责
 
@@ -79,7 +83,7 @@ PRD记录长期产品事实：定位、用户与权限、核心闭环、信息�
 
 PRD不记录开发版本、Task、Bug、返工、代码路径、接口签名、数据库Schema、测试命令、Commit或开发日志。
 
-根PRD分域后只维护定位、全局边界、事实源优先级和领域索引；稳定产品正文只在`docs/prd/<domain>.md`的一份领域文件中原位维护，`docs/prd/README.md`只负责路由，不复制正文。
+根PRD分域后只维护定位、全局边界、事实源优先级和领域索引；稳定产品正文只在`docs/prd/<domain>.md`的一份领域文件中原位维护，`docs/prd/README.md`只负责路由，不复制正文。跨领域重要规则的唯一负责人、编号、引用和依赖按[拆分PRD产品合同](product-contracts.md)管理。
 
 ### 根PRD模板
 
@@ -140,9 +144,9 @@ PRD文档版本和开发版本分开：`PRD v2.1`不等于`0.6.8.1`。
 docs/specs/0.6.8/0.6.8.1-<topic>-design.md
 ```
 
-Spec头部至少包含：`Version`、`Status`和`Last Updated`。Spec不建立PRD式变更记录；设计变化直接更新正文并递增`Version`。
+Spec头部至少包含：`Version`、`Revision`、`Status`、`Last Updated`和`Supersedes`。Spec不建立PRD式变更记录；草稿可以原位修正，已批准正文只能经用户确认后按修订规则更新并保留旧修订。
 
-至少包含：
+至少包含（UI功能适用时）：
 
 ```text
 Scope
@@ -150,6 +154,7 @@ Architecture
 Architecture Reuse & Selection（适用时）
 Components
 UI Compliance：组件复用、设计规范、状态与动效（适用时）
+Design Source：`Design-Brief.md`及相关设计域版本（适用时）
 Data Flow
 Error Handling
 Testing

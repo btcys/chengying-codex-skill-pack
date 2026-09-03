@@ -5,17 +5,18 @@ Task不需要拆成微步骤，但必须让无上下文开发代理知道改什�
 ## 必填
 
 - `Result`：完成后可观察结果；
+- `Task Revision`和`Supersedes`：标识当前获批定义及被替代修订；
 - `Depends On`：真实前置Task；
 - `Parallel`：只有无共享文件、接口和状态时才为YES；
 - `Files`：准确Create、Modify、Test路径；
 - `Interfaces`：接口名、输入输出、调用方或组件事件；
 - `Acceptance`：可逐条判断的产品或工程结果；
-- `Verification`：准确的定向命令或真实页面检查；
+- `Verification`：准确的定向命令或真实页面检查；项目已有门禁时包含本Task相关的`quality:fast`；
 - `Remaining`：部分完成时的剩余结果。
 - `Execution Mode`：本Task使用的环境模式；付费测试或数据范围不明确时只询问一次，不逐次询问普通本地操作。
 - 若Task未覆盖环境或费用差异，使用Plan的`Execution Mode`和`Authorized Test Scope`；只有需要切换环境或范围时才在Task中覆盖。
 
-验收 `PASS` 后在原Task回写 `Actual Result`、Evidence、`Remaining`、`Spec Sync` 和 `Plan Sync`；实现方式变化只更新Plan，产品行为变化需确认后更新PRD或Spec。
+验收 `PASS` 后在原Task回写 `Actual Result`、Evidence、`Remaining`、`Spec Sync` 和 `Plan Sync`。这些执行事实可据实更新；改变已批准Task的Result、Acceptance、范围、接口或依赖前，必须先展示增量差异并获得明确确认，再递增`Task Revision`，不得用后续需求覆盖原定义。
 
 ## TDD任务
 
