@@ -46,15 +46,15 @@ description: 在帧芯开发工作流中遇到Bug、测试失败、异常行为�
 4. 若该失败已改变Task状态，按 [failure-evidence-contract.md](../product-spec-governance/references/failure-evidence-contract.md) 原地更新RootCause和Resolution；
 5. 使用 `$zhenxin-development-workflow:verification-before-completion` 后再宣称修复。
 
-## 三轮停止规则
+## 返工与停止条件
 
-同一Task连续三轮修复或返工仍不通过时：
+同一问题重复修复无进展时立即停止原补丁思路；同一Task连续三轮仍不通过时必须重新调查，而不是仅按次数判为`BLOCKED`：
 
-- Task转为 `BLOCKED`；
-- 停止继续追加补丁；
 - 汇总每轮假设、证据和结果；
 - 重新检查Spec、Architecture、状态所有权、模块边界和Task拆分；
-- 需要改变产品或设计时返回用户确认。
+- 根因已证明、仍在批准范围内，且有新证据表明进展（例如原失败消失、剩余失败被缩小或假设被实验排除）时，保持`REWORK`继续最小修复，不因次数要求用户重批；
+- 重新调查后仍无可验证进展、无法证明根因、缺少必要权限/条件或需要改变产品、设计及范围时，受影响Task和依赖项标为`BLOCKED`并报告恢复条件；阻断整体交付时Plan也标为`BLOCKED`；
+- 每轮留下新证据和下一步依据；不能只换说法、重跑同一失败或重置轮次来无限重试。真正的合同变更仍回到用户确认。
 
 ## 红旗
 

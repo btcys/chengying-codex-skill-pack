@@ -80,4 +80,4 @@ docs/plans/<stage>/<unit>-<feature>.md
 
 ## 执行交接
 
-计划保存后按 [Plan模板的执行启动卡](references/plan-template.md#执行启动卡) 输出范围、非目标、预计交付、Goal执行文案和`1/2`选项，不增加“Goal建议”或第二轮批准。只有用户直接回复当前启动卡的`1`或`2`才开始执行：两者都批准Plan和范围；`1`记录`GOAL`并创建运行时Goal，`2`记录`NORMAL`且不创建Goal。运行时Goal只推进到验收、文档收尾和`READY_FOR_GIT`，不包含Git写操作；其他回复保持`PENDING`。获批后默认交给子智能体执行，无子智能体或用户要求单线程时才使用`executing-plans`。
+计划保存后按 [Plan模板的执行启动卡](references/plan-template.md#执行启动卡) 输出范围、非目标、预计交付、Goal执行文案和`1/2`选项，不增加“Goal建议”。接受数字或针对当前计划的明确自然语言确认；只有明确启用Goal才记录`GOAL`并创建运行时Goal，否则明确批准执行时记录`NORMAL`。未确认或要求调整时保持`PENDING`；已批准且范围未变时沿用授权，不反复展示启动卡。运行时Goal只到验收、文档收尾和`READY_FOR_GIT`，不包含Git写操作。获批后默认交给子智能体执行，无子智能体或用户要求单线程时才使用`executing-plans`。

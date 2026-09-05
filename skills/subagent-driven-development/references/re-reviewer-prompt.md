@@ -9,5 +9,5 @@
 - 修复diff或材料：<path>
 - 修复验证证据：<paths>
 
-逐项给出 `ADDRESSED` 或 `NOT_ADDRESSED`，引用证据。只报告修复diff中新引入的 `BLOCKER` 或 `IMPORTANT` 回归。最后给出 `PASS` 或 `BLOCKED`。
+逐项给出 `ADDRESSED` 或 `NOT_ADDRESSED`，引用证据。只报告修复diff中新引入的 `BLOCKER` 或 `IMPORTANT` 回归。最后给出 `PASS` 或 `CHANGES_REQUIRED`；是否继续修复或将Task/Plan标为`BLOCKED`由主任务依据根因、进展和授权裁定。
 ```

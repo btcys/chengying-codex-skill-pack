@@ -5,11 +5,11 @@ description: 在帧芯开发工作流的实现、Review、完整验证和产品�
 
 # Git集成收尾
 
-先验证，再把交付标为`READY_FOR_GIT`并等待用户决定。AI生成的“可以提交”“准备提交”或“作为下一版本基线”只是状态结论，不是授权；选择前不得运行`git add`、`git commit`、`merge`或`push`。
+先核对证据，再把交付标为`READY_FOR_GIT`。AI生成的“可以提交”“准备提交”或“作为下一版本基线”只是状态结论，不是授权；没有用户明确的对应Git授权，不得运行`git add`、`git commit`、`merge`或`push`。
 
 ## 1. 确认完成证据
 
-运行并检查项目要求的完整test、typecheck、build和其他门禁；确认独立Review和定向复审（如有）覆盖最新diff。若Plan含用户可见Acceptance，确认产品验收已完成；纯API、内部数据或基础设施Plan记录`Product Acceptance: N/A`并确认技术验收完成。失败时停止，不提供Git选项；全部满足后只标记`READY_FOR_GIT`，运行时Goal在此结束。
+按 [完成前验证](../verification-before-completion/SKILL.md#复用证据) 核对项目要求的完整test、typecheck、build和门禁证据，补跑缺失或失效部分，不因进入Git阶段重复全量验证；确认独立Review及必要复审覆盖最新diff。用户可见Acceptance须完成产品验收，纯内部Plan记录`Product Acceptance: N/A`并完成技术验收。证据未通过时不得执行Git收尾；全部满足后标记`READY_FOR_GIT`，运行时Goal在此结束。
 
 ## 2. 确定环境
 
@@ -33,7 +33,9 @@ description: 在帧芯开发工作流的实现、Review、完整验证和产品�
 3. 创建`commit`后合并到本地主开发分支，不上传GitHub；
 4. 创建`commit`，`push`（上传）到GitHub，并创建`PR`（发起合并审核）。
 
-同时展示拟提交文件、排除的用户改动、建议commit message、当前验证和未决风险。只有用户直接回复当前菜单的数字才授权对应操作；未选择时只能执行`git status`、`git diff`等只读检查。
+同时展示拟提交文件、排除的用户改动、建议commit message、当前验证和未决风险。接受数字或明确自然语言授权；已有针对本次交付且仍适用的Git授权时沿用，不重复询问。没有明确授权时只做只读检查；目标或范围有歧义、扩大或授权被撤回时先确认。
+
+自然语言按实际动作执行，不强行套菜单组合：“提交并推送”只授权本次commit和push，不自动创建PR或合并；“做完了”“自行推进”不授权Git写操作。获批Plan执行或Goal本身也不授权Git。
 
 若当前是detached HEAD，先报告准确commit；除选项2外，必须先由用户提供准确分支名，不得发明分支，也不得假装存在可集成功能分支。
 
@@ -55,7 +57,7 @@ description: 在帧芯开发工作流的实现、Review、完整验证和产品�
 
 ### 4. commit、push并创建PR
 
-先按选项1创建commit；只有本次数字选择明确授权时才push。PR概括交付结果、验证、风险和关联Spec/Plan，不泄漏Secret或内部敏感信息。
+先按选项1创建commit；push和创建PR分别须有用户明确授权，数字4同时授权两者。PR概括交付结果、验证、风险和关联Spec/Plan，不泄漏Secret或内部敏感信息。
 
 ## 5. 清理
 

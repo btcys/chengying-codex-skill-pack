@@ -75,7 +75,7 @@ description: 在帧芯开发工作流已有批准Plan且当前环境支持子智
 
 基础批次若定义了多个后续批次依赖的公共接口、Schema或状态合同，进入后续批次前由主任务检查其diff和定向证据；证据不完整时停止，不默认增加独立Reviewer。
 
-实现或定向验证失败时，优先把明确失败和证据发回原代理修复。每轮都要记录结果和根因；同一Task连续三轮仍未通过时转 `BLOCKED`，停止继续补丁，使用系统化调试并复查Spec、Architecture或Task边界。
+实现或定向验证失败时，优先把明确失败和证据发回原代理修复；每轮记录结果和根因，按 [返工与停止条件](../systematic-debugging/SKILL.md#返工与停止条件) 区分继续修复与真实阻塞，不仅凭轮数停止。
 
 不要让多个代理同时修同一问题，也不要在主任务中悄悄代替代理修复后跳过记录。
 
@@ -87,15 +87,15 @@ description: 在帧芯开发工作流已有批准Plan且当前环境支持子智
 2. 使用 `$zhenxin-development-workflow:requesting-code-review` 派一个未参与实现的独立Reviewer；它是唯一Plan级Review入口和模板来源。
 3. Reviewer针对整个Spec和Plan给出一次结论，不为每个Task重复Review，也不重复执行已有的新鲜可信测试；不得再从本Skill额外派第二个Reviewer。
 4. `BLOCKER`或`IMPORTANT`问题由一个修复代理统一处理，避免每个问题重新建立上下文。
-5. 修复后只做一次针对原问题和修复diff的定向复审，使用 [re-reviewer-prompt.md](references/re-reviewer-prompt.md)。
-6. 仍有影响交付的真实问题时将Plan标记 `BLOCKED` 并报告用户；不进入第二轮修复波次或五轮Review循环。
+5. 修复后针对原问题和修复diff做必要定向复审，使用 [re-reviewer-prompt.md](references/re-reviewer-prompt.md)。
+6. 仍有问题时按`requesting-code-review`的处理规则继续原范围修复或报告真实阻塞；不重开全量Review，不增加Reviewer轮番审查。
 
 ## 6. 完成
 
 独立Review通过后：
 
-1. 使用 `$zhenxin-development-workflow:verification-before-completion` 运行完整验证；
+1. 使用 `$zhenxin-development-workflow:verification-before-completion` 取得覆盖当前整合结果的完整验证，复用有效证据，仅补跑缺失或失效部分；
 2. 若Plan含用户可见Acceptance，使用 `$zhenxin-development-workflow:product-acceptance`；纯API、内部数据或基础设施Plan记录`Product Acceptance: N/A`并完成技术验收。
 3. 汇总 `progress.md` 中主任务做出的范围裁定及其风险；
-4. 完成文档收尾并标记`READY_FOR_GIT`；运行时Goal在此结束，再使用 `$zhenxin-development-workflow:finishing-a-development-branch` 等待用户选择，选择前不执行Git写操作；
+4. 完成文档收尾并标记`READY_FOR_GIT`；运行时Goal在此结束，再使用 `$zhenxin-development-workflow:finishing-a-development-branch` 核对已有Git授权或请用户选择，无对应授权不执行Git写操作；
 5. 临时执行目录可在结果已被Plan、Git和验收证据承接后清理，清理必须使用解析后的精确目录。

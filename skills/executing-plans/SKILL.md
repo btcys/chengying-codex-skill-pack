@@ -27,17 +27,17 @@ description: 在帧芯开发工作流已有书面Plan，但当前环境没有子
 5. 更新Acceptance、Remaining和必要的Rework记录；
 6. 只有所有阻断性Acceptance满足才标记 `DONE`；明确标记为`Advisory`的事项不参与完成门禁。
 
-开发中无需每完成一个Task就请求独立Review。遇到失败先系统化调试；同一Task连续三轮仍不通过时转 `BLOCKED`，停止继续打补丁。
+开发中无需每完成一个Task就请求独立Review。失败先系统化调试，按 [返工与停止条件](../systematic-debugging/SKILL.md#返工与停止条件) 处理；有证据推进的原范围修复不机械按轮数停止。
 
 ## 3. Plan级收尾
 
 所有Task完成后：
 
 1. 请求一次独立代码Review；
-2. 阻断问题统一修复后只做一次定向复审；
-3. 运行完整test、typecheck、build和项目门禁；
+2. 阻断问题按`requesting-code-review`统一修复并做必要定向复审，不重开全量Review；
+3. 按`verification-before-completion`取得完整test、typecheck、build和项目门禁证据，复用有效结果，补跑缺失或失效部分；
 4. 用户可见能力进行产品验收；纯API、内部数据或基础设施Plan记录`Product Acceptance: N/A`并完成技术验收；
-5. 完成文档收尾并标记`READY_FOR_GIT`；运行时Goal在此结束，再使用Git集成收尾Skill等待用户选择，选择前不执行Git写操作。
+5. 完成文档收尾并标记`READY_FOR_GIT`；运行时Goal在此结束，再使用Git集成收尾Skill核对已有Git授权或请用户选择，无对应授权不执行Git写操作。
 
 ## 停止条件
 

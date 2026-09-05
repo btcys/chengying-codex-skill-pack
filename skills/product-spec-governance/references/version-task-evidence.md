@@ -35,7 +35,7 @@ Task直接写在Plan中，状态只使用：`TODO`、`IN_PROGRESS`、`REWORK`、
 - 已完成版本的回归：创建新的 `0.6.8.n`，不重开旧Plan。
 - 部分完成：保持 `IN_PROGRESS`，用checkbox和 `Remaining` 记录；未满足任何阻断性Acceptance不得 `DONE`，明确标记为`Advisory`的事项可以未完成且不阻塞 `DONE`。
 - 返工：只有原实现未满足原Acceptance时才使用原Task；新增需求建立新Task，改变原Task定义走确认和修订。每轮按 [failure-evidence-contract.md](failure-evidence-contract.md) 记录一行 `FAIL-EVIDENCE`，修复后原地更新Resolution。
-- 连续三轮仍未通过：转 `BLOCKED`，使用系统化调试并复查Spec、Architecture和Task边界。
+- 重复失败或连续三轮仍未通过：按 [返工与停止条件](../../systematic-debugging/SKILL.md#返工与停止条件) 重新调查；有证据推进的原范围修复继续`REWORK`，真实阻塞才标记`BLOCKED`。
 
 ## 截图证据
 

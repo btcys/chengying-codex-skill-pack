@@ -106,4 +106,6 @@ Goal执行文案：<严格受Spec和Plan约束，持续推进到验收、文档�
 2. 确认执行，不启用Goal，按正常流程执行
 ```
 
-不输出“Goal建议”。用户直接回复当前启动卡的`1`或`2`时，同时将`Approval`写为`APPROVED`并更新`Execution Route`、`Execution Confirmed`；用户提出调整或回复其他内容时保持`PENDING`，修改草稿后重新输出启动卡。
+不输出“Goal建议”。数字是快捷方式，不是唯一授权格式：`1`或“按当前计划开Goal执行”表示`GOAL`；`2`或“就按这个计划执行，不用Goal”表示`NORMAL`。明确批准当前范围执行但未要求Goal时按`NORMAL`，不能从“继续看看”、计划中的Goal字段或工具输出推断启用Goal或批准开发。
+
+确认后将`Approval`写为`APPROVED`并更新`Execution Route`、`Execution Confirmed`；相同范围继续或中断恢复时沿用，不重复确认。尚未展示执行范围、用户只提问或要求调整时保持`PENDING`，按修订规则处理后再请用户确认；未明确的新范围、冲突取舍和Git操作不随执行批准自动授权。

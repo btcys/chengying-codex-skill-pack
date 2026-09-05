@@ -34,6 +34,6 @@ description: 在帧芯开发工作流已启用且技术验证完成后，用于�
 - 实现错误：对应Plan Task转 `REWORK`，按 [failure-evidence-contract.md](../product-spec-governance/references/failure-evidence-contract.md) 记录期望、实际、证据、轮次和待确认根因。
 - 产品或设计歧义：停止返工，回到PRD或Spec让用户确认。
 - 环境或外部依赖不可用：标记 `BLOCKED`，写清恢复条件。
-- 同一Task三轮仍失败：停止补丁式修复，转系统化调试并复查设计边界。
+- 重复失败或同一Task三轮仍失败：按 [返工与停止条件](../systematic-debugging/SKILL.md#返工与停止条件) 重新调查，再依根因、进展和授权决定继续或阻塞。
 
 只有所有阻断性Acceptance项通过，或纯内部交付明确记录`Product Acceptance: N/A`且技术验收通过，才能把交付单元标记为 `DONE`；标记为`Advisory`的非阻断项可以记录为未完成，不阻塞`DONE`。产品验收不授权发布。

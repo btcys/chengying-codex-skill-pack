@@ -61,7 +61,7 @@ description: 用于长期、多模块、按版本推进的商业软件项目，�
 → 检查或建立Design-Brief（有UI时）→ 必要时架构复用调研或Spike
 → 必要时Visual Companion确认UI方案
 → 可交付Spec并由用户批准 → 必要时确认并建立项目质量门禁
-→ Implementation Plan与执行启动卡（用户回复1或2后执行）
+→ Implementation Plan与执行启动卡（数字或明确自然语言确认）
 → 子智能体按功能批次开发
 → 一次独立Review
 → 完整验证
@@ -95,7 +95,7 @@ description: 用于长期、多模块、按版本推进的商业软件项目，�
 - Spec经用户确认后，新项目、首次接入或新增技术能力时先使用 `$zhenxin-development-workflow:project-quality-gates` 只读推荐，用户确认后才生成项目门禁；随后使用 `$zhenxin-development-workflow:writing-plans`。
 - Plan必须写准确文件路径、接口、验证命令和Task依赖。
 - Plan前扫描一次项目代码行数，识别与本次交付有关的热点文件；项目较大、模块依赖不清或涉及跨模块改动时，建议使用 `$code-review-graph` 建立或更新代码图谱，用于派发前确认影响范围、开发后检查依赖边界、合并前辅助Review；简单任务不强制使用，不把全仓统计长期复制进文档。
-- `Goal`是Plan中的一句话交付结果；Plan完成后输出范围、非目标、预计交付和一段Goal执行文案，用户回复`1`表示批准并创建运行时Goal，回复`2`表示批准但正常执行，其他回复不得开始开发；运行时Goal最晚在文档收尾并标记`READY_FOR_GIT`时结束，不包含任何Git写操作。
+- Plan完成后展示执行范围、非目标、交付和Goal文案；按`writing-plans`接受`1/2`或明确自然语言确认，沿用未变范围的有效授权。Plan的`Goal`字段不等于运行时Goal，只有明确选择才启用；运行时Goal到文档收尾和`READY_FOR_GIT`结束，不包含Git写操作。
 
 ### 4. 默认开发执行
 
@@ -117,12 +117,12 @@ description: 用于长期、多模块、按版本推进的商业软件项目，�
 - 开发中运行定向测试；整个Plan完成后使用 `$zhenxin-development-workflow:requesting-code-review` 做一次独立Review。
 - 处理Review意见时使用 `$zhenxin-development-workflow:receiving-code-review`，先验证再修改，不盲从。
 - 只做当前Task的Acceptance；额外想法记入`Remaining`或ROADMAP Inbox，不顺手实现。宣称完成前必须使用 `$zhenxin-development-workflow:verification-before-completion` 获取新鲜证据。
-- 任何代码、接口、状态或数据结构发生改动后，之前的`PASS`证据自动失效，相关Task必须重新验证；未完成真实页面验收时，只能报告“开发完成，待真页验收”，不能报告“已修复”或“已完成”。
+- 代码、接口、状态或数据结构改动后，受影响的`PASS`证据失效并重新验证；未受影响证据按完成前验证规则复用，不因换回合、换代理或Git收尾重复全量检查。用户可见任务未完成真页验收时，只能报告“开发完成，待真页验收”。
 
 ### 6. 验收与发布
 
 - 用户可见功能通过技术验证后，使用 `$zhenxin-development-workflow:product-acceptance` 从真实入口验收。
-- 产品验收和文档收尾完成后标记`READY_FOR_GIT`，运行时Goal在此结束；再使用 `$zhenxin-development-workflow:finishing-a-development-branch` 展示数字选项。用户选择前不得`git add`、`commit`、`merge`或`push`。
+- 产品验收和文档收尾完成后标记`READY_FOR_GIT`，运行时Goal在此结束；再使用 `$zhenxin-development-workflow:finishing-a-development-branch` 核对已有Git授权，没有则展示选项。数字或明确自然语言均可授权，不自动扩展到未授权操作。
 - `$zhenxin-development-workflow:release-risk-review` 只在正式首发、正式版本更新或生产hotfix发布前使用，不进入日常开发循环。
 - 正式候选确定后再执行发布风险审查；通过后使用 `$zhenxin-development-workflow:release-governance`，生产执行仍需单独授权。
 
@@ -136,5 +136,5 @@ description: 用于长期、多模块、按版本推进的商业软件项目，�
 
 - 未经明确授权，不安装Skill、不写全局目录、不创建worktree、不commit、不push、不merge、不deploy、不release，也不执行生产写入；`LOCAL_DEV`/`STAGING_QA`按执行模式允许范围操作。
 - 计划、Spec或Visual Companion确认的UI发生冲突时停止开发并报告冲突。
-- 同一Task连续三轮返工仍未通过时转为 `BLOCKED`，停止继续打补丁，重新检查根因、Spec、Architecture和Task边界。
+- 重复失败或同一Task连续三轮仍未通过时按系统化调试重新调查；原批准范围内、根因明确且有证据推进则继续，缺条件或无进展等真实阻塞才标记`BLOCKED`并报告。
 - 不维护巨型状态JSON、长期角色绑定、每Task独立文档或五轮Review循环。
