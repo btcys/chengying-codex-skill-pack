@@ -1,17 +1,17 @@
 ---
 name: executing-plans
-description: 在帧芯开发工作流已有书面Plan，但当前环境没有子智能体能力或用户明确要求单线程时，用于在一个开发任务中按依赖连续执行功能Task。
+description: 在帧芯开发工作流已有批准Plan且任务内聚、交接收益不足、无子智能体能力或用户要求单线程时，由主任务连续执行。
 ---
 
 # 单线程执行计划
 
-这是回退路线；有子智能体能力时默认使用 `subagent-driven-development`。
+主任务可以直接执行内聚Plan，不必为了使用子智能体增加交接；独立分工有实际收益时才改用 `subagent-driven-development`。不改变已有的独立Review和验收节点。
 
 ## 1. 载入与审查
 
 1. 读取最新Plan修订、关联Spec、Global Constraints和适用项目指令；确认`Approval=APPROVED`且`Execution Route`为`GOAL`或`NORMAL`，任一仍为`PENDING`时停止。
 2. 检查文件、接口、依赖和验证命令是否仍与仓库一致。
-3. 发现关键歧义、缺失前置条件或不合理设计时，在写代码前停止并报告。
+3. 已批准变更尚未实现或原Acceptance内的已确认缺陷，直接在原范围实施；可在授权内补齐的环境前置条件自行处理。需求取舍不明、合同冲突或无法补齐的必要条件才暂停受影响部分。
 4. 按Task依赖排序，创建执行清单。
 
 不要在执行Plan时自动搜索其他PRD或旧计划补全上下文。
@@ -31,7 +31,7 @@ description: 在帧芯开发工作流已有书面Plan，但当前环境没有子
 
 ## 3. Plan级收尾
 
-所有Task完成后：
+所有Task实现达到可集成状态后（不要求先把待真页验收Task标为DONE）：
 
 1. 请求一次独立代码Review；
 2. 阻断问题按`requesting-code-review`统一修复并做必要定向复审，不重开全量Review；
@@ -42,6 +42,6 @@ description: 在帧芯开发工作流已有书面Plan，但当前环境没有子
 ## 停止条件
 
 - Plan、Spec、PRD或用户确认的UI相互冲突；
-- 依赖、权限、凭据或环境缺失；
+- 必要依赖、权限、凭据或环境缺失，且无法在已有授权内补齐；
 - 验证连续失败且根因未明；
-- 下一步需要未授权的worktree、依赖安装、commit、push、merge、deploy或生产写入。
+- 下一步需要未授权的worktree、新增依赖、commit、push、merge、deploy或生产写入；按锁文件恢复已有依赖及授权内测试登录不单独触发停止，遵守安装脚本与凭据边界。

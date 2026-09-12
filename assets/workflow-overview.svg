@@ -46,7 +46,7 @@
       <rect width="150" height="106" rx="18" fill="#fef3c7" stroke="#fcd34d"/>
       <text x="75" y="43" text-anchor="middle" fill="#b45309" font-size="20" font-weight="800" font-family="Arial, sans-serif">4</text>
       <text x="75" y="73" text-anchor="middle" fill="#334155" font-size="18" font-weight="700" font-family="Arial, PingFang SC, Microsoft YaHei, sans-serif">批次开发</text>
-      <text x="75" y="94" text-anchor="middle" fill="#64748b" font-size="13" font-family="Arial, PingFang SC, sans-serif">子智能体 · worktree</text>
+      <text x="75" y="94" text-anchor="middle" fill="#64748b" font-size="13" font-family="Arial, PingFang SC, sans-serif">主任务 / 子智能体</text>
     </g>
     <path d="M811 53H858" stroke="#64748b" stroke-width="2.5" marker-end="url(#arrow)"/>
     <g transform="translate(868)">

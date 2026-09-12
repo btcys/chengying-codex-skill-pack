@@ -58,7 +58,7 @@ git worktree add <path> <branch>
 
 ## 3. 项目准备
 
-根据仓库实际文件识别安装和构建方式，例如 `package.json`、`Cargo.toml`、`pyproject.toml`、`go.mod`。新增或安装依赖前检查现有依赖与lifecycle scripts；没有授权不安装。
+根据仓库实际文件识别安装和构建方式，例如 `package.json`、`Cargo.toml`、`pyproject.toml`、`go.mod`。开发授权内可按锁文件恢复已有依赖，默认禁用lifecycle scripts，必要脚本先检查用途再运行；新增依赖或改变锁定版本仍须确认，不把恢复已有环境当作新选型。
 
 ## 4. 验证基线
 

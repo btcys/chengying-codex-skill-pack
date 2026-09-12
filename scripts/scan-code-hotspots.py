@@ -117,11 +117,18 @@ def classify(
         if base_lines is not None and base_lines <= hard_limit < lines:
             return "VIOLATION", f"从{base_lines}行增长并跨过{hard_limit}行硬上限"
         if base_lines is not None and base_lines > hard_limit and lines > base_lines:
-            return "VIOLATION", f"既有超限文件从{base_lines}行增长到{lines}行"
+            return (
+                "WARNING",
+                f"既有超限文件从{base_lines}行增长到{lines}行；"
+                "行数扫描不能判定语义，需由Plan/Review人工判定是否属于职责扩张；"
+                "新增职责仍需拆分",
+            )
 
     if lines > hard_limit:
         if new_file and not base_requested:
             return "VIOLATION", f"新增文件超过{hard_limit}行硬上限"
+        if base_lines is not None and base_lines > hard_limit:
+            return "WARNING", "既有热点；必要局部修复不按行数阻断，新增职责仍需拆分"
         return "NO_GROWTH", f"既有热点；不得超过当前{lines}行"
     if warning_limit is not None and lines > warning_limit:
         return "WARNING", f"超过{warning_limit}行预警线"
@@ -173,7 +180,9 @@ def print_markdown(root: Path, results: list[FileResult], total_lines: int, top:
     print(f"- 代码文件：{len(results)}")
     print(f"- 总行数：{total_lines}")
     print(f"- 对比基线：`{base or 'NONE'}`")
-    print("- 规则：普通源文件600行预警、1000行硬上限；测试文件1000行预警、1500行硬上限；既有超限文件no-growth。")
+    print("- 规则：普通源文件600行预警、1000行硬上限；测试文件1000行预警、1500行硬上限。")
+    print("- 提供基线时：新文件或原未超限文件跨过硬上限会阻断；既有超限文件增长仅预警，由Plan/Review人工判定职责扩张。")
+    print("- 未提供基线时：无法区分历史增长，既有超限文件保留保守NO_GROWTH提示，不代表获得批准。")
     print("- EXCEPTION：只由显式--allow-over-limit路径产生，不阻断check；Plan必须记录原因和边界。")
     print()
     print("## 热点")
@@ -196,7 +205,7 @@ def print_markdown(root: Path, results: list[FileResult], total_lines: int, top:
 def main() -> int:
     parser = argparse.ArgumentParser(description="扫描项目代码行数并识别热点文件")
     parser.add_argument("--root", default=".", help="项目根目录，默认当前目录")
-    parser.add_argument("--base", help="可选Git基线，用于检查硬上限和no-growth；空仓库可传UNBORN")
+    parser.add_argument("--base", help="可选Git基线，用于检查新增越界和既有热点增长；空仓库可传UNBORN")
     parser.add_argument("--top", type=int, default=20, help="展示最大的代码文件数量")
     parser.add_argument("--json", action="store_true", help="输出JSON")
     parser.add_argument("--check", action="store_true", help="存在VIOLATION时返回非零")

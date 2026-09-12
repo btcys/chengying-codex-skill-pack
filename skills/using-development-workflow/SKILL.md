@@ -3,7 +3,7 @@ name: using-development-workflow
 description: 用于长期、多模块、按版本推进的商业软件项目，从指定PRD、UI可视化确认、Spec与Plan到子智能体开发、产品验收和正式发布治理；单文件修改、确定性小Bug和短任务不使用。
 ---
 
-# 帧芯开发工作流 6.2
+# 帧芯开发工作流 6.5
 
 把产品事实、当前版本设计、实施任务和发布治理分开，让长期项目持续推进而不被流程拖慢。
 
@@ -35,7 +35,7 @@ description: 用于长期、多模块、按版本推进的商业软件项目，�
 1. 读取仓库中的 `AGENTS.md` 和适用的项目指令。
 2. 用户明确指定PRD时，只把该文件当作本轮产品来源；不要自动读取其他PRD、旧计划、状态文件或旧工作流文档。根 `CONTEXT.md`存在时可读取相关词条解释术语，但不能从中增加需求。
 3. 先检查现有代码、依赖、类型、测试和相似实现；使用PRD、Spec或Plan前，按文档现实性规则核对本次任务的版本、路径、接口、状态和验收，不做全库审计。
-4. 发现文档与代码冲突时标记`DOC_STALE`或`CODE_DRIFT`，列出期望、实际和证据，停止受影响范围；不得自动判断应该改文档还是改代码。
+4. 先区分已批准变更尚未实现、原Acceptance内的已确认缺陷与真实合同冲突；前两类按批准范围实施和验证，不因代码尚不符合目标就暂停。只有事实源矛盾或需求取舍不明时，记录`DOC_STALE`或`CODE_DRIFT`及证据并暂停受影响部分；不得自行覆盖已批准文档。
 5. 涉及 UI/页面/交互时，先检查根 `Design-Brief.md` 及相关设计域；缺失时先建立并确认最小 Design-Brief，再进入页面设计或 Spec。没有仓库或代码为空时，从产品边界和第一个可交付单元开始，不提前设计完整企业架构。
 
 需要建立或整理产品文档、版本和证据目录时，使用 `$zhenxin-development-workflow:product-spec-governance`。
@@ -62,7 +62,7 @@ description: 用于长期、多模块、按版本推进的商业软件项目，�
 → 必要时Visual Companion确认UI方案
 → 可交付Spec并由用户批准 → 必要时确认并建立项目质量门禁
 → Implementation Plan与执行启动卡（数字或明确自然语言确认）
-→ 子智能体按功能批次开发
+→ 主任务直接执行或子智能体按功能批次开发
 → 一次独立Review
 → 完整验证
 → 产品验收与文档收尾
@@ -74,7 +74,7 @@ description: 用于长期、多模块、按版本推进的商业软件项目，�
 ### 1. 需求与设计
 
 - 新项目、新子系统、接口结构变化或需求仍有歧义：使用 `$zhenxin-development-workflow:brainstorming`。
-- 新增功能先按复杂度进行适度需求访谈；每个关键问题给推荐方案、备选和取舍，达到停止条件后立即进入设计，不持续追问。
+- 新增功能只询问会改变结果的未决问题；有真实取舍才给推荐、备选和理由，信息足够就进入设计，不凑问题或轮数。
 - 空项目骨架、新子系统和昂贵底层能力先调查项目现有能力与成熟开源方案；结论写入Spec，不单建调研流程。
 - 先把大型需求拆成可独立验收的交付单元；每个交付单元一份Spec和一份Plan。
 - 产品事实变化先由PM更新PRD或唯一领域PRD并让用户确认，再同步`PRD-CHANGELOG.md`；后续返工、补充需求和新指令默认增量处理，不覆盖已批准Spec、Plan或Task，替换、取消和冲突取舍必须先展示差异并确认。
@@ -99,13 +99,13 @@ description: 用于长期、多模块、按版本推进的商业软件项目，�
 
 ### 4. 默认开发执行
 
-默认使用 `$zhenxin-development-workflow:subagent-driven-development`：
+按任务边界和交接收益选择主任务直接执行或 `$zhenxin-development-workflow:subagent-driven-development`：
 
 - 主任务保持全局上下文并负责整合；
 - 按功能批次派开发子智能体，不为每个微小步骤派一个；
 - 只有依赖、文件和共享状态互不冲突的批次才并行，使用 `$zhenxin-development-workflow:dispatching-parallel-agents`；
-- 有前后依赖或共享核心文件的批次顺序执行；
-- 当前环境无子智能体能力，或用户明确要求单线程时，才使用 `$zhenxin-development-workflow:executing-plans`。
+- 有前后依赖或共享核心文件的批次顺序执行，不为并行拆散内聚功能；
+- 单一内聚任务、交接收益不足、无子智能体能力或用户要求单线程时使用 `$zhenxin-development-workflow:executing-plans`，不需另请用户批准执行分工；独立Review仍按既有节点进行。
 
 ### 5. 开发纪律
 
@@ -113,7 +113,7 @@ description: 用于长期、多模块、按版本推进的商业软件项目，�
 - CSS、布局、文案、静态资源、fixture和简单配置不强制先写失败测试；用真实页面、交互和Golden验证。
 - 前端/UI Task按需读取 [前端六点实施规则](references/frontend-six-rules.md)；只检查相关条目，不新增UI线程、Preview阶段或Task级Review。
 - 遇到Bug、测试失败或反复返工，先使用 `$zhenxin-development-workflow:systematic-debugging` 找根因，再修复。
-- 普通源文件600行预警、1000行硬上限，测试文件1000行预警、1500行硬上限；既有超限文件执行no-growth，当前Task只渐进拆分相关职责，不做无关大重写。Plan批准的准确路径例外可显式放行。
+- 普通源文件600行预警、1000行硬上限，测试文件1000行预警、1500行硬上限；新文件或原未超限文件仍执行硬上限。既有超限文件的必要局部修复不因净增几行强制拆分，新增职责应拆出去；增长由Plan/Review按实际差异判断，脚本只报行数风险。保留准确路径例外，不做无关重写。
 - 开发中运行定向测试；整个Plan完成后使用 `$zhenxin-development-workflow:requesting-code-review` 做一次独立Review。
 - 处理Review意见时使用 `$zhenxin-development-workflow:receiving-code-review`，先验证再修改，不盲从。
 - 只做当前Task的Acceptance；额外想法记入`Remaining`或ROADMAP Inbox，不顺手实现。宣称完成前必须使用 `$zhenxin-development-workflow:verification-before-completion` 获取新鲜证据。
@@ -121,7 +121,7 @@ description: 用于长期、多模块、按版本推进的商业软件项目，�
 
 ### 6. 验收与发布
 
-- 用户可见功能通过技术验证后，使用 `$zhenxin-development-workflow:product-acceptance` 从真实入口验收。
+- 用户可见功能通过技术验证后，使用 `$zhenxin-development-workflow:product-acceptance` 从真实入口验收；已授权且条件具备时连续完成运行、验收及本次问题修复，仅在真实阻塞、需要决定或到达授权终点时交回，不在首次实现后直接停为“待验收”。
 - 产品验收和文档收尾完成后标记`READY_FOR_GIT`，运行时Goal在此结束；再使用 `$zhenxin-development-workflow:finishing-a-development-branch` 核对已有Git授权，没有则展示选项。数字或明确自然语言均可授权，不自动扩展到未授权操作。
 - `$zhenxin-development-workflow:release-risk-review` 只在正式首发、正式版本更新或生产hotfix发布前使用，不进入日常开发循环。
 - 正式候选确定后再执行发布风险审查；通过后使用 `$zhenxin-development-workflow:release-governance`，生产执行仍需单独授权。

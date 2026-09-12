@@ -1,11 +1,11 @@
-# 帧芯开发工作流 6.2
+# 帧芯开发工作流 6.5
 
 <p align="center">
-  <img src="assets/hero.svg" alt="帧芯开发工作流 6.2" width="100%" />
+  <img src="assets/hero.svg" alt="帧芯开发工作流 6.5" width="100%" />
 </p>
 
 <p align="center">
-  <a href="https://github.com/btcys/chengying-codex-skill-pack"><img src="https://img.shields.io/badge/version-6.2.0-2563eb?style=flat-square" alt="Version 6.2.0" /></a>
+  <a href="https://github.com/btcys/chengying-codex-skill-pack"><img src="https://img.shields.io/badge/version-6.5.0-2563eb?style=flat-square" alt="Version 6.5.0" /></a>
   <a href="https://github.com/btcys/chengying-codex-skill-pack/blob/main/LICENSE"><img src="https://img.shields.io/badge/license-MIT-16a34a?style=flat-square" alt="MIT License" /></a>
   <a href="https://github.com/btcys/chengying-codex-skill-pack/tree/main/skills"><img src="https://img.shields.io/badge/skills-21-7c3aed?style=flat-square" alt="21 skills" /></a>
   <a href="https://github.com/btcys/chengying-codex-skill-pack/tree/main/tests"><img src="https://img.shields.io/badge/tests-workflow%20routing-f59e0b?style=flat-square" alt="Workflow routing tests" /></a>
@@ -37,7 +37,7 @@
   → Spec 批准
   → 必要时确认并建立项目质量门禁
   → Implementation Plan 与执行启动卡（数字或明确自然语言确认）
-  → 子智能体按功能批次开发
+  → 主任务直接执行或子智能体按功能批次开发
   → 一次独立 Review
   → 最新完整验证
   → 真实产品验收与文档收尾
@@ -120,9 +120,9 @@ python3 scripts/audit-context.py
 
 ## 版本
 
-当前版本：`6.2.0`
+当前版本：`6.5.0`
 
-最后更新：`2026-09-05`
+最后更新：`2026-09-12`
 
 - `5.6`：PRD 唯一事实源、领域索引、变更记录和文档归档。
 - `5.7`：代码或合同变化后旧 PASS 证据自动失效并重新验证。
@@ -130,8 +130,12 @@ python3 scripts/audit-context.py
 - `5.9`：统一以 `Design-Brief.md` 管理项目设计规范；有 UI 的空项目先建立并确认最小设计规范。
 - `6.0`：分级UI验收和按需外部参考；执行前以`1/2`确认是否启用Goal，后续需求按修订增量合并并保留旧计划。
 - `6.2`：按项目能力推荐并建立项目自有质量门禁；拆分PRD项目可增加`check:product-contracts`，检查重复定义、冲突和旧版本引用。
+- `6.3`：明确子代理单次交付与续派边界，无进展交回主任务判断，减少重复核查、无效协调和长日志回传；不增加审批或台账。
+- `6.5`：按分工收益选主任务或子代理；访谈不凑轮数，已批准变更不因代码未实现而误停，已有实现可补测试检错证据；旧热点局部修复不因净增行数强拆，恢复锁定依赖和测试登录沿用授权。保留设计确认、验收、计划保护和发布边界。
 
 6.2的Astra适配不增加新流程：支持自然语言确认并沿用同范围授权；有效验证证据跨回合、跨代理复用；返工根据证据进展继续或停止，不按固定次数机械卡住。TDD、UI先确认、真实验收和已批准计划保护保持不变。
+
+2026-09-09补强子代理执行边界：一个代理一个明确交付，原任务反馈可续派，新目标另行安排；无进展交回主任务判断。复用现有报告和有效证据，减少重复核查、无效询问及长日志回传，不新增流程节点。
 
 运行时Goal在`READY_FOR_GIT`结束。AI报告“可以提交”只是状态，不是Git授权；没有用户针对对应动作的明确授权，不会暂存、提交、合并或推送。数字选项和明确自然语言均可授权，已有且仍适用的授权不重复询问。
 

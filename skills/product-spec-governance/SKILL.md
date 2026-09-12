@@ -16,7 +16,7 @@ description: 在帧芯开发工作流已启用时，用于从指定PRD建立或�
 - 不自动拆分或迁移现有PRD；先提出拆分建议，由用户确认。
 - 已有 `CONTEXT.md`只用于解释项目术语，不是产品输入，不能新增、覆盖或推断PRD需求。
 - PRD已分域时，按 [拆分PRD产品合同](references/product-contracts.md) 检查根PRD、领域PRD、Design-Brief和当前Spec的唯一负责人、引用版本与直接依赖；不读取全部历史文档。
-- 使用PRD、Spec或Plan前，按 [document-system.md](references/document-system.md) 的文档现实性规则核对当前版本和相关代码；发现`DOC_STALE`或`CODE_DRIFT`时记录证据，不自动改写任一方。
+- 使用PRD、Spec或Plan前，按 [document-system.md](references/document-system.md) 核对当前版本和相关代码；批准变更或原Acceptance缺陷按原范围实施，真正事实源冲突才暂停，不自行改写已批准合同。
 
 ## 执行顺序
 

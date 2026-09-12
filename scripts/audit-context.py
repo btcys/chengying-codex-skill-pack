@@ -65,7 +65,7 @@ def main() -> int:
 
     brainstorming = root / "skills" / "brainstorming" / "SKILL.md"
     brainstorming_text = brainstorming.read_text(encoding="utf-8")
-    for rule in ("适度需求访谈", "全部按推荐", "最多三轮", "architecture-reuse-research.md"):
+    for rule in ("适度需求访谈", "全部按推荐", "architecture-reuse-research.md"):
         if rule not in brainstorming_text:
             errors.append(f"Brainstorming缺少需求或架构调研规则: {rule}")
 
@@ -99,7 +99,7 @@ def main() -> int:
 
     plans = root / "skills" / "writing-plans" / "SKILL.md"
     plan_text = plans.read_text(encoding="utf-8")
-    for rule in ("scan-code-hotspots.py", "600行", "1000行", "1500行", "no-growth"):
+    for rule in ("scan-code-hotspots.py", "600行", "1000行", "1500行"):
         if rule not in plan_text:
             errors.append(f"Plan缺少代码热点控制: {rule}")
 

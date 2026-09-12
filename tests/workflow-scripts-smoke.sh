@@ -125,7 +125,8 @@ git init -q
 git config user.name "Workflow Test"
 git config user.email "workflow-test@example.invalid"
 awk 'BEGIN { for (i = 1; i <= 1100; i++) print "export const line" i " = " i ";" }' > src/legacy-hotspot.ts
-git add src/legacy-hotspot.ts
+awk 'BEGIN { for (i = 1; i <= 999; i++) print "export const boundary" i " = " i ";" }' > src/cross-limit.ts
+git add src/legacy-hotspot.ts src/cross-limit.ts
 git commit -qm "baseline"
 
 hotspot_report="$test_root/hotspots.md"
@@ -143,13 +144,25 @@ rm -f src/warning.ts
 
 printf '%s\n' 'export const growth = true;' >> src/legacy-hotspot.ts
 growth_report="$test_root/hotspot-growth.md"
-if python3 "$hotspot_script" --root "$hotspot_repo" --base HEAD --check > "$growth_report"; then
-  echo "既有超限文件增长未被热点检查拦截" >&2
+if ! python3 "$hotspot_script" --root "$hotspot_repo" --base HEAD --check > "$growth_report"; then
+  echo "既有超限文件的局部修改不应仅因净增行数被拦截" >&2
   exit 1
 fi
-grep -Fq '既有超限文件从1100行增长到1101行' "$growth_report"
+grep -Fq '| WARNING | 1101 | 1100 |' "$growth_report"
+grep -Fq '行数扫描不能判定语义' "$growth_report"
+grep -Fq '需由Plan/Review人工判定是否属于职责扩张' "$growth_report"
+grep -Fq '新增职责仍需拆分' "$growth_report"
 
 git show HEAD:src/legacy-hotspot.ts > src/legacy-hotspot.ts
+printf '%s\n' 'export const boundary1000 = 1000;' 'export const boundary1001 = 1001;' >> src/cross-limit.ts
+cross_report="$test_root/hotspot-cross-limit.md"
+if python3 "$hotspot_script" --root "$hotspot_repo" --base HEAD --check > "$cross_report"; then
+  echo "原未超限文件跨过硬上限未被拦截" >&2
+  exit 1
+fi
+grep -Fq '从999行增长并跨过1000行硬上限' "$cross_report"
+git show HEAD:src/cross-limit.ts > src/cross-limit.ts
+
 awk 'BEGIN { for (i = 1; i <= 1001; i++) print "export const fresh" i " = " i ";" }' > src/new-large.ts
 new_report="$test_root/hotspot-new.md"
 if python3 "$hotspot_script" --root "$hotspot_repo" --base HEAD --check > "$new_report"; then
@@ -157,6 +170,13 @@ if python3 "$hotspot_script" --root "$hotspot_repo" --base HEAD --check > "$new_
   exit 1
 fi
 grep -Fq '新增文件超过1000行硬上限' "$new_report"
+
+invalid_base_stderr="$test_root/hotspot-invalid-base.err"
+if python3 "$hotspot_script" --root "$hotspot_repo" --base missing-base --check >/dev/null 2> "$invalid_base_stderr"; then
+  echo "无效Git基线不应被接受" >&2
+  exit 1
+fi
+grep -Fq 'Git基线无效: missing-base' "$invalid_base_stderr"
 
 git add src/new-large.ts
 staged_new_report="$test_root/hotspot-staged-new.md"
@@ -171,6 +191,15 @@ python3 "$hotspot_script" --root "$hotspot_repo" --check \
   --allow-over-limit src/new-large.ts > "$exception_report"
 grep -Fq '| EXCEPTION | 1001 |' "$exception_report"
 rm -f src/new-large.ts
+
+mkdir -p generated
+awk 'BEGIN { for (i = 1; i <= 2000; i++) print "export const generated" i " = " i ";" }' > generated/large.generated.ts
+generated_report="$test_root/hotspot-generated.md"
+python3 "$hotspot_script" --root "$hotspot_repo" --base HEAD --check > "$generated_report"
+if grep -Fq 'generated/large.generated.ts' "$generated_report"; then
+  echo "生成文件未被热点扫描排除" >&2
+  exit 1
+fi
 
 mkdir -p tests
 awk 'BEGIN { for (i = 1; i <= 1501; i++) print "test(\"case" i "\", () => expect(true).toBe(true));" }' > tests/large.test.ts

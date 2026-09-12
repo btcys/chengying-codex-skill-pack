@@ -41,7 +41,7 @@
 **Supersedes:** `NONE | <path>`
 ```
 
-当前依据只沿着“用户指定PRD → Design-Brief（有UI时） → 当前ACTIVE Spec → 当前ACTIVE Plan → 当前Task”读取；`archive/`、旧版本和未被当前链引用的文档默认不读取。版本、路径、接口、状态或验收与代码不一致时，标记`DOC_STALE`或`CODE_DRIFT`并记录证据，不自动改写文档或代码。
+当前依据只沿着“用户指定PRD → Design-Brief（有UI时） → 当前ACTIVE Spec → 当前ACTIVE Plan → 当前Task”读取；`archive/`、旧版本和未被当前链引用的文档默认不读取。已批准变更尚未实现或原Acceptance内的已确认缺陷属于预期差异，按批准范围实施；事实源矛盾、批准状态不明或需求取舍不清时，才记录`DOC_STALE`或`CODE_DRIFT`及证据并暂停受影响部分，不自行改写已批准合同。
 
 变更记录只属于PRD，单独放在根目录`PRD-CHANGELOG.md`（已有项目沿用等价命名，并在PRD头部链接）。PRD产品事实或规则获确认后，递增`Document Version`、更新`Last Updated`，并在变更记录按日期追加一条稳定结论；不写实现细节、Task状态、截图或失败日志。Design-Brief、设计域、Spec、Plan、ROADMAP、CONTEXT、Evidence和执行记录不建立PRD式变更记录，只更新自身版本、日期、状态或记录字段。模板见[PRD变更记录](prd-changelog.md)。
 

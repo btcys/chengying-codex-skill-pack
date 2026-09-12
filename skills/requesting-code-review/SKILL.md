@@ -26,7 +26,7 @@ Review的目标是在整合点发现真实缺陷，不是为每个小Task增加�
 - 未跟踪文件清单；
 - 开发测试证据；
 - Golden或问题证据ID；
-- 热点扫描结果，以及准确base可用时的no-growth检查结果；
+- 热点扫描结果，以及准确base可用时的增长差异；
 - 已知裁定和残余风险。
 
 不要让Reviewer依赖主任务的口头总结。使用 [code-reviewer.md](references/code-reviewer.md) 构造提示，派一个未参与实现的独立Reviewer。

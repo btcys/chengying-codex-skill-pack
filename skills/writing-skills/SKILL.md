@@ -65,6 +65,6 @@ skill-name/
 针对帧芯工作流的修改，还必须：
 
 - 运行包根目录 `scripts/validate-package.py`；
-- 使用 `tests/workflow-routing-cases.md` 做独立上下文前向测试；
+- 行为或触发条件变化时，选取 `tests/workflow-routing-cases.md` 中相关场景做独立上下文前向测试；仅版本号、错字、非行为说明更新时做结构检查并复用有效结果，不重复派发；
 - 检查简单任务不会触发总工作流；
 - 检查未授权操作、UI确认和Review频率没有回退。
